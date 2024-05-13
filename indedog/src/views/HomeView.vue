@@ -1,17 +1,14 @@
 <template>
-    <header class = "row align-items-center" style="width: 1600px;">
-        <div class="col-9">
+    <header class = "row align-items-center">
+        <div class="col" style="margin-top: 15px; margin-bottom: 15px;">
             <TodayRecommend />
-        </div>
-        <div class = "col-3">
-            <Menu />
         </div>
     </header>
 </template>
 
 <script setup>
 import TodayRecommend from "@/components/TodayRecommend.vue"
-import Menu from "@/components/Menu.vue"
+
 </script>
 
 <style scoped>

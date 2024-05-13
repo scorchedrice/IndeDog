@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import {RouterLink} from 'vue-router'
+import {RouterLink, RouterView} from 'vue-router'
 </script>
 
 <style scoped>
