@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>TESTVIEW</h1>
+        <h1>CinemaView</h1>
     </div>
 </template>
 
