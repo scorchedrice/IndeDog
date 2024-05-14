@@ -1,6 +1,6 @@
 <template>
-    <div style="position: fixed; top: 30px; left: 30px;" id="Menu">
-        <img src="@/assets/icon/site_icon_1.jpg" class="rounded col" alt="Home" width="100px" height="100px" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+    <div style="position: fixed; top: 10px; left: 30px;" id="Menu">
+        <img src="@/assets/icon/site_icon_1.jpg" class="rounded col" alt="Home" width="80px" height="80px" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
         <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Menu</h5>
@@ -36,11 +36,13 @@
                     <hr>
                     <div>
                         <strong>아직 회원이 아니신가요?</strong>
-                        <p class="text-primary" style="text-decoration: underline;">회원가입</p>
+                        <p class="text-primary" style="text-decoration: underline;" @click="goSignUp">회원가입</p>
                     </div>
                 </div>
             </div>
             </div>
+            <li class="list-group-item"><strong>Inde-Dog 소개</strong></li>
+            <li class="list-group-item"></li>
             <li class="list-group-item" @click="goMovieSearch">작품 검색</li>
             <li class="list-group-item" @click="goCinemaSearch">상영관 검색</li>
             <li class="list-group-item" @click="goNowInTheater">현재 상영작</li>
@@ -69,6 +71,10 @@ const goNowInTheater = function () {
 const goCommunity = function () {
     console.log('community')
     router.push({name: 'community'})
+}
+const goSignUp = function () {
+    console.log('SignUp')
+    router.push({name: 'signup'})
 }
 </script>
 

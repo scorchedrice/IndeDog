@@ -5,6 +5,8 @@ import CinemaDetail from '@/components/CinemaDetail.vue'
 import MovieSearchView from '@/views/MovieSearchView.vue'
 import NowInTheaterView from '@/views/NowInTheaterView.vue'
 import CommunityView from '@/views/CommunityView.vue'
+import SignUp from '@/views/SignUp.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -38,8 +40,20 @@ const router = createRouter({
       path: '/community',
       name: 'community',
       component: CommunityView,
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: SignUp,
+      beforeEnter: (to, from, next) => {
+        console.log('Enter')
+        document.querySelector('#menu').style.display='none';
+        next();
+      },
     }
   ]
 })
-
+const menuHideEmit = function () {
+  emit('menuHide')
+}
 export default router

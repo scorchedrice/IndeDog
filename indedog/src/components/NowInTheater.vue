@@ -1,5 +1,6 @@
 <template>
     <div class = "container">
+        <h1>상영중인 영화</h1>
         <div id="carousel_now_in_theater" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
             <div class="carousel-item active">
