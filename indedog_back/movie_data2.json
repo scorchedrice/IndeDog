@@ -1,0 +1,34 @@
+[
+  {
+    "model": "movies.movie",
+    "pk": 10000,
+    "fields": {
+      "title": "교토에서 온 편지",
+      "img_src": "http://www.indieseoul.org/lib/thumbnail.php?code=tb_movie&w=343&sq=135&imgfilename=1efa12b1f0f1a7491_img.jpg"
+    }
+  },
+  {
+    "model": "movies.movie",
+    "pk": 10001,
+    "fields": {
+      "title": "너와나",
+      "img_src": "http://www.indieseoul.org/lib/thumbnail.php?code=tb_movie&w=343&sq=132&imgfilename=6a59fef10166ea9a7_img.jpg"
+    }
+  },
+  {
+    "model": "movies.movie",
+    "pk": 10002,
+    "fields": {
+      "title": "버텨내고 존재하기",
+      "img_src": "http://www.indieseoul.org/lib/thumbnail.php?code=tb_movie&w=343&sq=133&imgfilename=78664e6a70a6138d2_img.jpg"
+    }
+  },
+  {
+    "model": "movies.movie",
+    "pk": 10003,
+    "fields": {
+      "title": "이어지는 땅",
+      "img_src": "http://www.indieseoul.org/lib/thumbnail.php?code=tb_movie&w=343&sq=136&imgfilename=014ce00677f812207_img.png"
+    }
+  }
+]
