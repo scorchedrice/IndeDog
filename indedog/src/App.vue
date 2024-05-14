@@ -1,19 +1,17 @@
 <template>
-  <div class="">
+  <div id="app">
     <div style="text-align: center; margin-top: 20px;">
       <h1 id="HomePage" @click="goHomePage">인디독</h1>
     </div>
-  <br>
-  <div class="container-sm" style="width: 1200px;">
-    <div class="row">
-        <div>
-          <RouterView />
-          <div id="menu">
-            <Menu />
-          </div>
+    <br>
+    <div class="container-sm" style="width: 1200px;">
+      <div>
+        <RouterView />
+        <div id="menu">
+          <Menu />
         </div>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
