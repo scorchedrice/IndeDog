@@ -22,14 +22,21 @@ import TodayRecommend from "@/components/TodayRecommend.vue"
 import NowInTheater from "@/components/NowInTheater.vue"
 import Notice from "@/components/Notice.vue"
 import {ref} from 'vue'
+import { useCounterStore } from '@/stores/counter'
+import { onMounted } from 'vue'
+
+const store = useCounterStore()
+
+onMounted(() => {
+  store.getMovies()
+})
+
 const isDeskTop = ref(true);
 window.onresize = function () {
     if (window.innerWidth < 576) {
         isDeskTop.value = false
-        console.log(isDeskTop)
     } else {
         isDeskTop.value = true
-        console.log(isDeskTop)
     }
 }
 </script>
