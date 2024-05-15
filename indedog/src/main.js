@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
+import '../node_modules/flowbite-vue/dist/index.css'
 
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import App from './App.vue'
