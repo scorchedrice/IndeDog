@@ -31,7 +31,7 @@ while i <4626:
         age = ''
 
         for el in explain:
-            if '관람가' in el:
+            if '관람가' in el or '미분류' in el:
                 age = el.strip('\t')
 
         for el in detail:
@@ -56,8 +56,8 @@ while i <4626:
                 'title_en': title_en,
                 'director': director,
                 'keywords': keywords,
-                # 'making_year': making_year,
-                # 'length': length,
+                'making_year': making_year,
+                'length': length,
                 'img_src': 'https://indieground.kr'+soup.select_one('div.movie_info_poster > img')['src'],
                 'detail': json.dumps(soup.select_one('div.detail').text.split(), ensure_ascii=False)
             }

@@ -5,7 +5,7 @@ from .models import Movie
 class MovieListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = ('id', 'title', 'img_src')
+        fields = ('id', 'title', 'img_src', 'keywords', 'director')
 
 
 class MovieSerializer(serializers.ModelSerializer):

@@ -15,4 +15,4 @@ class Movie(models.Model):
     making_year = models.CharField(max_length=10)
     detail = models.TextField()
     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_movies')
-    
+    cinemas = models.TextField()

@@ -3,7 +3,11 @@
     "model": "movies.movie",
     "pk": 10000,
     "fields": {
+      "cinemas": "중랑아트센터,답십리영화미디어아트센터,",
       "title": "교토에서 온 편지",
+      "director": "김민주",
+      "genre": "드라마",
+      "length": "102분",
       "img_src": "http://www.indieseoul.org/lib/thumbnail.php?code=tb_movie&w=343&sq=135&imgfilename=1efa12b1f0f1a7491_img.jpg"
     }
   },
@@ -11,7 +15,11 @@
     "model": "movies.movie",
     "pk": 10001,
     "fields": {
+      "cinemas": "구로문화재단 (신도림오페라하우스),국립중앙도서관,서울시50플러스 중부캠퍼스,서울특별시교육청 남산도서관,서울시50플러스 남부캠퍼스,금천50플러스센터,서대문50플러스센터,서울시청 시민청,구립 은평뉴타운도서관,천연옹달샘마을활력소,서울시50플러스 서부캠퍼스,서울시립대학교,김근태기념도서관,",
       "title": "너와나",
+      "director": "조현철",
+      "genre": "드라마",
+      "length": "118분",
       "img_src": "http://www.indieseoul.org/lib/thumbnail.php?code=tb_movie&w=343&sq=132&imgfilename=6a59fef10166ea9a7_img.jpg"
     }
   },
@@ -19,7 +27,11 @@
     "model": "movies.movie",
     "pk": 10002,
     "fields": {
+      "cinemas": "서울시민대학 동남권캠퍼스,서대문자연사박물관,송파도서관,구립 구산동도서관마을,양천도서관,꿈의숲아트센터,서울시청 시민청,서울시립청소년미디어센터,강서도서관,서울아트책 보고 해보고,동작50플러스센터,양천50플러스센터,마포평생학습관,답십리도서관,서울특별시교육청 정독도서관,중랑양원미디어센터,",
       "title": "버텨내고 존재하기",
+      "director": "권철",
+      "genre": "다큐멘터리",
+      "length": "64분",
       "img_src": "http://www.indieseoul.org/lib/thumbnail.php?code=tb_movie&w=343&sq=133&imgfilename=78664e6a70a6138d2_img.jpg"
     }
   },
@@ -27,7 +39,11 @@
     "model": "movies.movie",
     "pk": 10003,
     "fields": {
+      "cinemas": "중랑아트센터,답십리영화미디어아트센터,",
       "title": "이어지는 땅",
+      "director": "조희영",
+      "genre": "드라마",
+      "length": "87분",
       "img_src": "http://www.indieseoul.org/lib/thumbnail.php?code=tb_movie&w=343&sq=136&imgfilename=014ce00677f812207_img.png"
     }
   }
