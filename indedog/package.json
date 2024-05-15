@@ -15,9 +15,11 @@
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
     "vue": "^3.4.27",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vue3-naver-maps": "^4.2.0"
   },
   "devDependencies": {
+    "@types/navermaps": "^3.7.5",
     "@vitejs/plugin-vue": "^5.0.4",
     "vite": "^5.2.8"
   }

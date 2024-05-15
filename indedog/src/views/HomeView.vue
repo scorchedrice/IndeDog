@@ -13,11 +13,11 @@
         </div>
     </header>
     <header v-else-if="!isDeskTop" class="row align-items-center container">
-        <div class="col" style="background-color: green;">
+        <div class="col" style="background-color: green; margin-bottom: 15px;">
             <MobileTodayRecommend/>
         </div>
         <hr>
-        <div class="col" style="background-color: bisque;">
+        <div class="col" style="background-color: bisque; margin-bottom: 15px;">
             <MobileNowInTheater/>
         </div>
         <hr>
@@ -45,7 +45,6 @@ const mobileWidth = ref(576)
 
 onMounted(() => {
   store.getMovies()
-  console.log(window.innerWidth)
   if (window.innerWidth < 576) {
     isDeskTop.value = false
     mobileWidth.value = window.innerWidth
@@ -56,8 +55,6 @@ onMounted(() => {
 
 const isDeskTop = ref(true);
 window.onresize = function () {
-    console.log(window.innerWidth)
-    console.log(isDeskTop.value)
     if (window.innerWidth < 576) {
         isDeskTop.value = false
         mobileWidth.value = window.innerWidth
