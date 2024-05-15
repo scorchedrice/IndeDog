@@ -7,7 +7,9 @@
         <div 
         v-for="movie in paginationMovies"
         :key="movie.id">
-            <img :src="movie.img_src" alt="movie.poster" width="500px">
+            <RouterLink :to="{ name: 'movie_detail', params: { 'id': movie.id } }">
+                <img :src="movie.img_src" alt="movie.poster" width="500px">
+            </RouterLink>
             {{ movie.title }}
             {{ movie.id }}
             <hr>
@@ -19,6 +21,7 @@
 
 <script setup>
 import { useCounterStore } from '@/stores/counter'
+import { RouterLink, RouterView } from 'vue-router'
 import { FwbPagination } from 'flowbite-vue'
 import { ref, computed } from 'vue'
 
