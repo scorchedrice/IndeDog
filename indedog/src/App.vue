@@ -4,7 +4,7 @@
       <h1 id="HomePage" @click="goHomePage">인디독</h1>
     </div>
     <br>
-    <div class="container-sm" style="width: 1200px;">
+    <div class="container-sm" style="width: 90%;">
       <div>
         <RouterView />
         <div id="menu">

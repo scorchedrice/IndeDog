@@ -11,6 +11,7 @@ export const useCounterStore = defineStore('counter', () => {
       url: `${API_URL}/api/v1/movies/`
     })
       .then(res => {
+        console.log(res.data)
         movies.value = res.data
       })
       .catch(err => console.log(err))

@@ -3,36 +3,30 @@
         <h1>상영중인 영화</h1>
         <div id="carousel_now_in_theater" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="container row align-items-center">
-                    <div class="col-4">
-                        <img src="@/assets/movie_ex1.jpeg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="col-8">
-                        <h2>이곳에 영화 정보를 적습니다.</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="container row align-items-center">
-                    <div class="col-4">
-                        <img src="@/assets/movie_ex2.jpeg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="col-8">
-                        <h2>이곳에 영화 정보를 적습니다.</h2>
+            <template v-for="movie in recentMovie"
+                :key="movie.id">
+                <div v-if="movie.id==10000" class="carousel-item active">
+                    <div class="container row align-items-center">
+                        <div class="col-4">
+                            <img :src="movie.img_src" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="col-8">
+                            <h2>이곳에 영화 정보를 적습니다.</h2>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <div class="container row align-items-center">
-                    <div class="col-4">
-                        <img src="@/assets/movie_ex3.jpeg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="col-8">
-                        <h2>이곳에 영화 정보를 적습니다.</h2>
+                <div v-if="movie.id>10000" class="carousel-item">
+                    <div class="container row align-items-center">
+                        <div class="col-4">
+                            <img :src="movie.img_src" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="col-8">
+                            <h2>{{ movie.title }}</h2>
+                            <p>{{ movie.cinemas }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </template>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carousel_now_in_theater" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -47,6 +41,23 @@
 </template>
 
 <script setup>
+import { useCounterStore } from '@/stores/counter'
+import { ref } from 'vue'
+
+const store = useCounterStore()
+const movieList = store.movies
+const recentMovie = ref([])
+
+// 키워드를 중심으로 검색
+// 현재 상영중인 영화는 id 10000번대부터 설정, id 1만번대부터 검색
+for (const movie of movieList) {
+    if (Number(movie.id) >= 10000) {
+        console.log(movie)
+        recentMovie.value.push(movie)
+    }
+}
+
+const recentMovieFirst = recentMovie.value[0]
 
 </script>
 
