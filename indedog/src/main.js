@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import { createNaverMap } from 'vue3-naver-maps'
+import { createNaverMap, NaverMarker, NaverInfoWindow } from 'vue3-naver-maps'
 
 import '../node_modules/flowbite-vue/dist/index.css'
 
@@ -21,5 +21,6 @@ app.use(createNaverMap, {
     category: "ncp",
     subModules: [],
 })
+
 
 app.mount('#app')
