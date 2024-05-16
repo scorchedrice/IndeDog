@@ -4,8 +4,8 @@ from rest_framework import status
 
 
 from django.shortcuts import get_object_or_404, get_list_or_404
-from .serializers import MovieListSerializer, MovieSerializer
-from .models import Movie
+from .serializers import MovieListSerializer, CinemaListSerializer
+from .models import Movie, Cinema
 
 
 # Create your views here.
@@ -18,11 +18,9 @@ def movie_list(request):
         return Response(serializer.data)
 
 
-@api_view(['GET'])
-def movie_detail(request, movie_pk):
+@api_view(['GET', 'POST'])
+def cinema_list(request):
     if request.method == 'GET':
-        movie = get_object_or_404(Movie, pk=movie_pk)
-        print(movie)
-        serializer = MovieSerializer(movie)
+        cinemas = get_list_or_404(Cinema)
+        serializer = CinemaListSerializer(cinemas, many=True)
         return Response(serializer.data)
-    
