@@ -7,6 +7,7 @@ import NowInTheaterView from '@/views/NowInTheaterView.vue'
 import CommunityView from '@/views/CommunityView.vue'
 import SignUp from '@/views/SignUp.vue'
 import MovieDetail from '@/components/MovieDetail.vue'
+import CinemaInfoView from '@/views/CinemaInfoView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +34,11 @@ const router = createRouter({
       path: '/movie_detail/:id',
       name: 'movie_detail',
       component: MovieDetail
+    },
+    {
+      path: '/cinema_info/:address',
+      name: 'cinema_info',
+      component: CinemaInfoView,      
     },
     {
       path: '/now_in_theater',
