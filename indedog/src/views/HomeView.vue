@@ -44,7 +44,8 @@ const store = useCounterStore()
 const mobileWidth = ref(576)
 
 onMounted(() => {
-  store.getMovies()
+
+  console.log(window.innerWidth)
   if (window.innerWidth < 576) {
     isDeskTop.value = false
     mobileWidth.value = window.innerWidth
