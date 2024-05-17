@@ -5,8 +5,7 @@ import axios from 'axios'
 export const useCounterStore = defineStore('counter', () => {
   const movies = ref([])
   const API_URL = 'http://127.0.0.1:8000'
-  const getMovies = function () {
-    axios({
+  axios({
       method: 'get',
       url: `${API_URL}/api/v1/movies/`
     })
@@ -15,6 +14,5 @@ export const useCounterStore = defineStore('counter', () => {
         movies.value = res.data
       })
       .catch(err => console.log(err))
-    }
-  return { movies, getMovies }
+  return { movies }
 }, { persist: true })

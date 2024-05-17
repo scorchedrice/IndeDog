@@ -14,11 +14,15 @@
                     :key="tdmovie.id">
                     <div class="carousel-item active"
                     v-if="index == 0">
+                    <RouterLink :to="{ name: 'movie_detail', params: { 'id': tdmovie.id } }">
                         <img :src="tdmovie.img_src" class="d-block w-100" alt="...">
+                    </RouterLink>
                     </div>
                     <div class="carousel-item"
                     v-if="index > 0">
+                    <RouterLink :to="{ name: 'movie_detail', params: { 'id': tdmovie.id } }">
                         <img :src="tdmovie.img_src" class="d-block w-100" alt="...">
+                    </RouterLink>
                     </div>
                     </template>
                 </div>
@@ -37,6 +41,7 @@
 
 <script setup>
 import { useCounterStore } from '@/stores/counter'
+import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
 
 const store = useCounterStore()

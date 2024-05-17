@@ -8,17 +8,22 @@
                 <div v-if="movie.id==10000" class="carousel-item active">
                     <div class="container row align-items-center">
                         <div class="col-4">
-                            <img :src="movie.img_src" class="d-block w-100" alt="...">
+                            <RouterLink :to="{ name: 'movie_detail', params: { 'id': movie.id } }">
+                               <img :src="movie.img_src" class="d-block w-100" alt="...">
+                            </RouterLink>
                         </div>
                         <div class="col-8">
-                            <h2>이곳에 영화 정보를 적습니다.</h2>
+                            <h2>{{ movie.title }}</h2>
+                            <p>{{ movie.cinemas }}</p>
                         </div>
                     </div>
                 </div>
                 <div v-if="movie.id>10000" class="carousel-item">
                     <div class="container row align-items-center">
                         <div class="col-4">
-                            <img :src="movie.img_src" class="d-block w-100" alt="...">
+                            <RouterLink :to="{ name: 'movie_detail', params: { 'id': movie.id } }">
+                                <img :src="movie.img_src" class="d-block w-100" alt="...">
+                            </RouterLink>
                         </div>
                         <div class="col-8">
                             <h2>{{ movie.title }}</h2>
@@ -42,6 +47,7 @@
 
 <script setup>
 import { useCounterStore } from '@/stores/counter'
+import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
 
 const store = useCounterStore()

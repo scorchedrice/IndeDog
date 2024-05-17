@@ -5,7 +5,7 @@
         <hr>
         <h2>제목 : {{ curMovie.title }}</h2>
         <p>감독 : {{ curMovie.director }}</p>
-        <p>키워드 : {{ curMovie.keywords }}</p>
+        <p v-if="curMovie.keywords">키워드 : {{ curMovie.keywords }}</p>
     </div>
 </template>
 
