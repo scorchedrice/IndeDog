@@ -1,15 +1,14 @@
 from rest_framework import serializers
-from .models import Movie
+from .models import Movie, Cinema
 
 
 class MovieListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = ('id', 'title', 'img_src', 'keywords', 'director')
+        fields = ('id', 'title', 'img_src', 'keywords', 'director', 'cinemas', 'genre', 'title_en', 'making_year', 'length')
 
 
-class MovieSerializer(serializers.ModelSerializer):
+class CinemaListSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Movie
-        fields = '__all__'
-        # read_only_fields = ('user',)
+        model = Cinema
+        fields = ('address', 'latitude', 'longitude')

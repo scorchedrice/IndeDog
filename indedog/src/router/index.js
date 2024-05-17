@@ -6,6 +6,7 @@ import MovieSearchView from '@/views/MovieSearchView.vue'
 import NowInTheaterView from '@/views/NowInTheaterView.vue'
 import CommunityView from '@/views/CommunityView.vue'
 import SignUp from '@/views/SignUp.vue'
+import MovieDetail from '@/components/MovieDetail.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +28,11 @@ const router = createRouter({
       path: '/movie_search',
       name: 'movie_search',
       component: MovieSearchView
+    },
+    {
+      path: '/movie_detail/:id',
+      name: 'movie_detail',
+      component: MovieDetail
     },
     {
       path: '/now_in_theater',

@@ -16,3 +16,10 @@ class Movie(models.Model):
     detail = models.TextField()
     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_movies')
     cinemas = models.TextField()
+
+
+class Cinema(models.Model):
+    recent_movies = models.ManyToManyField(Movie, related_name='recent_cinemas')
+    address = models.CharField(max_length=100)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
