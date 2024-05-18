@@ -4,10 +4,12 @@ import axios from 'axios'
 import { useRouter } from 'vue-router'
 
 export const useCounterStore = defineStore('counter', () => {
+  const router = useRouter()
   const movies = ref([])
   const cinemas = ref([])
   const API_URL = 'http://127.0.0.1:8000'
   const articles = ref()
+  const filterMovies = ref()
   const token = ref(null)
   const loginUser = ref('')
   // const token = ref(null)
@@ -26,6 +28,10 @@ export const useCounterStore = defineStore('counter', () => {
     })
       .then(res => {
         movies.value = res.data
+        for(const movie of movies.value){
+          movie.keywords = movie.keywords.split('#').filter(item => item.trim() !== '')
+        }
+        console.log(movies.value)
       })
       .catch(err => console.log(err))
 
@@ -33,13 +39,13 @@ export const useCounterStore = defineStore('counter', () => {
     axios({
       method: 'get',
       url: `${API_URL}/api/v1/articles/`,
-      headers: {
-        Authorization : `Token ${token.value}`
-      }
+      // headers: {
+      //   Authorization : `Token ${token.value}`
+      // }
     })
       .then(response => {
         // console.log(response)
-        // console.log(response.data)
+        console.log(response.data)
         articles.value = response.data
       })
       .catch(error => {
@@ -77,7 +83,24 @@ export const useCounterStore = defineStore('counter', () => {
     })
       .then((res) => {
         console.log('로그인 성공')
+        console.log(res)
         token.value = res.data.key
+      })
+      .catch((err) => {
+        window.alert('로그인정보가 일치하지 않습니다.')
+        console.log(err)
+        router.replace({ name: 'home'})
+      })
+  }
+
+  const logOut = function() {
+    axios({
+      method: 'post',
+      url: `${API_URL}/accounts/logout/`,
+    })
+      .then((res) => {
+        console.log('로그아웃')
+        token.value = null
       })
       .catch((err) => {
         console.log(err)
@@ -96,5 +119,6 @@ export const useCounterStore = defineStore('counter', () => {
     .catch(err => console.log(err))
   }
   
-  return { movies, getArticles, API_URL, articles, signUp, logIn, token, loginUser, getCoord, cinemas }
+
+  return { movies, getArticles, API_URL, articles, signUp, logIn, token, loginUser, getCoord, cinemas, logOut }
 }, { persist: true })

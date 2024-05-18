@@ -29,7 +29,7 @@
                                 <label for="floatingPassword">Password</label>
                             </div>
                             <br>
-                            <div class="container" style="display: flex; justify-content: space-between;">
+                            <div class="container" style="display: flex; justify-content: space-between;" v-if="!store.token">
                                 <button type="submit" class="btn btn-outline-success" style="margin-left:auto;">
                                     Login
                                 </button>
@@ -45,6 +45,11 @@
                     <div v-if="store.token">
                         <h1>ID : {{ store.loginUser }}</h1>
                         <p>환영합니다!</p>
+                        <div>
+                            <button @click="store.logOut" class="btn btn-outline-danger" style="margin-left:auto;">
+                                Logout
+                            </button>
+                        </div>
                     </div>
      
                     
@@ -56,7 +61,7 @@
             <li class="list-group-item" @click="goMovieSearch">작품 검색</li>
             <li class="list-group-item" @click="goCinemaSearch">상영관 검색</li>
             <li class="list-group-item" @click="goNowInTheater">현재 상영작</li>
-            <li class="list-group-item" @click="goCommunity" v-if="store.token">커뮤니티</li>
+            <li class="list-group-item" @click="goCommunity">커뮤니티</li>
         </ul>
         </div>
     </div>
@@ -73,11 +78,12 @@ const username = ref(null)
 const password = ref(null)
 
 const logIn = function() {
-    
     const payload = {
         username: username.value,
         password: password.value
     }
+    username.value = null
+    password.value = null
     store.logIn(payload)
 }
 
