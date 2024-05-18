@@ -11,7 +11,7 @@ import MovieSearchResult from '@/components/MovieSearchResult.vue'
 import CommunityCreateView from '@/views/CommunityCreateView.vue'
 import CommunityDetailView from '@/views/CommunityDetailView.vue'
 import { useCounterStore } from '@/stores/counter'
-
+import CinemaInfoView from '@/views/CinemaInfoView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,6 +41,11 @@ const router = createRouter({
       path: '/movie_detail/:id',
       name: 'movie_detail',
       component: MovieDetail
+    },
+    {
+      path: '/cinema_info/:address',
+      name: 'cinema_info',
+      component: CinemaInfoView,      
     },
     {
       path: '/now_in_theater',
@@ -80,8 +85,6 @@ const router = createRouter({
 const menuHideEmit = function () {
   emit('menuHide')
 }
-
-import { createRouter } from 'vue-router'
 
 
 export default router

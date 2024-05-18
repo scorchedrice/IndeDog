@@ -5,6 +5,7 @@ import { useRouter } from 'vue-router'
 
 export const useCounterStore = defineStore('counter', () => {
   const movies = ref([])
+  const cinemas = ref([])
   const API_URL = 'http://127.0.0.1:8000'
   const articles = ref()
   const token = ref(null)
@@ -82,7 +83,18 @@ export const useCounterStore = defineStore('counter', () => {
         console.log(err)
       })
   }
-      
-  return { movies, getArticles, API_URL, articles, signUp, logIn, token, loginUser }
+        
+  const getCoord = function () {
+    axios({
+      method: 'get',
+      url: `${API_URL}/api/v1/cinemas/`,
+    })
+    .then(res => {
+      cinemas.value = res.data;
+      console.log('#store - cinema')
+    })
+    .catch(err => console.log(err))
+  }
   
+  return { movies, getArticles, API_URL, articles, signUp, logIn, token, loginUser, getCoord, cinemas }
 }, { persist: true })

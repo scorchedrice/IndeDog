@@ -1,29 +1,44 @@
 <template>
     <div>
-        <h1>상영관의 정보를 담고 있습니다.</h1>
-        <p>해당 상영관의 길찾기, 상영중인 영화 등의 정보를 제공합니다.</p>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="now_in" @click="searchNowInTheater">
+            <label class="form-check-label" for="now_in">
+                상영중인 영화를 기준으로 상영관 검색
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked @click="searchRegion">
+            <label class="form-check-label" for="flexRadioDefault2">
+                지역을 기준으로 상영관 검색
+            </label>
+        </div>
+        <div v-if="searchMethod">
+            <CinemaDetail_NowInTheater/>
+        </div>
+        <div v-else-if = "searchMethod==false">
+            <CinemaDetail_Region/>
+        </div>
     </div>
 </template>
 
 <script setup>
+import {ref} from 'vue'
+import CinemaDetail_NowInTheater from '@/components/CinemaDetail-NowInTheater.vue'
+import CinemaDetail_Region from '@/components/CinemaDetail-Region.vue'
+// Event
+const searchMethod = ref(null) // true: nowintheater, false: searchRegion
 
-import { useCounterStore } from '@/stores/counter'
-import { ref } from 'vue'
-const store = useCounterStore()
-const movieList = store.movies
-const recentMovie = ref([])
-
-// 키워드를 중심으로 검색
-// 현재 상영중인 영화는 id 10000번대부터 설정, id 1만번대부터 검색
-for (const movie of movieList) {
-    if (Number(movie.id) >= 10000) {
-        recentMovie.value.push(movie)
-    }
+const searchNowInTheater = function () {
+    console.log('NOWINTHEATER')
+    searchMethod.value=true
+    console.log(searchMethod)
 }
 
-const recentMovieFirst = recentMovie.value[0]
-
-
+const searchRegion = function () {
+    console.log('REGION')
+    searchMethod.value=false
+    console.log(searchMethod)
+}
 </script>
 
 <style scoped>
