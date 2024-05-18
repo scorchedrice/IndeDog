@@ -38,13 +38,18 @@
                         <li class="list-group-item">Director: {{ movie.director }}</li>
                         <li class="list-group-item">Genre: {{ movie.genre }}</li>
                         <li class="list-group-item">Running Time: {{ movie.length }}</li>
-                        {{ movie.keywords }}
-                        <div class="accordion" :id="movie.id">
+                        <div class="accordion" :id="movie.id+'container'">
                             <div class="accordion-item">
                                 <div class="accordion-header">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" :data-bs-target="'#'+movie.id" aria-expanded="true" :aria-controls="movie.id">
                                         <li class="list-group-item">Keyword</li>
                                     </button>
+                                    <div :id="movie.id" class="accordion-collapse collapse show" :data-bs-parent="'#'+movie.id">
+                                        <div class="accordion-body">
+                                            나중에 v-for로 정리, 기본값 닫힘 설정
+                                            {{ movie.keywords }}
+                                        </div>
+                                    </div>
                                 </div>
                             
                             </div>
