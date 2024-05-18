@@ -46,12 +46,14 @@ import { ref } from 'vue'
 
 const store = useCounterStore()
 const movieList = store.movies
+console.log(movieList)
 const todayMovie = ref([])
 
 // 키워드를 중심으로 검색
 // 현재 상영중인 영화는 id 10000번대부터 설정, id 1만번대부터 검색
 for (const movie of movieList) {
     if (movie.keywords.includes('#불교')){
+        console.log(movie)
         todayMovie.value.push(movie)
     }
 }

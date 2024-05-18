@@ -45,7 +45,8 @@ const loadKakaoMap = (container) => {
 
                 // - Marker -
                 const markerPosition = new kakao.maps.LatLng(cinema_lat.value, cinema_lng.value)
-                const imageSrc = "../../src/assets/icon/marker_icon.jpg"
+                // const imageSrc = "../../src/assets/icon/marker_icon.jpg"
+                const imageSrc = "https://cdn4.iconfinder.com/data/icons/dog-breed-minimal-outline/512/Pomeranian-1024.png"
                 const imageSize = new kakao.maps.Size(30,30)
                 const imageOption = {offset: new kakao.maps.Point(27,69)}
                 const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)        

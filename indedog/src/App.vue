@@ -7,7 +7,7 @@
     <div class="container-sm" style="width: 90%;">
       <div>
         <RouterView />
-        <div id="menu">
+        <div id="menu" style="z-index: 99; position: relative;">
           <Menu />
         </div>
       </div>
