@@ -26,10 +26,12 @@ export const useCounterStore = defineStore('counter', () => {
     })
       .then(res => {
         movies.value = res.data
+        for(const movie of movies.value){
+          movie.keywords = movie.keywords.split('#').filter(item => item.trim() !== '')
+        }
         for (const idx in movies.value) {
           if (movies.value[idx].id >= 10000) {
             movies.value[idx].cinemas = movies.value[idx].cinemas.split(',')
-            console.log(movies.value[idx].cinemas)
           }
         }
       })
