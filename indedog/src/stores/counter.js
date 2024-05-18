@@ -26,6 +26,12 @@ export const useCounterStore = defineStore('counter', () => {
     })
       .then(res => {
         movies.value = res.data
+        for (const idx in movies.value) {
+          if (movies.value[idx].id >= 10000) {
+            movies.value[idx].cinemas = movies.value[idx].cinemas.split(',')
+            console.log(movies.value[idx].cinemas)
+          }
+        }
       })
       .catch(err => console.log(err))
 
@@ -92,6 +98,7 @@ export const useCounterStore = defineStore('counter', () => {
     .then(res => {
       cinemas.value = res.data;
       console.log('#store - cinema')
+      console.log(cinemas.value)
     })
     .catch(err => console.log(err))
   }

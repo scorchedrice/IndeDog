@@ -28,20 +28,31 @@
 <script setup>
 
 import { useCounterStore } from '@/stores/counter'
-import { RouterLink } from 'vue-router'
-import { ref } from 'vue'
+import { RouterLink, useRouter } from 'vue-router'
+import { onMounted, ref } from 'vue'
 
+
+const isFirstMount = ref(true)
 const store = useCounterStore()
 const movieList = store.movies
 const recentMovie = ref([])
 const cinemaList = ref([])
 // 키워드를 중심으로 검색
 // 현재 상영중인 영화는 id 10000번대부터 설정, id 1만번대부터 검색
-for (const movie of movieList) {
-    if (Number(movie.id) >= 10000) {
-        recentMovie.value.push(movie)
+
+onMounted(() => {
+    if (isFirstMount.value === true) {
+        for (const movie of movieList) {
+            if (Number(movie.id) >= 10000) {
+                    recentMovie.value.push(movie)
+            }
+        isFirstMount.value = false
     }
 }
+})
+
+
+
 
 
 </script>
