@@ -20,14 +20,18 @@
                             :key="tdmovie.id">
                                 <div class="carousel-item active"
                                 v-if="index == 0">
+                                <RouterLink :to="{ name: 'movie_detail', params: { 'id': tdmovie.id } }">
                                     <img :src="tdmovie.img_src" class="d-block w-100" alt="...">
+                                </RouterLink>
                                     <p>영화 제목: {{ tdmovie.title }}</p>
                                     <p>영화 감독: {{ tdmovie.director }}</p>
                                     <p>Keywords: {{ tdmovie.keywords }}</p>
                                 </div>
                                 <div class="carousel-item"
                                 v-if="index > 0">
+                                <RouterLink :to="{ name: 'movie_detail', params: { 'id': tdmovie.id } }">
                                     <img :src="tdmovie.img_src" class="d-block w-100" alt="...">
+                                </RouterLink>
                                     <p>영화 제목: {{ tdmovie.title }}</p>
                                     <p>영화 감독: {{ tdmovie.director }}</p>
                                     <p>Keywords: {{ tdmovie.keywords }}</p>

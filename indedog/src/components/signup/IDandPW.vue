@@ -1,16 +1,16 @@
 <template>
 	<div class="container" style="background-color: blue;">
-        
+        <form @submit.prevent="signUp">
         <div id="userId">
             <div class="row g-3 align-items-center">
                 <div class="col-auto">
                     <label for="inputId" class="col-form-label">ID</label>
                 </div>
                 <div class="col-auto">
-                    <input type="text" id="userIdInput" class="form-control" aria-describedby="passwordHelpInline" @input="idInput">
+                    <input type="text" v-model.trim="username" id="userIdInput" aria-describedby="passwordHelpInline">
                 </div>
                 <div class="col-auto">
-                    <span id="IdHelpInline" class="form-text">
+                    <span id="IdHelpInline">
                         <button>
                             중복확인
                         </button>
@@ -25,7 +25,7 @@
                     <label for="inputPassword6" class="col-form-label">Password</label>
                 </div>
                 <div class="col-auto">
-                    <input type="password" id="password_init" class="form-control" aria-describedby="passwordHelpInline" @input="passwordInput">
+                    <input type="password" id="password_init" aria-describedby="passwordHelpInline" v-model="password1">
                 </div>
                 <div class="col-auto">
                     <span id="passwordHelpInline" class="form-text">
@@ -41,7 +41,7 @@
                     <label for="inputPassword6" class="col-form-label">Password</label>
                 </div>
                 <div class="col-auto">
-                    <input type="password" id="password_check" class="form-control" aria-describedby="passwordHelpInline"  @input="passwordInput">
+                    <input type="password" id="password_check" aria-describedby="passwordHelpInline" v-model="password2">
                 </div>
                 <div class="col-auto">
                     <span id="same_check" class="form-text">
@@ -49,38 +49,54 @@
                     </span>
                 </div>
             </div>
+            <input type="submit" value="회원가입">
         </div>
+        </form>
     </div>
         
     </template>
 <script setup>
 import {ref} from 'vue'
 import { onBeforeRouteLeave } from 'vue-router';
-onBeforeRouteLeave((to, from) => {
-    document.querySelector('#menu').style.display='block';
-})
-const userId = ref('')
-const passwordInit = ref('')
-const passwordSecond = ref('')
-const isSame = ref('')
-const idInput = function (event) {
-    userId.value = event.currentTarget.value
-}
-const passwordInput = function (event) {
-    if (event.currentTarget.id === 'password_init') {
-        passwordInit.value = event.currentTarget.value
-	} else {
-		passwordSecond.value = event.currentTarget.value
-		if (passwordInit.value === passwordSecond.value) {
-			isSame.value = '비밀번호가 일치합니다!'
-		} else if (passwordSecond.value !== '') {
-			isSame.value = '비밀번호가 동일하지 않습니다!'
-		}
-	}
-}
+import {useCounterStore} from '@/stores/counter'
 
-const sameCheck = function () {
-	console.log(passwordInit.value)
+// onBeforeRouteLeave((to, from) => {
+//     document.querySelector('#menu').style.display='block';
+// })
+const username = ref(null)
+const password1 = ref(null)
+const password2 = ref(null)
+const isSame = ref('')
+// const idInput = function (event) {
+//     userId.value = event.currentTarget.value
+// }
+const store = useCounterStore()
+
+// const passwordInput = function (event) {
+//     if (event.currentTarget.id === 'password_init') {
+//         passwordInit.value = event.currentTarget.value
+// 	} else {
+// 		passwordSecond.value = event.currentTarget.value
+// 		if (passwordInit.value === passwordSecond.value) {
+// 			isSame.value = '비밀번호가 일치합니다!'
+// 		} else if (passwordSecond.value !== '') {
+// 			isSame.value = '비밀번호가 동일하지 않습니다!'
+// 		}
+// 	}
+// }
+
+// const sameCheck = function () {
+// 	console.log(passwordInit.value)
+// }
+
+const signUp = function () {
+    console.log(username.value)
+    const payload = {
+      username: username.value,
+      password1: password1.value,
+      password2: password2.value
+    }
+    store.signUp(payload)
 }
 
 </script>

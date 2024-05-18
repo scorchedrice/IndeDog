@@ -17,27 +17,37 @@
             <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <strong>로그인인 경우, 이를 회원정보로 대체합니다.</strong>
-                    <div id="login_form">
-                        <div class="form-floating mb-3">
-                            <input type="id" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">ID</label>
+                    <div v-if="!store.token">
+                    <form @submit.prevent="logIn">
+                        <div id="login_form">
+                            <div class="form-floating mb-3">
+                                <input type="id" class="form-control" id="floatingInput" placeholder="name@example.com" v-model.trim="username">
+                                <label for="floatingInput">ID</label>
+                            </div>
+                            <div class="form-floating">
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" v-model.trim="password">
+                                <label for="floatingPassword">Password</label>
+                            </div>
+                            <br>
+                            <div class="container" style="display: flex; justify-content: space-between;">
+                                <button type="submit" class="btn btn-outline-success" style="margin-left:auto;">
+                                    Login
+                                </button>
+                            </div>
                         </div>
-                        <div class="form-floating">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                            <label for="floatingPassword">Password</label>
-                        </div>
-                        <br>
-                        <div class="container" style="display: flex; justify-content: space-between;">
-                            <button type="button" class="btn btn-outline-success" style="margin-left:auto;">
-                                Login
-                            </button>
-                        </div>
-                    </div>
+                    </form>
                     <hr>
                     <div>
                         <strong>아직 회원이 아니신가요?</strong>
                         <p class="text-primary" style="text-decoration: underline;" @click="goSignUp">회원가입</p>
                     </div>
+                    </div>
+                    <div v-if="store.token">
+                        <h1>ID : {{ store.loginUser }}</h1>
+                        <p>환영합니다!</p>
+                    </div>
+     
+                    
                 </div>
             </div>
             </div>
@@ -46,7 +56,7 @@
             <li class="list-group-item" @click="goMovieSearch">작품 검색</li>
             <li class="list-group-item" @click="goCinemaSearch">상영관 검색</li>
             <li class="list-group-item" @click="goNowInTheater">현재 상영작</li>
-            <li class="list-group-item" @click="goCommunity">커뮤니티</li>
+            <li class="list-group-item" @click="goCommunity" v-if="store.token">커뮤니티</li>
         </ul>
         </div>
     </div>
@@ -55,6 +65,22 @@
 
 <script setup>
 import {useRoute,useRouter} from 'vue-router'
+import {ref} from 'vue'
+import {useCounterStore} from '@/stores/counter.js'
+
+const store = useCounterStore()
+const username = ref(null)
+const password = ref(null)
+
+const logIn = function() {
+    
+    const payload = {
+        username: username.value,
+        password: password.value
+    }
+    store.logIn(payload)
+}
+
 const router = useRouter()
 const goMovieSearch = function () {
     console.log('movie-search')

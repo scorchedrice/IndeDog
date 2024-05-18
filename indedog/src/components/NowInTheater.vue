@@ -58,7 +58,6 @@ const recentMovie = ref([])
 // 현재 상영중인 영화는 id 10000번대부터 설정, id 1만번대부터 검색
 for (const movie of movieList) {
     if (Number(movie.id) >= 10000) {
-        console.log(movie)
         recentMovie.value.push(movie)
     }
 }

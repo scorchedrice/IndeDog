@@ -87,5 +87,5 @@ if response.status_code == 200:
 else : 
     print(response.status_code)
   
-with open("movie_data2.json", "w", encoding='utf-8') as f:
-    json.dump(movie_data, f, indent=2, ensure_ascii=False)
+# with open("movie_data2.json", "w", encoding='utf-8') as f:
+#     json.dump(movie_data, f, indent=2, ensure_ascii=False)

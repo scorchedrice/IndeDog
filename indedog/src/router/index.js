@@ -7,6 +7,11 @@ import NowInTheaterView from '@/views/NowInTheaterView.vue'
 import CommunityView from '@/views/CommunityView.vue'
 import SignUp from '@/views/SignUp.vue'
 import MovieDetail from '@/components/MovieDetail.vue'
+import MovieSearchResult from '@/components/MovieSearchResult.vue'
+import CommunityCreateView from '@/views/CommunityCreateView.vue'
+import CommunityDetailView from '@/views/CommunityDetailView.vue'
+import { useCounterStore } from '@/stores/counter'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,7 +32,10 @@ const router = createRouter({
     {
       path: '/movie_search',
       name: 'movie_search',
-      component: MovieSearchView
+      component: MovieSearchView,
+    },
+    {
+      path: '/:category/:name', name: 'movie_search_result', component: MovieSearchResult
     },
     {
       path: '/movie_detail/:id',
@@ -56,10 +64,24 @@ const router = createRouter({
         document.querySelector('#menu').style.display='none';
         next();
       },
+    },
+    {
+      path: '/create',
+      name: 'CommunityCreateView',
+      component: CommunityCreateView
+    },
+    {
+      path: '/community/:id',
+      name: 'CommunityDetailView',
+      component: CommunityDetailView
     }
   ]
 })
 const menuHideEmit = function () {
   emit('menuHide')
 }
+
+import { createRouter } from 'vue-router'
+
+
 export default router
