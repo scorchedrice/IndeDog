@@ -29,7 +29,7 @@ def article_create(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['GET'])
 def article_detail(request, article_pk):
     article = Article.objects.get(pk=article_pk)
 
@@ -37,7 +37,14 @@ def article_detail(request, article_pk):
         serializer = ArticleSerializer(article)
         print(serializer.data)
         return Response(serializer.data)
-    elif request.method == 'PUT':
+
+
+@api_view(['PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def article_update(request, article_pk):
+    article = Article.objects.get(pk=article_pk)
+    
+    if request.method == 'PUT':
         serializer = ArticleSerializer(article, data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
@@ -45,6 +52,7 @@ def article_detail(request, article_pk):
     elif request.method == 'DELETE':
         article.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAdminUser])
