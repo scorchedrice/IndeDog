@@ -131,6 +131,11 @@ const keywords = curMovie.value.keywords.filter(item => item.trim() !== '')
 
 
 const createComment = function(movie_id) {
+    console.log(store.loginUser)
+    if(!store.loginUser){
+        window.alert('로그인을 하셔야 댓글등록이 가능해요!')
+        return
+    }
     axios({
       method: 'post',
       url: `${store.API_URL}/api/v1/articles/movie/${movie_id}/comments/`,
