@@ -12,6 +12,8 @@ import CommunityCreateView from '@/views/CommunityCreateView.vue'
 import CommunityDetailView from '@/views/CommunityDetailView.vue'
 import { useCounterStore } from '@/stores/counter'
 import CinemaInfoView from '@/views/CinemaInfoView.vue'
+import NoticeView from '@/views/NoticeView.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -80,6 +82,11 @@ const router = createRouter({
       path: '/community/:id',
       name: 'CommunityDetailView',
       component: CommunityDetailView
+    },
+    {
+      path: '/notice',
+      name: 'notice',
+      component: NoticeView
     }
   ]
 })

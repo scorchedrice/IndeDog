@@ -12,6 +12,7 @@ export const useCounterStore = defineStore('counter', () => {
   const filterMovies = ref()
   const token = ref(null)
   const loginUser = ref('')
+  const isStaff = ref(null)
   // const token = ref(null)
   // const isLogin = computed(() => {
   //   if (token.value === null) {
@@ -85,6 +86,26 @@ export const useCounterStore = defineStore('counter', () => {
         console.log('로그인 성공')
         console.log(res)
         token.value = res.data.key
+        axios({
+          method: 'get',
+          url: `${API_URL}/api/v1/admin/`,
+        })
+          .then(res => {
+            console.log(res)
+            for(const data in res.data){
+              console.log(res.data[data].is_staff)
+              if (res.data[data].username === loginUser.value){
+                if (res.data[data].is_staff) {
+                  console.log('스태프입니다.')
+                  isStaff.value = true
+                }
+                break
+              }
+            }
+          })
+          .catch(err => {
+            console.log(err)
+          })
       })
       .catch((err) => {
         window.alert('로그인정보가 일치하지 않습니다.')
@@ -101,6 +122,8 @@ export const useCounterStore = defineStore('counter', () => {
       .then((res) => {
         console.log('로그아웃')
         token.value = null
+        loginUser.value = null
+        isStaff.value = false
       })
       .catch((err) => {
         console.log(err)
@@ -121,5 +144,5 @@ export const useCounterStore = defineStore('counter', () => {
   }
   
 
-  return { movies, getArticles, API_URL, articles, signUp, logIn, token, loginUser, getCoord, cinemas, logOut }
+  return { movies, getArticles, API_URL, articles, signUp, logIn, token, loginUser, getCoord, cinemas, logOut, isStaff }
 }, { persist: true })

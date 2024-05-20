@@ -5,17 +5,24 @@ from rest_framework.authentication import TokenAuthentication, BasicAuthenticati
 from rest_framework import status
 
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-
-from .models import Article
-from .serializers import ArticleSerializer
+from .models import Article, Comment
+from .serializers import ArticleSerializer, CommentSerializer
 
 
 # Create your views here.
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def article_list(request):
     if request.method == 'GET':
         articles = Article.objects.all()
         serializer = ArticleSerializer(articles, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def comment_list(request):
+    if request.method == 'GET':
+        comments = Comment.objects.all()
+        serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -26,6 +33,16 @@ def article_create(request):
         serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def comment_create_article(request, article_pk):
+    if request.method == 'POST':
+        serializer = ArticleSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user, article=article_pk)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -60,9 +77,11 @@ def notice(request):
     if request.method == 'GET':    
         articles = Article.objects.filter(is_notice=True)
         serializer = ArticleSerializer(articles, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK) 
     elif request.method == 'POST':
         serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user, is_notice=True)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+

@@ -12,10 +12,15 @@ class Article(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_notice = models.BooleanField(default=False)
+    category = models.CharField(max_length=20)
 
 
 class Comment(models.Model):
-    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, blank=True)
+    point = models.FloatField(default=0.0)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, blank=True)
+    cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, blank=True)
     content = models.CharField(max_length=250)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

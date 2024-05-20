@@ -3,6 +3,15 @@
     <h1>게시글 작성</h1>
     <form @submit.prevent="createArticle">
       <div>
+        <label for="category">카테고리 : </label>
+        <select name="category" id="category" v-model="category">
+        <option value="영화">영화</option>
+        <option value="상영관">상영관</option>
+        <option value="자유">자유</option>
+        <option v-if="store.isStaff" value="공지">공지</option>
+      </select>
+      </div>
+      <div>
         <label for="title">제목 : </label>
         <input type="text" v-model.trim="title" id="title">
       </div>
@@ -10,7 +19,11 @@
         <label for="content">내용 : </label>
         <textarea v-model.trim="content" id="content"></textarea>
       </div>
+      <div v-if="store.isStaff">
+        <input type="checkbox" v-model="isNotice">공지사항 체크
+      </div>
       <input type="submit">
+      <br>
     </form>
   </div>
 </template>
@@ -25,6 +38,8 @@ const store = useCounterStore()
 const title = ref(null)
 const content = ref(null)
 const router = useRouter()
+const isNotice = ref(false)
+const category = ref(null)
 
 const createArticle = function () {
     axios({
@@ -32,14 +47,21 @@ const createArticle = function () {
       url: `${store.API_URL}/api/v1/articles/create/`,
       data: {
         title: title.value,
-        content: content.value
+        content: content.value,
+        is_notice: isNotice.value,
+        category: category.value
       },
       headers: {
         Authorization : `Token ${store.token}`
       }
     })
       .then(response => {
-        router.push({ name: 'community'})
+        console.log(response.data)
+        if(isNotice.value) {
+          router.push({ name: 'notice'})
+        } else {
+          router.replace({ name: 'community'})
+        }
       })
       .catch(error => {
         console.log(error)
