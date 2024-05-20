@@ -4,7 +4,7 @@
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#mobile_notice_sub" aria-expanded="false" aria-controls="#mobile_notice_sub">
-                        공지사항
+                        <h2>공지사항</h2>
                     </button>
                 </h2>
                 <div id="mobile_notice_sub" class="accordion-collapse collapse" data-bs-parent="#mobile_notice">
@@ -20,5 +20,10 @@ import {ref, onMounted, computed } from 'vue'
 </script>
 
 <style scoped>
-
+h1,h2 {
+    font-family: "hanna";
+}
+* {
+    font-family: "hanna_air"
+}
 </style>

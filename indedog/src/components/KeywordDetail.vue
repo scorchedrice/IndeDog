@@ -1,11 +1,12 @@
 <template>
+    Keyword
     <button
     type="button"
-    class="btn btn-primary"
+    class="btn btn-link"
       ref="targetElement"
       @click="visible = !visible"
     >
-      Keywords
+       . 
     </button>
   
     <Wowerlay
@@ -34,3 +35,11 @@
     })
     
   </script>
+
+<style scoped>
+@import '@/assets/font/font.css';
+
+* {
+    font-family: "hanna_air"
+}
+</style>

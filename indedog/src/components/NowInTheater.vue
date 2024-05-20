@@ -70,5 +70,11 @@ const recentMovieFirst = recentMovie.value[0]
 </script>
 
 <style scoped>
-
+@import '@/assets/font/font.css';
+h1,h2 {
+    font-family: "hanna";
+}
+* {
+    font-family: "hanna_air"
+}
 </style>

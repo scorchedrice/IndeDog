@@ -30,6 +30,7 @@ export const useCounterStore = defineStore('counter', () => {
         movies.value = res.data
         for(const movie of movies.value){
           movie.keywords = movie.keywords.split('#').filter(item => item.trim() !== '')
+          movie.cinemas = movie.cinemas.split(',')
         }
         console.log(movies.value)
       })

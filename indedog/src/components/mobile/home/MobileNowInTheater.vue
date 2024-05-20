@@ -5,7 +5,7 @@
                 <h2 class="accordion-header">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#mobile_NIT_sub" aria-expanded="false" aria-controls="mobile_NIT_sub">
                         <div>
-                            <h3>현재 상영중인 영화</h3>
+                            <h2>현재 상영중인 영화</h2>
                         </div>
                     </button>
                 </h2>
@@ -73,4 +73,10 @@ for (const movie of movieList) {
 </script>
 
 <style scoped>
+h1,h2 {
+    font-family: "hanna";
+}
+* {
+    font-family: "hanna_air"
+}
 </style>

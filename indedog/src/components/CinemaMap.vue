@@ -1,9 +1,10 @@
 <template>
-    <div ref="mapContainer" style="width: 100%; height: 400px;"></div>
+    <div ref="mapContainer" style="width: 100%; height: 400px; font-family: euljiro;"></div>
     <div style="text-align: center;"></div>
     <div>
     <b-form-rating v-model="value"></b-form-rating>
     <p class="mt-2">Value: {{ value }}</p>
+    <p style="text-align: right; font-family: euljiro;">test</p>
   </div>
 </template>
 
@@ -57,19 +58,24 @@ const loadKakaoMap = (container) => {
                     }) // 마커를 생성
                     marker.setMap(mapInstance) // 마커 표시
 
-                    // - Marker Window -
-                    const infowindow = new kakao.maps.InfoWindow({
-                            content: '<div style="font-family: euljiro"; margin:7px 22px 7px 12px;>' + cinemas[i].address + '</div>'
+                    // - Custom Overlay -
+                    const content = '<div style:"text-align: center;"><strong>' + cinemas[i].address + '</strong></div>'
+                    const infowindow = new kakao.maps.CustomOverlay({
+                            content: content,
+                            map: mapInstance,
+                            position: marker.getPosition(),
+                            clickable: true
                         })
+                    infowindow.setMap(null)
                     // - Marker Event | mouse over -
                     {
                         kakao.maps.event.addListener(marker,'mouseover',function() {
-                            infowindow.open(mapInstance,marker);
+                            infowindow.setMap(mapInstance);
                         });
                     };
                     {
                         kakao.maps.event.addListener(marker,'mouseout',function() {
-                            infowindow.close();
+                            infowindow.setMap(null);
                         });
                     };
                     // - Marker Event | click -
