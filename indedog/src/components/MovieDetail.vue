@@ -38,7 +38,7 @@ for(const movie of store.movies){
 }
 
 console.log(curMovie.value.keywords)
-const keywords = curMovie.value.keywords.split('#').filter(item => item.trim() !== '')
+const keywords = curMovie.value.keywords.filter(item => item.trim() !== '')
 
 console.log(keywords)
 

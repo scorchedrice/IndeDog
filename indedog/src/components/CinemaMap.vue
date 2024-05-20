@@ -1,6 +1,10 @@
 <template>
     <div ref="mapContainer" style="width: 100%; height: 400px;"></div>
     <div style="text-align: center;"></div>
+    <div>
+    <b-form-rating v-model="value"></b-form-rating>
+    <p class="mt-2">Value: {{ value }}</p>
+  </div>
 </template>
 
 <script setup>
@@ -42,8 +46,8 @@ const loadKakaoMap = (container) => {
                     const markerPosition = new kakao.maps.LatLng(cinemas[i].latitude, cinemas[i].longitude)
                         // - Marker Image -
                         // const imageSrc = "../src/assets/icon/marker_icon.jpg"
-                        const imageSrc = "https://cdn4.iconfinder.com/data/icons/dog-breed-minimal-outline/512/Pomeranian-1024.png"
-                        const imageSize = new kakao.maps.Size(30,30)
+                        const imageSrc = "../src/assets/icon/dog_marker.png"
+                        const imageSize = new kakao.maps.Size(50,50)
                         const imageOption = {offset: new kakao.maps.Point(27,69)}
                         const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
                     const marker = new kakao.maps.Marker({

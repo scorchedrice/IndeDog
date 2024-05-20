@@ -37,7 +37,7 @@ else if (route.params.category === '감독'){
 }
 else if (route.params.category === '키워드'){
     for (const movie of store.movies){  
-        if (movie.keywords.split('#').includes(route.params.name)){
+        if (movie.keywords.includes(route.params.name)){
             currentMovies.value.push(movie)
         }
     }
