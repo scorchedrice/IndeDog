@@ -1,16 +1,15 @@
 <template>
-    <div class = "row">
-        <div class="col-6" style="border: 5px solid black">
+    <div style=" display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+        <div style="border: 5px solid black; align-items: flex-start;">
             <h1>Notice</h1>
             <h1>가장 최근 공지</h1>
             <hr>
             <RouterLink v-if="articlesLatest" :to="{ name: 'CommunityDetailView', params: { 'id': articlesLatest.id}}">
                 <h1>{{ articlesLatest.title }}</h1>
             </RouterLink>
-
         </div>
-        <div class="col-1"></div>
-        <div class="col-5" style="border: 5px solid black">
+        
+        <div style="border: 5px solid black; align-items:flex-end;">
             <h2>최근 공지 목록</h2>
             <hr>
             <div v-for="article in articles" style="position: flex; ">
@@ -20,7 +19,12 @@
                     </RouterLink>
                 </div>
                 <div>
-                    {{ article.updated_at }}
+                    <p v-if="article.content.length < 20">
+                        {{ article.content }}
+                    </p>
+                    <p v-else>
+                        {{ article.content.slice(0,20) }}..
+                    </p>
                 </div>
             </div>
         </div>

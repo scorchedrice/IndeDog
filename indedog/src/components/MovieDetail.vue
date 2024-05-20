@@ -63,11 +63,11 @@
                     <div class="col" >
                         {{ rating }}
                     </div>
-                </div>s
+                </div>
                 <div>
                     <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
                     <label for="floatingTextarea2"></label>
-                </div>
+            </div>
             </div>
         </div>
     </div>

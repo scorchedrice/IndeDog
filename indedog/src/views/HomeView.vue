@@ -4,13 +4,9 @@
             <TodayRecommend />
         </div>
        
-        <div style="margin-bottom: 15px; border: 5px solid black">
-            <NowInTheater/>
-        </div>
         
-        <div>
-            <Notice/>
-        </div>
+            <NowInTheater/>
+        
     </header>
     <header v-else-if="!isDeskTop" class="row align-items-center container">
         <div class="col" style="background-color: green; margin-bottom: 15px;">

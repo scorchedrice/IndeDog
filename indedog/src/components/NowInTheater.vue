@@ -1,49 +1,54 @@
 <template>
-    <div class = "container">
-        <h1>상영중인 영화</h1>
-        <div id="carousel_now_in_theater" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-            <div v-for="movie in recentMovie"
-                :key="movie.id">
-                <div v-if="movie.id==10000" class="carousel-item active">
-                    <div class="container row align-items-center">
-                        <div class="col-4">
-                            <RouterLink :to="{ name: 'movie_detail', params: { 'id': movie.id } }">
-                               <img :src="movie.img_src" class="d-block w-100" alt="...">
-                            </RouterLink>
-                        </div>
-                        <div class="col-8">
-                            <h2>{{ movie.title }} - {{ movie.director }}</h2>
-                            <h3 v-if="movie.title_en !=''">{{ movie.title_en }}</h3>
-                            <p>Genre: {{ movie.genre }}</p>
-                            <p>RunningTime: {{ movie.length }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div v-if="movie.id>10000" class="carousel-item">
-                    <div class="container row align-items-center">
-                        <div class="col-4">
-                            <RouterLink :to="{ name: 'movie_detail', params: { 'id': movie.id } }">
+    <div class="container row justify-content-between" style="margin: auto; padding: 0px;">
+        <div class = "col-5 align-items-center justify-content-start" style="padding-left: 0px; border: 5px solid black;">
+            <h1 style="text-align: center;">상영중인 영화</h1>
+            <div id="carousel_now_in_theater" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                <div v-for="movie in recentMovie"
+                    :key="movie.id">
+                    <div v-if="movie.id==10000" class="carousel-item active">
+                        <div class="container row align-items-center">
+                            <div>
+                                <RouterLink :to="{ name: 'movie_detail', params: { 'id': movie.id } }">
                                 <img :src="movie.img_src" class="d-block w-100" alt="...">
-                            </RouterLink>
+                                </RouterLink>
+                            </div>
+                            <div>
+                                <h2>{{ movie.title }} - {{ movie.director }}</h2>
+                                <h3 v-if="movie.title_en !=''">{{ movie.title_en }}</h3>
+                                <p>Genre: {{ movie.genre }}</p>
+                                <p>RunningTime: {{ movie.length }}</p>
+                            </div>
                         </div>
-                        <div class="col-8">
-                            <h2>{{ movie.title }} - {{ movie.director }}</h2>
-                            <p>Genre: {{ movie.genre }}</p>
-                            <p>RunningTime: {{ movie.length }}</p>
+                    </div>
+                    <div v-if="movie.id>10000" class="carousel-item">
+                        <div class="container row align-items-center">
+                            <div>
+                                <RouterLink :to="{ name: 'movie_detail', params: { 'id': movie.id } }">
+                                    <img :src="movie.img_src" class="d-block w-100" alt="...">
+                                </RouterLink>
+                            </div>
+                            <div>
+                                <h2>{{ movie.title }} - {{ movie.director }}</h2>
+                                <p>Genre: {{ movie.genre }}</p>
+                                <p>RunningTime: {{ movie.length }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel_now_in_theater" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel_now_in_theater" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+                </button>
             </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel_now_in_theater" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel_now_in_theater" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-            </button>
+        </div>
+        <div class="col-7 align-items-center justify-content-end" style="padding-right: 0px;">
+            <Notice/>
         </div>
     </div>
 </template>
@@ -52,6 +57,7 @@
 import { useCounterStore } from '@/stores/counter'
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
+import Notice from '@/components/Notice.vue'
 
 const store = useCounterStore()
 const movieList = store.movies
