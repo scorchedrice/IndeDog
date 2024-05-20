@@ -7,7 +7,7 @@
     <div class="container-sm" style="width: 90%;">
       <div>
         <RouterView />
-        <div id="menu">
+        <div id="menu" style="z-index: 99; position: relative;">
           <Menu />
         </div>
       </div>
@@ -16,13 +16,15 @@
 </template>
 
 <script setup>
-import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router';
+import { RouterLink, RouterView, routerKey, useRoute, useRouter } from 'vue-router';
 import Menu from '@/components/Menu.vue'
 import router from './router';
 const route = useRouter()
 const goHomePage = function () {
-  console.log('HomePage')
-  route.push({name: 'home'})
+  route.push({name: 'home'}).then(() => {
+    window.location.reload();
+    // menu 에 회원가입 이후 반영이 안되는 문제 해결, home page이동시에만 새로고침 활용
+  })
 }
 
 const menuHide = function () {

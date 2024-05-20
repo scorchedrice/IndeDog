@@ -115,6 +115,7 @@ export const useCounterStore = defineStore('counter', () => {
     .then(res => {
       cinemas.value = res.data;
       console.log('#store - cinema')
+      console.log(cinemas.value)
     })
     .catch(err => console.log(err))
   }

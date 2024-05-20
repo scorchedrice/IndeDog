@@ -57,6 +57,7 @@
             </div>
             </div>
             <li class="list-group-item"><strong>Inde-Dog 소개</strong></li>
+            <li class="list-group-item"><strong>공지사항 / 이벤트</strong></li>
             <li class="list-group-item"></li>
             <li class="list-group-item" @click="goMovieSearch">작품 검색</li>
             <li class="list-group-item" @click="goCinemaSearch">상영관 검색</li>

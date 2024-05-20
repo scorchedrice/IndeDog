@@ -3,7 +3,7 @@
         <h1>상영중인 영화</h1>
         <div id="carousel_now_in_theater" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-            <template v-for="movie in recentMovie"
+            <div v-for="movie in recentMovie"
                 :key="movie.id">
                 <div v-if="movie.id==10000" class="carousel-item active">
                     <div class="container row align-items-center">
@@ -13,8 +13,9 @@
                             </RouterLink>
                         </div>
                         <div class="col-8">
-                            <h2>{{ movie.title }}</h2>
-                            <p>{{ movie.cinemas }}</p>
+                            <h2>{{ movie.title }} - {{ movie.director }}</h2>
+                            <p>장르: {{ movie.genre }}</p>
+                            <p>{{ movie.keyword }}</p>
                         </div>
                     </div>
                 </div>
@@ -27,11 +28,12 @@
                         </div>
                         <div class="col-8">
                             <h2>{{ movie.title }}</h2>
+                            <p>{{ movie.genre }}</p>
                             <p>{{ movie.cinemas }}</p>
                         </div>
                     </div>
                 </div>
-            </template>
+            </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carousel_now_in_theater" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
