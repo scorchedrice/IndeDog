@@ -2,11 +2,13 @@
     <h1>KakaoMap Render</h1>
     <div ref="mapContainer" style="width: 100%; height: 400px;"></div>
     <div style="text-align: center;"></div>
+    <Rating/>
 </template>
 
 <script setup>
 import {ref, onMounted} from 'vue'
 import {useCounterStore} from '@/stores/counter.js'
+import Rating from '@/components/Rating.vue'
 // 1. Data
 const props = defineProps({cinemaName: String})
 const store = useCounterStore()
@@ -46,8 +48,8 @@ const loadKakaoMap = (container) => {
                 // - Marker -
                 const markerPosition = new kakao.maps.LatLng(cinema_lat.value, cinema_lng.value)
                 // const imageSrc = "../../src/assets/icon/marker_icon.jpg"
-                const imageSrc = "https://cdn4.iconfinder.com/data/icons/dog-breed-minimal-outline/512/Pomeranian-1024.png"
-                const imageSize = new kakao.maps.Size(30,30)
+                const imageSrc = "../src/assets/icon/dog_marker.png"
+                const imageSize = new kakao.maps.Size(50,50)
                 const imageOption = {offset: new kakao.maps.Point(27,69)}
                 const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)        
                 const marker = new kakao.maps.Marker({

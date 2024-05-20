@@ -1,10 +1,11 @@
 <template>
-    <div class = "container row align-items-center">
-        <h1>Notice</h1>
-        <div class="col-6">
+    <div class = "row">
+        <div class="col-6" style="border: 5px solid black">
+            <h1>Notice</h1>
             <h1>가장 최근 공지</h1>
         </div>
-        <div class="col-6">
+        <div class="col-1"></div>
+        <div class="col-5" style="border: 5px solid black">
             <h2>최근 공지 목록</h2>
             <p>관리자는 수정 가능</p>
         </div>

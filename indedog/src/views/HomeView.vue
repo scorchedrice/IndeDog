@@ -1,14 +1,14 @@
 <template>
     <header v-if="isDeskTop" class = "row align-items-center">
-        <div class="col" style="margin-bottom: 15px; background-color: green;">
+        <div class="col" style="margin-bottom: 15px; border: 5px solid black">
             <TodayRecommend />
         </div>
-        <hr>
-        <div style="margin-bottom: 15px; background-color: bisque;">
+       
+        <div style="margin-bottom: 15px; border: 5px solid black">
             <NowInTheater/>
         </div>
-        <hr>
-        <div style="background-color: blueviolet;">
+        
+        <div>
             <Notice/>
         </div>
     </header>

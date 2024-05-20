@@ -14,8 +14,9 @@
                         </div>
                         <div class="col-8">
                             <h2>{{ movie.title }} - {{ movie.director }}</h2>
-                            <p>장르: {{ movie.genre }}</p>
-                            <p>{{ movie.keyword }}</p>
+                            <h3 v-if="movie.title_en !=''">{{ movie.title_en }}</h3>
+                            <p>Genre: {{ movie.genre }}</p>
+                            <p>RunningTime: {{ movie.length }}</p>
                         </div>
                     </div>
                 </div>
@@ -27,9 +28,9 @@
                             </RouterLink>
                         </div>
                         <div class="col-8">
-                            <h2>{{ movie.title }}</h2>
-                            <p>{{ movie.genre }}</p>
-                            <p>{{ movie.cinemas }}</p>
+                            <h2>{{ movie.title }} - {{ movie.director }}</h2>
+                            <p>Genre: {{ movie.genre }}</p>
+                            <p>RunningTime: {{ movie.length }}</p>
                         </div>
                     </div>
                 </div>

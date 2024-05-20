@@ -38,23 +38,9 @@
                         <li class="list-group-item">Director: {{ movie.director }}</li>
                         <li class="list-group-item">Genre: {{ movie.genre }}</li>
                         <li class="list-group-item">Running Time: {{ movie.length }}</li>
-                        <div class="accordion" :id="movie.id+'container'">
-                            <div class="accordion-item">
-                                <div class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" :data-bs-target="'#'+movie.id" aria-expanded="true" :aria-controls="movie.id">
-                                        <li class="list-group-item">Keyword</li>
-                                    </button>
-                                    <div :id="movie.id" class="accordion-collapse collapse show" :data-bs-parent="'#'+movie.id">
-                                        <div class="accordion-body">
-                                            나중에 v-for로 정리, 기본값 닫힘 설정
-                                            {{ movie.keywords }}
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                            </div>
-                        </div>
+                        <Keyword :keyword-list="movie.keywords" />
                     </div>
+                    
                 </div>
                 <br>
                 <hr>
@@ -70,6 +56,9 @@ import { useCounterStore } from '@/stores/counter'
 import { RouterLink, RouterView, useRouter } from 'vue-router'
 import { FwbPagination } from 'flowbite-vue'
 import { ref, computed } from 'vue'
+import Keyword from '@/components/KeywordDetail.vue'
+
+
 
 const text = ref('')
 const ctName = ref('')
