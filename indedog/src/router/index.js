@@ -83,6 +83,15 @@ const router = createRouter({
     }
   ]
 })
+
+router.beforeEach((to, from) => {
+  const store = useCounterStore()
+  if(to.name === 'CommunityCreateView' && !store.token) {
+    window.alert('로그인이 필요합니다.')
+    return { name: 'community' }
+  }
+})
+
 const menuHideEmit = function () {
   emit('menuHide')
 }
