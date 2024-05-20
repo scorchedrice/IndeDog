@@ -10,6 +10,17 @@
             게시글 삭제
           </button>
         </div>
+        <hr>
+        <h1>코멘트</h1>
+        <hr>
+        <form>
+          <input type="text">
+          <input type="submit" value="댓글달기">
+        </form>
+        <div v-for="comment in article.comment_set" style="display: flex;">
+          <h4>{{ comment.user }}</h4>
+          <p>{{ comment.content }}</p>
+        </div>
     </div>
 </template>
 

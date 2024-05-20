@@ -32,7 +32,7 @@
                         <h5 class="card-title">{{ movie.title }}</h5>
                         <h6 v-if="movie.title_en">{{ movie.title_en }}</h6>
                         <p class="card-text">{{ movie.making_year }}</p>
-                    
+        
                         <li class="list-group-item">Director: {{ movie.director }}</li>
                         <li class="list-group-item">Genre: {{ movie.genre }}</li>
                         <li class="list-group-item">Running Time: {{ movie.length }}</li>

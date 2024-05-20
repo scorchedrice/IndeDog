@@ -39,10 +39,11 @@ def article_create(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def comment_create_article(request, article_pk):
+    article = Article.objects.get(pk=article_pk)
     if request.method == 'POST':
-        serializer = ArticleSerializer(data=request.data)
+        serializer = CommentSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(user=request.user, article=article_pk)
+            serializer.save(user=request.user, article=article)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
