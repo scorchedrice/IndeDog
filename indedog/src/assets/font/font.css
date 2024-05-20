@@ -3,3 +3,12 @@
     src: url('./euljiro.ttf');
 }
 
+@font-face {
+    font-family: "hanna";
+    src: url('./hanna.ttf');
+}
+
+@font-face {
+    font-family: "hanna_air";
+    src: url('./hanna_air.ttf');
+}

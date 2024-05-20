@@ -5,7 +5,7 @@
                 <h2 class="accordion-header">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#mobile_recommend_sub" aria-expanded="false" aria-controls="mobile_recommend_sub">
                         <div>
-                            <h3>오늘의 추천 영화</h3>
+                            <h2>오늘의 추천 영화</h2>
                             <h4>오늘은 석가탄신일! 불교와 관련된 독립영화 어때요?</h4>
                             <p class="keyword">#불교</p>
                         </div>
@@ -25,7 +25,7 @@
                                 </RouterLink>
                                     <p>영화 제목: {{ tdmovie.title }}</p>
                                     <p>영화 감독: {{ tdmovie.director }}</p>
-                                    <p>Keywords: {{ tdmovie.keywords }}</p>
+                                    <p>Keywords: {{ tdmovie.keywords.join(', ') }}</p>
                                 </div>
                                 <div class="carousel-item"
                                 v-if="index > 0">
@@ -34,7 +34,7 @@
                                 </RouterLink>
                                     <p>영화 제목: {{ tdmovie.title }}</p>
                                     <p>영화 감독: {{ tdmovie.director }}</p>
-                                    <p>Keywords: {{ tdmovie.keywords }}</p>
+                                    <p>Keywords: {{ tdmovie.keywords.join(', ') }}</p>
                                 </div>
                             </template>
                         </div>
@@ -65,8 +65,7 @@ const todayMovie = ref([])
 // 키워드를 중심으로 검색
 // 현재 상영중인 영화는 id 10000번대부터 설정, id 1만번대부터 검색
 for (const movie of movieList) {
-    if (movie.keywords.includes('#불교')){
-        console.log(movie)
+    if (movie.keywords.includes('불교')){
         todayMovie.value.push(movie)
     }
 }
@@ -75,4 +74,10 @@ for (const movie of movieList) {
 </script>
 
 <style scoped>
+h1,h2 {
+    font-family: "hanna";
+}
+* {
+    font-family: "hanna_air"
+}
 </style>

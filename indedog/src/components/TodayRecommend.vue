@@ -60,5 +60,11 @@ for (const movie of movieList) {
 </script>
 
 <style scoped>
-
+@import '@/assets/font/font.css';
+h1 {
+    font-family: "hanna";
+}
+* {
+    font-family: "hanna_air"
+}
 </style>

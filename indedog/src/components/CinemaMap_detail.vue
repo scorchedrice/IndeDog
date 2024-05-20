@@ -61,7 +61,7 @@ const loadKakaoMap = (container) => {
 
                 // - Marker Custom Overlay -
                    // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-                   const content = '<div class="wrap" style="background-color: aqua;">' + 
+                   const content = '<div class="wrap" style="background-color: white; border: 3px solid black">' + 
                         '    <div class="info">' + 
                         '        <div class="title">' + 
                         props.cinemaName + 
@@ -71,8 +71,6 @@ const loadKakaoMap = (container) => {
                         '                <img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/thumnail.png" width="73" height="70">' +
                         '           </div>' + 
                         '            <div class="desc">' + 
-                        '                <div class="ellipsis">해당 영화관의 주소를 입력합니다.</div>' + 
-                        '                <div class="jibun ellipsis">화곡로 999길 999</div>' + 
                         '                <div><a href="' + 'https://map.kakao.com/link/to/'+props.cinemaName+','+cinema_lat.value+','+cinema_lng.value +'" target="_blank" class="link">길찾기</a></div>' + 
                         '            </div>' + 
                         '        </div>' + 
@@ -84,7 +82,8 @@ const loadKakaoMap = (container) => {
                         content: content,
                         map: mapInstance,
                         position: marker.getPosition(),
-                        clickable: true    
+                        clickable: true,
+                        yAnchor: -0.01,
                     });
 
                     // - Marker Event -

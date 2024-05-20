@@ -1,10 +1,5 @@
 <template>
     <div>
-        <h1>작품을 검색하는 View입니다.</h1>
-        <h2>크롤링을 통해 구축한 DB를 활용해 렌더링합니다.</h2>
-        <br>
-        <h3>디버깅용 {{ movies.length }}</h3>
-        <h3>{{ totalPages }}</h3>
         <form @submit.prevent="movieResult(ctName)" style="text-align: right">
             <select v-model="ctName">
                 <option value="" selected>카테고리선택</option>
@@ -17,13 +12,14 @@
             <input type="text" v-model="text">
             <input type="submit" value="검색">
         </form>
+
         <br>
-        <div class="row align-items-center container" style="background-color: bisque;">
+        <div class="row align-items-center container" style="background-color: bisque; border: 5px solid black">
             <div
             v-for="movie in paginationMovies"
             :key="movie.id" class="col-6">
                 <br>
-                <div class="container row" style="background-color: brown;">
+                <div class="container row">
                     <div class="col-6">
                         <RouterLink :to="{ name: 'movie_detail', params: { 'id': movie.id } }">
                             <img :src="movie.img_src" alt="movie.poster" width="100%">
@@ -31,13 +27,13 @@
                     </div>
 
                     <div class="col-6">
-                        <h5 class="card-title">{{ movie.title }}</h5>
-                        <h6 v-if="movie.title_en">{{ movie.title_en }}</h6>
-                        <p class="card-text">{{ movie.making_year }}</p>
+                        <h4 class="card-title">{{ movie.title }}</h4>
+                        <h5 v-if="movie.title_en">{{ movie.title_en }}</h5>
+                        <h6 class="card-text">{{ movie.making_year }}</h6>
                     
-                        <li class="list-group-item">Director: {{ movie.director }}</li>
-                        <li class="list-group-item">Genre: {{ movie.genre }}</li>
-                        <li class="list-group-item">Running Time: {{ movie.length }}</li>
+                        <h6 class="list-group-item">Director: {{ movie.director }}</h6>
+                        <h6 class="list-group-item">Genre: {{ movie.genre }}</h6>
+                        <h6 class="list-group-item">Running Time: {{ movie.length }}</h6>
                         <Keyword :keyword-list="movie.keywords" />
                     </div>
                     
@@ -58,8 +54,6 @@ import { FwbPagination } from 'flowbite-vue'
 import { ref, computed } from 'vue'
 import Keyword from '@/components/KeywordDetail.vue'
 
-
-
 const text = ref('')
 const ctName = ref('')
 const router = useRouter()
@@ -69,7 +63,6 @@ const movies = store.movies
 const searchedMovies = ref([])
 
 const movieResult = function (category) {
-    console.log(category)
     router.push({ name: 'movie_search_result', params: { 'category': category, 'name': text.value }})
 }
 
@@ -88,5 +81,11 @@ const paginationMovies = computed(()=>{
 </script>
 
 <style scoped>
-
+@import '@/assets/font/font.css';
+h4,h3 {
+    font-family: "hanna";
+}
+* {
+    font-family: "hanna_air"
+}
 </style>
