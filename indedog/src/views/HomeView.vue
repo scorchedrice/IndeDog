@@ -1,11 +1,21 @@
 <template>
-    <header v-if="isDeskTop" class = "row align-items-center">
-        <div class="col" style="margin-bottom: 15px; border: 5px solid black">
+    <header v-if="isDeskTop">
+        <div style="border: solid black 5px;">
             <TodayRecommend />
         </div>
-       
-        
+        <br>
+        <div>
             <NowInTheater/>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-7" style="border: solid black 5px;">
+                <Notice/>
+            </div>
+            <div class="col-5" style="border: solid black 5px;">
+                <AIRecommend/>
+            </div>
+        </div>
         
     </header>
     <header v-else-if="!isDeskTop" class="row align-items-center container">
@@ -31,6 +41,7 @@ import NowInTheater from "@/components/NowInTheater.vue"
 import MobileNowInTheater from "@/components/mobile/home/MobileNowInTheater.vue"
 import Notice from "@/components/Notice.vue"
 import MobileNotice from "@/components/mobile/home/MobileNotice.vue"
+import AIRecommend from "@/components/AIRecommend.vue"
 import {ref} from 'vue'
 import { useCounterStore } from '@/stores/counter'
 import { onMounted } from 'vue'
@@ -62,5 +73,12 @@ window.onresize = function () {
 </script>
 
 <style scoped>
-
+@import '@/assets/font/font.css';
+h1,h2 {
+    font-family: "hanna";
+    text-align: center;
+}
+* {
+    font-family: "hanna_air"
+}
 </style>

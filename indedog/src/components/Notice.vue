@@ -1,6 +1,6 @@
 <template>
     <div style=" display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
-        <div style="border: 5px solid black; align-items: flex-start;">
+        <div style="height: 44%;">
             <h1>Notice</h1>
             <h1>가장 최근 공지</h1>
             <hr>
@@ -8,8 +8,8 @@
                 <h1>{{ articlesLatest.title }}</h1>
             </RouterLink>
         </div>
-        
-        <div style="border: 5px solid black; align-items:flex-end;">
+        <br>
+        <div style="height: 54%;">
             <h2>최근 공지 목록</h2>
             <hr>
             <div v-for="article in articles" style="position: flex; ">

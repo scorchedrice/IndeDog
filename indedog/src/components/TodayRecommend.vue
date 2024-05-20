@@ -1,7 +1,7 @@
 <template>
     <div class = "container row align-items-center">
         <div class="col-8">
-            <h1>오늘의 추천 영화</h1>
+            <h1>오늘의 추천 영화!</h1>
             <h4>
                 오늘은 석가탄신일! 불교와 관련된 독립영화 어때요?
             </h4>
