@@ -33,7 +33,7 @@ export const useCounterStore = defineStore('counter', () => {
           movie.keywords = movie.keywords.split('#').filter(item => item.trim() !== '')
           movie.cinemas = movie.cinemas.split(',')
         }
-        console.log(movies.value)
+        console.log('영화 데이터 불러옴')
       })
       .catch(err => console.log(err))
 

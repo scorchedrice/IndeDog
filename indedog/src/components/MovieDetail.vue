@@ -63,10 +63,26 @@
                     <div class="col" >
                         {{ rating }}
                     </div>
-                </div>s
+                </div>
                 <div>
-                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
+                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px" v-model="content"></textarea>
                     <label for="floatingTextarea2"></label>
+                    <input type="submit" value="댓글작성" @click="createComment(curMovie.id)">
+                </div>
+                <hr>
+                <h1>코멘트들...</h1>
+                <div v-for="comment in curMovie.comment_set" style="display: flex;">
+                    {{ comment.content }}
+                    {{ comment.user }}
+                    <vue3-star-ratings
+                    v-model="comment.point"
+                    :starSize="20"
+                    starColor="#ff9800"
+                    inactiveColor="#333333"
+                    :numberOfStars="5"
+                    :disableClick="true"
+                    />
+                    {{ comment.point }}
                 </div>
             </div>
         </div>
@@ -76,9 +92,10 @@
 
 <script setup>
 import { useRoute, RouterLink } from 'vue-router'
-import { ref, defineComponent } from 'vue'
+import { ref, defineComponent, computed } from 'vue'
 import { useCounterStore } from '@/stores/counter.js'
 import vue3StarRatings from "vue3-star-ratings"
+import axios from 'axios'
 
 defineComponent({
     components: {
@@ -86,9 +103,9 @@ defineComponent({
     }
 })
 
-
-const rating = ref(0)
+const rating = ref(0.0)
 const score = ref(3.5)
+const content = ref(null)
 
 const route = useRoute()
 const curMovie = ref()
@@ -102,9 +119,38 @@ for(const movie of store.movies){
     }
 }
 
+let sumRate = 0
+for(const comment of curMovie.value.comment_set){
+    sumRate += comment.point
+    console.log(comment.point)
+}
+score.value = (sumRate / curMovie.value.comment_set.length).toFixed(2)
+
 console.log(curMovie.value.keywords)
 const keywords = curMovie.value.keywords.filter(item => item.trim() !== '')
 
+
+const createComment = function(movie_id) {
+    axios({
+      method: 'post',
+      url: `${store.API_URL}/api/v1/articles/movie/${movie_id}/comments/`,
+      data: {
+        content: content.value,
+        point: rating.value,
+      },
+      headers: {
+        Authorization : `Token ${store.token}`
+      }
+    })
+      .then(res => {
+        console.log('댓글 생성')
+        window.location.reload()
+      })
+      .catch(err => {
+        console.log(err)
+        window.alert('댓글을 적어주세요')
+      })
+}
 
 console.log(keywords)
 
