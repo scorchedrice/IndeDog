@@ -4,9 +4,10 @@ from .models import Article, Comment
 
 class ArticleSerializer(serializers.ModelSerializer):
     class CommentArticleSerializer(serializers.ModelSerializer):
+        user = serializers.ReadOnlyField(source='user.username')
         class Meta:
             model = Comment
-            fields = ('content')
+            fields = ('content', 'user')
 
     user = serializers.ReadOnlyField(source='user.username')
     comment_set = CommentArticleSerializer(read_only=True, many=True)
@@ -20,7 +21,7 @@ class CommentSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
     class Meta:
         model = Comment
-        fields = '__all__'
+        fields = ('content', 'point', 'article', 'user')
         read_only_fields = ('user', 'article', 'cinema')
 
 
