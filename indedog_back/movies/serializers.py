@@ -19,5 +19,5 @@ class MovieListSerializer(serializers.ModelSerializer):
 class CinemaListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cinema
-        fields = ('address', 'latitude', 'longitude')
+        fields = ('address', 'latitude', 'longitude', 'recent_movies',)
 
