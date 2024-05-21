@@ -25,11 +25,11 @@ const breakpoints = {
 </script>
 
 <template>
-  <Carousel :wrap-around="true" :breakpoints="breakpoints" :autoplay="2000">
-    <Slide v-for="slide in slides" :key="slide.id">
+  <Carousel :itemsToShow="3.95" :wrapAround="true" :transition="500">
+    <Slide v-for="slide in 5" :key="slide">
       <div class="carousel__item">
-        <h3>{{ slide.title }}</h3>
-        <p>{{ slide.content }}</p>
+        <h3>{{ slide }}</h3>
+        <p>{{ slide }}</p>
       </div>
     </Slide>
 
@@ -42,7 +42,7 @@ const breakpoints = {
 
 <style>
 .carousel__item {
-  min-height: 200px;
+  min-height: 500px;
   width: 100%;
   background-color: var(--vc-clr-primary);
   color: var(--vc-clr-white);
