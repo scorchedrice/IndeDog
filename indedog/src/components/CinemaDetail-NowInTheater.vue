@@ -1,9 +1,9 @@
 <template>
     <div>
-        <h1>상영관의 정보를 담고 있습니다.</h1>
-        <p>해당 상영관의 길찾기, 상영중인 영화 등의 정보를 제공합니다.</p>
         <div v-for="movie in recentMovie" class="row align-items-center">
-            <img :src="movie.img_src" alt="movie_poster" class="col-4">
+            <RouterLink :to="{ name: 'movie_detail', params: { 'id': movie.id } }" class="col-4">
+                    <img :src="movie.img_src" class="d-block w-100" alt="...">
+            </RouterLink>
             <div class="col-8">
                 <h3>{{ movie.title }} - {{ movie.director }}</h3>
                 <p>장르: {{ movie.genre }}</p>
