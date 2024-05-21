@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
@@ -12,7 +12,9 @@ export const useCounterStore = defineStore('counter', () => {
   const filterMovies = ref()
   const token = ref(null)
   const loginUser = ref('')
+  const loginPk = ref(null)
   const isStaff = ref(null)
+  const isLoading = ref(true)
   // const token = ref(null)
   // const isLogin = computed(() => {
   //   if (token.value === null) {
@@ -21,40 +23,44 @@ export const useCounterStore = defineStore('counter', () => {
   //     return true
   //   }
   // })
-  // const router = useRouter()
 
-  axios({
-    method: 'get',
-    url: `${API_URL}/api/v1/movies/`
-  })
-    .then(res => {
-      movies.value = res.data
-      for(const movie of movies.value){
-        movie.keywords = movie.keywords.split('#').filter(item => item.trim() !== '')
-        movie.cinemas = movie.cinemas.split(',')
-      }
-      console.log('영화 데이터 불러옴')
-    })
-    .catch(err => console.log(err))
-
-  const getArticles = function () {
+  onMounted(() => {
+    isLoading.value = true
     axios({
       method: 'get',
-      url: `${API_URL}/api/v1/articles/`,
-      // headers: {
-      //   Authorization : `Token ${token.value}`
-      // }
+      url: `${API_URL}/api/v1/movies/`
     })
-      .then(response => {
-        // console.log(response)
-        console.log(response.data)
-        articles.value = response.data
+      .then(res => {
+        movies.value = res.data
+        for(const movie of movies.value){
+          movie.keywords = movie.keywords.split('#').filter(item => item.trim() !== '')
+          movie.cinemas = movie.cinemas.split(',')
+        }
+        console.log('영화 데이터 불러옴')
+        isLoading.value = false
       })
-      .catch(error => {
-        console.log(error)
-      })
-  }
+      .catch(err => console.log(err))
   
+    })
+    
+    const getArticles = function () {
+      axios({
+        method: 'get',
+        url: `${API_URL}/api/v1/articles/`,
+        // headers: {
+        //   Authorization : `Token ${token.value}`
+        // }
+      })
+        .then(response => {
+          // console.log(response)
+          console.log(response.data)
+          articles.value = response.data
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+    
   const pwChange = function (payload) {
     console.log(payload)
     const { new_password1, new_password2 } = payload
@@ -103,7 +109,6 @@ export const useCounterStore = defineStore('counter', () => {
     })
       .then((res) => {
         console.log('로그인 성공')
-        console.log(res)
         token.value = res.data.key
         axios({
           method: 'get',
@@ -117,6 +122,7 @@ export const useCounterStore = defineStore('counter', () => {
                 if (res.data[data].is_staff) {
                   console.log('스태프입니다.')
                   isStaff.value = true
+                  loginPk.value = res.data[data].id
                 }
                 break
               }
@@ -143,6 +149,7 @@ export const useCounterStore = defineStore('counter', () => {
         token.value = null
         loginUser.value = null
         isStaff.value = false
+        loginPk.value = null
       })
       .catch((err) => {
         console.log(err)
@@ -163,5 +170,5 @@ export const useCounterStore = defineStore('counter', () => {
   }
   
 
-  return { movies, getArticles, API_URL, articles, signUp, logIn, token, loginUser, getCoord, cinemas, logOut, isStaff }
+  return { movies, getArticles, API_URL, articles, signUp, logIn, token, loginUser, getCoord, cinemas, logOut, isStaff, loginPk, isLoading }
 }, { persist: true })

@@ -7,7 +7,7 @@
    :numberOfStars="5"
    :disableClick="false"
     />
-    <button @click="checkStar">평점 계산 시 사용</button>
+    <button @click.prevent="checkStar">평점 계산 시 사용</button>
 </template>
   
 <script setup>

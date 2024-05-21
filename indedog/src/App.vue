@@ -1,7 +1,10 @@
 <template>
-  <div id="app">
+  <div v-if="store.isLoading">
+    로딩중...
+  </div>
+  <div v-else id="app">
     <div style="text-align: center; margin-top: 20px;">
-      <h1 id="HomePage" @click="goHomePage">인디독</h1>
+      <h1 id="HomePage" @click.prevent="goHomePage">인디독</h1>
       <Subtitle/> 
     </div>
     <br>
@@ -18,10 +21,12 @@
 
 <script setup>
 import { RouterLink, RouterView, routerKey, useRoute, useRouter } from 'vue-router';
+import { useCounterStore } from './stores/counter';
 import Menu from '@/components/Menu.vue'
 import router from './router';
 import Subtitle from '@/components/slide/MarqueeSubtitle.vue'
 
+const store = useCounterStore()
 const route = useRouter()
 const goHomePage = function () {
   route.push({name: 'home'}).then(() => {

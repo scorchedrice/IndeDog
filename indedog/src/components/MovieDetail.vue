@@ -39,6 +39,12 @@
                     </span>
                 </template>
             </p>
+            <button v-if="!isLike" @click.prevent="upLike(curMovie.id, 1)">
+                좋아요
+            </button>
+            <button v-else @click.prevent="upLike(curMovie.id, 2)">
+                좋아요 취소
+            </button>
         </div>    
     </div>
     <br>
@@ -102,10 +108,10 @@
                             />
                             {{ comment.point }}
                             </span>
-                            <input type="button" v-if="store.loginUser == comment.user && !updateNow" @click="commentUpdate(comment.id, comment.content)" value="수정">
-                            <input type="button" v-if="store.loginUser == comment.user && updateNow" @click="commentUpdatePush(comment.id, index)" value="수정완료">
+                            <input type="button" v-if="store.loginUser == comment.user && !updateNow" @click.prevent="commentUpdate(comment.id, comment.content)" value="수정">
+                            <input type="button" v-if="store.loginUser == comment.user && updateNow" @click.prevent="commentUpdatePush(comment.id, index)" value="수정완료">
                             <span> | </span>
-                            <a v-if="store.loginUser == comment.user || store.isStaff" @click="commentDelete(comment.id, index)">
+                            <a v-if="store.loginUser == comment.user || store.isStaff" @click.prevent="commentDelete(comment.id, index)">
                                 [삭제]
                             </a>
                             <hr>
@@ -128,6 +134,7 @@ import axios from 'axios'
 // commentUpdate(comment.id)
 
 
+const isLike = ref(false)
 const rating = ref(0.0)
 const score = ref(3.5)
 const content = ref(null)
@@ -148,6 +155,7 @@ const keywords = ref(null)
 const isLoading = ref(true)
 const sumRate = ref(0)
 const length = ref(0)
+const likeusersList = ref([])
 
 const currentIdx = ref(0)
 
@@ -160,6 +168,10 @@ defineComponent({
 for(const movie of store.movies){
     if (movie.id === Number(route.params.id)) {
         curMovie.value = movie
+        likeusersList.value = movie.like_users
+        if (curMovie.value.like_users.includes(store.loginPk)){
+            isLike.value = true
+        }
         break
     }
 }
@@ -280,6 +292,35 @@ const commentUpdatePush = function (comment_id, idx) {
       })
 }
 
+// movies/<int:movie_pk>/like/
+    const upLike = function(movie_pk, type) {
+        if (type === 1) {
+            likeusersList.value.push(store.loginPk)
+            console.log(likeusersList.value)
+            isLike.value = !isLike.value
+        } else {
+            likeusersList.value = likeusersList.value.filter(user => user !== store.loginPk)
+            isLike.value = !isLike.value
+        }
+        axios({
+            method: 'put',
+            url: `${store.API_URL}/api/v1/movies/${movie_pk}/like/`,
+            data: {
+                like_users: likeusersList.value
+            },
+            headers: {
+                Authorization : `Token ${store.token}`
+            }
+        })
+        .then(res => {
+            console.log('좋아요 수정완료')
+            console.log(res.data)
+            fetchData()
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
 
 </script>
 

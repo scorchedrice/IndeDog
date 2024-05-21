@@ -4,7 +4,7 @@
     type="button"
     class="btn btn-link"
       ref="targetElement"
-      @click="visible = !visible"
+      @click.prevent="visible = !visible"
     >
        . 
     </button>
@@ -16,7 +16,7 @@
       style="background-color: aliceblue;"
     >
       <div v-for="keyword in props.keywordList">
-        <p @click="goResult(keyword)" style="text-decoration: none; margin-bottom: 0;">
+        <p @click.prevent="goResult(keyword)" style="text-decoration: none; margin-bottom: 0;">
             #{{ keyword }}
         </p>
       </div>

@@ -8,30 +8,30 @@ class ArticleSerializer(serializers.ModelSerializer):
         user = serializers.ReadOnlyField(source='user.username')
         class Meta:
             model = Comment
-            fields = ('id', 'content', 'user')
+            fields = ('id', 'content', 'user', 'like_users')
 
     user = serializers.ReadOnlyField(source='user.username')
     comment_set = ArticleCommentSerializer(read_only=True, many=True)
     class Meta:
         model = Article
         fields = '__all__'
-        read_only_fields = ('user', )
+        read_only_fields = ('user', 'like_users')
 
 
 class CommentSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
     class Meta:
         model = Comment
-        fields = ('id', 'content', 'point', 'article', 'user')
-        read_only_fields = ('user', 'article', 'cinema', 'movie')
+        fields = ('id', 'content', 'point', 'article', 'user', 'like_users')
+        read_only_fields = ('user', 'article', 'cinema', 'movie', 'like_users')
         
 
 class CommentMovieSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
     class Meta:
         model = Comment
-        fields = ('id', 'content', 'point', 'movie', 'user')
-        read_only_fields = ('user', 'article', 'cinema', 'movie')
+        fields = ('id', 'content', 'point', 'movie', 'user', 'like_users')
+        read_only_fields = ('user', 'article', 'cinema', 'movie', 'like_users')
 
 
 # class NoticeSerializer(serializers.ModelSerializer):
