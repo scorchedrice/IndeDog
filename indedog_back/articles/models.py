@@ -4,7 +4,7 @@ from movies.models import Movie, Cinema
 
 # Create your models here.
 class Article(models.Model):
-    # movie = models.ForeignKey(Movie, on_delete=models.CASCADE, blank=True)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True)
     # cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
@@ -13,6 +13,7 @@ class Article(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_notice = models.BooleanField(default=False)
     category = models.CharField(max_length=20)
+
 
 
 class Comment(models.Model):

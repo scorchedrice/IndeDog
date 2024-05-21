@@ -98,3 +98,16 @@ def notice(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
+@api_view(['PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def comment_update_movie(request, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+    
+    if request.method == 'PUT':
+        serializer = CommentMovieSerializer(comment, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+    elif request.method == 'DELETE':
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

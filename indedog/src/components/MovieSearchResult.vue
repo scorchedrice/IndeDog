@@ -58,6 +58,7 @@ const store = useCounterStore()
 const route = useRoute()
 const router = useRouter()
 const currentMovies = ref([])
+const ctName = ref(route.params.category)
 
 const movieResult = function (category) {
     router.push({ name: 'movie_search_result', params: { 'category': category, 'name': text.value }})

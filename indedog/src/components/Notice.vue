@@ -45,9 +45,11 @@ onMounted(() => {
   store.getArticles()
 })
 
-for (const article of store.articles){
-    if(article.is_notice){
-        articles.value.push(article)
+if(store.articles){
+    for (const article of store.articles){
+        if(article.is_notice){
+            articles.value.push(article)
+        }
     }
 }
 

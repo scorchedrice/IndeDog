@@ -24,18 +24,18 @@ export const useCounterStore = defineStore('counter', () => {
   // const router = useRouter()
 
   axios({
-      method: 'get',
-      url: `${API_URL}/api/v1/movies/`
+    method: 'get',
+    url: `${API_URL}/api/v1/movies/`
+  })
+    .then(res => {
+      movies.value = res.data
+      for(const movie of movies.value){
+        movie.keywords = movie.keywords.split('#').filter(item => item.trim() !== '')
+        movie.cinemas = movie.cinemas.split(',')
+      }
+      console.log('영화 데이터 불러옴')
     })
-      .then(res => {
-        movies.value = res.data
-        for(const movie of movies.value){
-          movie.keywords = movie.keywords.split('#').filter(item => item.trim() !== '')
-          movie.cinemas = movie.cinemas.split(',')
-        }
-        console.log('영화 데이터 불러옴')
-      })
-      .catch(err => console.log(err))
+    .catch(err => console.log(err))
 
   const getArticles = function () {
     axios({
@@ -55,6 +55,24 @@ export const useCounterStore = defineStore('counter', () => {
       })
   }
   
+  const pwChange = function (payload) {
+    console.log(payload)
+    const { new_password1, new_password2 } = payload
+    axios({
+      method: 'post',
+      url: `${API_URL}/accounts/password/change/`,
+      data: {
+        new_password1, new_password2
+      }
+    })
+      .then((res) => {
+        console.log('비밀번호 변경성공')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   const signUp = function (payload) {
     console.log(payload)
     const { username, password1, password2 } = payload

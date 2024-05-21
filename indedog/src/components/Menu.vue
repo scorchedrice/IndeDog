@@ -51,8 +51,9 @@
                             </button>
                         </div>
                     </div>
-     
-                    
+                    <RouterLink :to="{ name: 'userpage', params: { 'username': store.loginUser }}">
+                        유저페이지
+                    </RouterLink>
                 </div>
             </div>
             </div>

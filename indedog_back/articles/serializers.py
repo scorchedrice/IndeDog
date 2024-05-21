@@ -8,7 +8,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         user = serializers.ReadOnlyField(source='user.username')
         class Meta:
             model = Comment
-            fields = ('content', 'user')
+            fields = ('id', 'content', 'user')
 
     user = serializers.ReadOnlyField(source='user.username')
     comment_set = ArticleCommentSerializer(read_only=True, many=True)
@@ -22,7 +22,7 @@ class CommentSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
     class Meta:
         model = Comment
-        fields = ('content', 'point', 'article', 'user')
+        fields = ('id', 'content', 'point', 'article', 'user')
         read_only_fields = ('user', 'article', 'cinema', 'movie')
         
 
@@ -30,7 +30,7 @@ class CommentMovieSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
     class Meta:
         model = Comment
-        fields = ('content', 'point', 'movie', 'user')
+        fields = ('id', 'content', 'point', 'movie', 'user')
         read_only_fields = ('user', 'article', 'cinema', 'movie')
 
 

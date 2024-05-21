@@ -8,7 +8,7 @@ class MovieListSerializer(serializers.ModelSerializer):
         user = serializers.ReadOnlyField(source='user.username')
         class Meta:
             model = Comment
-            fields = ('content', 'user', 'point')
+            fields = ('id', 'content', 'user', 'point')
     
     comment_set = MovieCommentSerializer(read_only=True, many=True)
     class Meta:
@@ -19,5 +19,6 @@ class MovieListSerializer(serializers.ModelSerializer):
 class CinemaListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cinema
-        fields = ('address', 'latitude', 'longitude')
+        fields = ('address', 'latitude', 'longitude', 'recent_movies')
+        read_only_fields = ('recent_movies', )
 

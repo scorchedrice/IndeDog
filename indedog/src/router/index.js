@@ -14,6 +14,7 @@ import { useCounterStore } from '@/stores/counter'
 import CinemaInfoView from '@/views/CinemaInfoView.vue'
 import NoticeView from '@/views/NoticeView.vue'
 import CommunityUpdate from '@/components/CommunityUpdate.vue'
+import UserpageView from '@/views/UserpageView.vue'
 
 
 
@@ -94,6 +95,11 @@ const router = createRouter({
       path: '/notice',
       name: 'notice',
       component: NoticeView
+    },
+    {
+      path: '/:username/userpage',
+      name: 'userpage',
+      component: UserpageView
     }
   ]
 })
@@ -102,7 +108,7 @@ router.beforeEach((to, from) => {
   const store = useCounterStore()
   if(to.name === 'CommunityCreateView' && !store.token) {
     window.alert('로그인이 필요합니다.')
-    return { name: 'community' }
+    return from.fullPath
   }
 })
 
