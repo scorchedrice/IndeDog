@@ -1,25 +1,32 @@
 <template>
-    <div>
-        <h1>이곳에는 커뮤니티가 렌더링 될 예정입니다. 로그인한 회원만 접속 가능합니다.</h1>
-        <RouterLink :to="{ name: 'CommunityCreateView' }">
-            게시글 작성하기
-        </RouterLink>
-        <CommunityList />
+    <div style="border: solid black 5px;">
+        <BestArticle/>
     </div>
+    <br>
+    <div class="row" style="border: solid black 5px;">
+        <div class="col-8">
+            <MovieCommunity/>
+        </div>
+        <div class="col-4">
+            <MovieComment/>
+        </div>
+    </div>
+    <br>
+    
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
 import { useCounterStore } from '@/stores/counter'
-import { RouterLink } from 'vue-router'
-import CommunityList from '@/components/CommunityList.vue'
-
+import BestArticle from '@/components/community/BestArticle.vue'
+import MovieCommunity from '@/components/community/MovieCommunity.vue'
+import MovieComment from '@/components/community/MovieComment.vue'
+import TheaterCommunity from '@/components/community/TheaterCommunity.vue'
 const store = useCounterStore()
 
 onMounted(() => {
   store.getArticles()
 })
-
 </script>
 
 <style scoped>

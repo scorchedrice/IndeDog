@@ -29,14 +29,8 @@ import { RouterLink } from 'vue-router'
 
 // 1. Data
 const store = useCounterStore()
-const recentMovies = ref([])
-
-for (const movie of store.movies) {
-    if (Number(movie.id) >= 10000) {
-        recentMovies.value.push(movie)
-    }
-}
-console.log(recentMovies.value)
+const recentMovies = store.recentMovies
+// 현재 상영중인 영화의 id 정보
 
 const playState = ref('playing')
 </script>

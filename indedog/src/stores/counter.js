@@ -13,6 +13,8 @@ export const useCounterStore = defineStore('counter', () => {
   const token = ref(null)
   const loginUser = ref('')
   const isStaff = ref(null)
+  const recentMovies = ref([])
+  const recentMovieIdList = ref([5242, 5246, 5293, 5311])
   // const token = ref(null)
   // const isLogin = computed(() => {
   //   if (token.value === null) {
@@ -32,6 +34,11 @@ export const useCounterStore = defineStore('counter', () => {
         for(const movie of movies.value){
           movie.keywords = movie.keywords.split('#').filter(item => item.trim() !== '')
           movie.cinemas = movie.cinemas.split(',')
+          if (recentMovieIdList.value.indexOf(movie.id) !== -1) {
+            if (recentMovies.value == []) {
+              recentMovies.value.push(movie)
+            }
+          }
         }
         console.log('영화 데이터 불러옴')
       })
@@ -145,5 +152,5 @@ export const useCounterStore = defineStore('counter', () => {
   }
   
 
-  return { movies, getArticles, API_URL, articles, signUp, logIn, token, loginUser, getCoord, cinemas, logOut, isStaff }
+  return { movies, getArticles, API_URL, articles, signUp, logIn, token, loginUser, getCoord, cinemas, logOut, isStaff, recentMovies }
 }, { persist: true })

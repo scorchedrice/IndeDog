@@ -2,7 +2,6 @@
     <div style=" display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
         <div style="height: 44%;">
             <h1>Notice</h1>
-            <h1>가장 최근 공지</h1>
             <hr>
             <RouterLink v-if="articlesLatest" :to="{ name: 'CommunityDetailView', params: { 'id': articlesLatest.id}}">
                 <h1>{{ articlesLatest.title }}</h1>
@@ -10,10 +9,9 @@
         </div>
         <br>
         <div style="height: 54%;">
-            <h2>최근 공지 목록</h2>
             <hr>
             <div v-for="article in articles" style="position: flex; ">
-                <div>
+                <div v-if="articleLatest != article">
                     <RouterLink :to="{ name: 'CommunityDetailView', params: { 'id': article.id }}">
                         {{ article.title }} 
                     </RouterLink>

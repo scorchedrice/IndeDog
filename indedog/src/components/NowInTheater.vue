@@ -17,13 +17,12 @@ import MarqueeNowInTheater from '@/components/slide/MarqueeNowInTheater.vue'
 const store = useCounterStore()
 const movieList = store.movies
 const recentMovie = ref([])
-
-// 키워드를 중심으로 검색
-// 현재 상영중인 영화는 id 10000번대부터 설정, id 1만번대부터 검색
-for (const movie of movieList) {
-    if (Number(movie.id) >= 10000) {
-        recentMovie.value.push(movie)
-    }
+// 현재 상영중인 영화의 id 정보
+const recentMovieIdList = ref([5242, 5246, 5293, 5311])
+for (movie in movieList.value) {
+    console.log('###')
+    console.log(movie.id)
+    console.log('###')
 }
 
 const recentMovieFirst = recentMovie.value[0]
