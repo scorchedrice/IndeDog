@@ -1,21 +1,23 @@
 <template>
     <header v-if="isDeskTop">
-        <div style="border: solid black 5px;">
-            <TodayRecommend />
+        <div class="row">
+            <div class="col-8"  style="border: solid black 5px;">
+                <TodayRecommend />
+            </div>
+            
+            <div class="col-4" style="border: solid black 5px;">
+                <AIRecommend/>
+            </div>
         </div>
         <br>
         <div>
             <NowInTheater/>
         </div>
         <br>
-        <div class="row">
-            <div class="col-7" style="border: solid black 5px;">
-                <Notice/>
-            </div>
-            <div class="col-5" style="border: solid black 5px;">
-                <AIRecommend/>
-            </div>
+        <div style="border: solid black 5px;">
+            <Notice/>
         </div>
+        
         
     </header>
     <header v-else-if="!isDeskTop" class="row align-items-center container">

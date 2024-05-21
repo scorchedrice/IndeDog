@@ -1,20 +1,31 @@
 <template>
     <div class="container">
-      <h1>ChatGPT API with Vue 3</h1>
-      <textarea v-model="userInput" placeholder="Ask something..."></textarea>
-      <button @click="sendMessage">Send</button>
-      <div v-if="loading">Loading...</div>
-      <div v-if="response">
-        <h2>Response:</h2>
-        <p>{{ response }}</p>
-      </div>
+      <h3>인공지능한테도 추천 받아보실래요?</h3>
+      <!-- <textarea v-model="userInput" placeholder="Ask something..."></textarea>
+      <button @click="sendMessage">Send</button> -->
+      <!-- <div v-if="loading">Loading...</div>
+      <div v-if="response"> -->
+        <!-- <h2>Response:</h2>
+        <p>{{ response }}</p> -->
+        <div class="container" style="margin: auto;">
+            <RouterLink :to="{name: 'ai_recommend'}">
+                <img src="@/assets/icon/AI_icon.webp" alt="" style="width: 50%;" @click="clickAI">
+            </RouterLink>
+        </div>
+      <!-- </div> -->
     </div>
   </template>
   
   <script setup>
   import { ref } from 'vue'
+  import {RouterLink} from 'vue-router'
   import axios from 'axios'
   
+  
+  const clickAI = function () {
+    console.log('clickAI')
+  }
+
   const userInput = ref('')
   const response = ref('')
   const loading = ref(false)
