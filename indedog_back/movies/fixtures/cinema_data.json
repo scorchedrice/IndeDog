@@ -3,7 +3,7 @@
     "model": "movies.cinema",
     "pk": 1,
     "fields": {
-      "recent_movies": [10000, 10003],
+      "recent_movies": [5242, 5246],
       "address": "중랑아트센터",
       "latitude": 37.5984617,
       "longitude": 127.0916835
@@ -13,7 +13,7 @@
     "model": "movies.cinema",
     "pk": 2,
     "fields": {
-      "recent_movies": [10000, 10003],
+      "recent_movies": [5242, 5246],
       "address": "답십리영화미디어아트센터",
       "latitude": 37.571758,
       "longitude": 127.063741
@@ -23,7 +23,7 @@
     "model": "movies.cinema",
     "pk": 3,
     "fields": {
-      "recent_movies": [10001],
+      "recent_movies": [5293],
       "address": "구로문화재단 (신도림오페라하우스)",
       "latitude": 37.5081213,
       "longitude": 126.890901
@@ -33,7 +33,7 @@
     "model": "movies.cinema",
     "pk": 4,
     "fields": {
-      "recent_movies": [10001],
+      "recent_movies": [5293],
       "address": "국립중앙도서관",
       "latitude": 37.497689,
       "longitude": 127.0028333
@@ -43,7 +43,7 @@
     "model": "movies.cinema",
     "pk": 5,
     "fields": {
-      "recent_movies": [10001],
+      "recent_movies": [5293],
       "address": "서울시50플러스 중부캠퍼스",
       "latitude": 37.54664760000001,
       "longitude": 126.9504201
@@ -53,7 +53,7 @@
     "model": "movies.cinema",
     "pk": 6,
     "fields": {
-      "recent_movies": [10001],
+      "recent_movies": [5293],
       "address": "서울특별시교육청 남산도서관",
       "latitude": 37.55292499999999,
       "longitude": 126.981414
@@ -63,7 +63,7 @@
     "model": "movies.cinema",
     "pk": 7,
     "fields": {
-      "recent_movies": [10001],
+      "recent_movies": [5293],
       "address": "서울시50플러스 남부캠퍼스",
       "latitude": 37.4884018,
       "longitude": 126.8419077
@@ -73,7 +73,7 @@
     "model": "movies.cinema",
     "pk": 8,
     "fields": {
-      "recent_movies": [10001],
+      "recent_movies": [5293],
       "address": "금천50플러스센터",
       "latitude": 37.4675431,
       "longitude": 126.8944013
@@ -83,7 +83,7 @@
     "model": "movies.cinema",
     "pk": 9,
     "fields": {
-      "recent_movies": [10001],
+      "recent_movies": [5293],
       "address": "서대문50플러스센터",
       "latitude": 37.591427,
       "longitude": 126.9430166
@@ -93,7 +93,7 @@
     "model": "movies.cinema",
     "pk": 10,
     "fields": {
-      "recent_movies": [10001, 10002],
+      "recent_movies": [5293, 5311],
       "address": "서울시청 시민청",
       "latitude": 37.5666454,
       "longitude": 126.9781553
@@ -103,7 +103,7 @@
     "model": "movies.cinema",
     "pk": 11,
     "fields": {
-      "recent_movies": [10001],
+      "recent_movies": [5293],
       "address": "구립 은평뉴타운도서관",
       "latitude": 37.6372344,
       "longitude": 126.9330971
@@ -113,7 +113,7 @@
     "model": "movies.cinema",
     "pk": 12,
     "fields": {
-      "recent_movies": [10001],
+      "recent_movies": [5293],
       "address": "천연옹달샘마을활력소",
       "latitude": 37.5687473,
       "longitude": 126.9610542
@@ -123,7 +123,7 @@
     "model": "movies.cinema",
     "pk": 13,
     "fields": {
-      "recent_movies": [10001],
+      "recent_movies": [5293],
       "address": "서울시50플러스 서부캠퍼스",
       "latitude": 37.607123,
       "longitude": 126.9343137
@@ -133,7 +133,7 @@
     "model": "movies.cinema",
     "pk": 14,
     "fields": {
-      "recent_movies": [10001],
+      "recent_movies": [5293],
       "address": "서울시립대학교",
       "latitude": 37.5838657,
       "longitude": 127.0587771
@@ -143,7 +143,7 @@
     "model": "movies.cinema",
     "pk": 15,
     "fields": {
-      "recent_movies": [10001],
+      "recent_movies": [5293],
       "address": "김근태기념도서관",
       "latitude": 37.6876202,
       "longitude": 127.0440062
@@ -153,7 +153,7 @@
     "model": "movies.cinema",
     "pk": 16,
     "fields": {
-      "recent_movies": [10002],
+      "recent_movies": [5311],
       "address": "서울시민대학 동남권캠퍼스",
       "latitude": 37.5578713,
       "longitude": 127.1697156
@@ -163,7 +163,7 @@
     "model": "movies.cinema",
     "pk": 17,
     "fields": {
-      "recent_movies": [10002],
+      "recent_movies": [5311],
       "address": "서대문자연사박물관",
       "latitude": 37.57667300000001,
       "longitude": 126.9374741
@@ -173,7 +173,7 @@
     "model": "movies.cinema",
     "pk": 18,
     "fields": {
-      "recent_movies": [10002],
+      "recent_movies": [5311],
       "address": "송파도서관",
       "latitude": 37.4999425,
       "longitude": 127.1347953
@@ -183,7 +183,7 @@
     "model": "movies.cinema",
     "pk": 19,
     "fields": {
-      "recent_movies": [10002],
+      "recent_movies": [5311],
       "address": "구립 구산동도서관마을",
       "latitude": 37.6095524,
       "longitude": 126.9130611
@@ -193,7 +193,7 @@
     "model": "movies.cinema",
     "pk": 20,
     "fields": {
-      "recent_movies": [10002],
+      "recent_movies": [5311],
       "address": "양천도서관",
       "latitude": 37.5336117,
       "longitude": 126.8762068
@@ -203,7 +203,7 @@
     "model": "movies.cinema",
     "pk": 21,
     "fields": {
-      "recent_movies": [10002],
+      "recent_movies": [5311],
       "address": "꿈의숲아트센터",
       "latitude": 37.6215198,
       "longitude": 127.0384925
@@ -213,7 +213,7 @@
     "model": "movies.cinema",
     "pk": 22,
     "fields": {
-      "recent_movies": [10002],
+      "recent_movies": [5311],
       "address": "서울시립청소년미디어센터",
       "latitude": 37.5409219,
       "longitude": 126.9725688
@@ -223,7 +223,7 @@
     "model": "movies.cinema",
     "pk": 23,
     "fields": {
-      "recent_movies": [10002],
+      "recent_movies": [5311],
       "address": "강서도서관",
       "latitude": 37.5478657,
       "longitude": 126.8600392
@@ -233,7 +233,7 @@
     "model": "movies.cinema",
     "pk": 24,
     "fields": {
-      "recent_movies": [10002],
+      "recent_movies": [5311],
       "address": "서울아트책 보고 해보고",
       "latitude": 37.4989526,
       "longitude": 126.8670525
@@ -243,7 +243,7 @@
     "model": "movies.cinema",
     "pk": 25,
     "fields": {
-      "recent_movies": [10002],
+      "recent_movies": [5311],
       "address": "동작50플러스센터",
       "latitude": 37.512952,
       "longitude": 126.941571
@@ -253,7 +253,7 @@
     "model": "movies.cinema",
     "pk": 26,
     "fields": {
-      "recent_movies": [10002],
+      "recent_movies": [5311],
       "address": "양천50플러스센터",
       "latitude": 37.5180179,
       "longitude": 126.8450429
@@ -263,7 +263,7 @@
     "model": "movies.cinema",
     "pk": 27,
     "fields": {
-      "recent_movies": [10002],
+      "recent_movies": [5311],
       "address": "마포평생학습관",
       "latitude": 37.5542685,
       "longitude": 126.9242273
@@ -273,7 +273,7 @@
     "model": "movies.cinema",
     "pk": 28,
     "fields": {
-      "recent_movies": [10002],
+      "recent_movies": [5311],
       "address": "답십리도서관",
       "latitude": 37.57101950000001,
       "longitude": 127.0566992
@@ -283,7 +283,7 @@
     "model": "movies.cinema",
     "pk": 29,
     "fields": {
-      "recent_movies": [10002],
+      "recent_movies": [5311],
       "address": "서울특별시교육청 정독도서관",
       "latitude": 37.5807856,
       "longitude": 126.9831611
@@ -293,7 +293,7 @@
     "model": "movies.cinema",
     "pk": 30,
     "fields": {
-      "recent_movies": [10002],
+      "recent_movies": [5311],
       "address": "중랑양원미디어센터",
       "latitude": 37.606639,
       "longitude": 127.108067

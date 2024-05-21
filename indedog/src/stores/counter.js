@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router'
 export const useCounterStore = defineStore('counter', () => {
   const router = useRouter()
   const movies = ref([])
-  const cinemas = ref([])
+  const cinemas = ref([]) // 좌표
   const API_URL = 'http://127.0.0.1:8000'
   const articles = ref()
   const filterMovies = ref()
@@ -15,6 +15,7 @@ export const useCounterStore = defineStore('counter', () => {
   const isStaff = ref(null)
   const recentMovies = ref([])
   const recentMovieIdList = ref([5242, 5246, 5293, 5311])
+  const cinemaRecentMovie = ref([])
   // const token = ref(null)
   // const isLogin = computed(() => {
   //   if (token.value === null) {
@@ -30,14 +31,16 @@ export const useCounterStore = defineStore('counter', () => {
       url: `${API_URL}/api/v1/movies/`
     })
       .then(res => {
+        recentMovies.value = []
         movies.value = res.data
         for(const movie of movies.value){
           movie.keywords = movie.keywords.split('#').filter(item => item.trim() !== '')
           movie.cinemas = movie.cinemas.split(',')
           if (recentMovieIdList.value.indexOf(movie.id) !== -1) {
-            if (recentMovies.value == []) {
+            if (recentMovieIdList.value.length > recentMovies.value.length) {
               recentMovies.value.push(movie)
-            }
+              
+          }
           }
         }
         console.log('영화 데이터 불러옴')
@@ -145,8 +148,6 @@ export const useCounterStore = defineStore('counter', () => {
     })
     .then(res => {
       cinemas.value = res.data;
-      console.log('#store - cinema')
-      console.log(cinemas.value)
     })
     .catch(err => console.log(err))
   }
