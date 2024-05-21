@@ -8,9 +8,6 @@
         <h2>Response:</h2>
         <p>{{ response }}</p>
         <div class="container" style="margin: auto;">
-            <RouterLink :to="{name: 'ai_recommend'}">
-                <img src="@/assets/icon/AI_icon.webp" alt="" style="width: 50%;" @click="clickAI">
-            </RouterLink>
         </div>
       </div>
     </div>
@@ -44,7 +41,7 @@
             role: 'user',
           },],
           temperature: 0.8,
-          max_tokens: 150,
+          max_tokens: 500,
         },
         {
           headers: {
