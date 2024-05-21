@@ -13,6 +13,8 @@ import CommunityDetailView from '@/views/CommunityDetailView.vue'
 import { useCounterStore } from '@/stores/counter'
 import CinemaInfoView from '@/views/CinemaInfoView.vue'
 import NoticeView from '@/views/NoticeView.vue'
+import CommunityUpdate from '@/components/CommunityUpdate.vue'
+
 
 
 const router = createRouter({
@@ -82,6 +84,11 @@ const router = createRouter({
       path: '/community/:id',
       name: 'CommunityDetailView',
       component: CommunityDetailView
+    },
+    {
+      path: '/community/update/:id',
+      name: 'CommunityUpdate',
+      component: CommunityUpdate
     },
     {
       path: '/notice',

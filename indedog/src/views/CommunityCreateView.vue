@@ -19,9 +19,6 @@
         <label for="content">내용 : </label>
         <textarea v-model.trim="content" id="content"></textarea>
       </div>
-      <div v-if="store.isStaff">
-        <input type="checkbox" v-model="isNotice">공지사항 체크
-      </div>
       <input type="submit">
       <br>
     </form>
@@ -42,6 +39,9 @@ const isNotice = ref(false)
 const category = ref(null)
 
 const createArticle = function () {
+    if(category.value === '공지') {
+      isNotice.value = true
+    }
     axios({
       method: 'post',
       url: `${store.API_URL}/api/v1/articles/create/`,

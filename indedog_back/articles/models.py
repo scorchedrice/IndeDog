@@ -17,10 +17,10 @@ class Article(models.Model):
 
 class Comment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, blank=True)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, null=True)
     point = models.FloatField(default=0.0)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, blank=True)
-    cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, blank=True)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True)
+    cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, null=True)
     content = models.CharField(max_length=250)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
