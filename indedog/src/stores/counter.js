@@ -15,6 +15,7 @@ export const useCounterStore = defineStore('counter', () => {
   const loginPk = ref(null)
   const isStaff = ref(null)
   const isLoading = ref(true)
+  const userData = ref(null)
   // const token = ref(null)
   // const isLogin = computed(() => {
   //   if (token.value === null) {
@@ -90,7 +91,13 @@ export const useCounterStore = defineStore('counter', () => {
       }
     })
       .then((res) => {
-        console.log('회원가입 성공')
+        const password = password1
+        logIn({username, password})
+        window.alert('회원가입 성공')
+        router.replace({ name: 'home'}).then(() => {
+          window.location.reload()
+          // menu 에 회원가입 이후 반영이 안되는 문제 해결, home page이동시에만 새로고침 활용
+        })
       })
       .catch((err) => {
         console.log(err)
@@ -99,7 +106,6 @@ export const useCounterStore = defineStore('counter', () => {
 
   const logIn = function(payload) {
     const { username, password } = payload
-    loginUser.value = username
     axios({
       method: 'post',
       url: `${API_URL}/accounts/login/`,
@@ -110,20 +116,20 @@ export const useCounterStore = defineStore('counter', () => {
       .then((res) => {
         console.log('로그인 성공')
         token.value = res.data.key
+        loginUser.value = username
         axios({
           method: 'get',
           url: `${API_URL}/api/v1/admin/`,
         })
           .then(res => {
-            console.log(res)
             for(const data in res.data){
-              console.log(res.data[data].is_staff)
               if (res.data[data].username === loginUser.value){
                 if (res.data[data].is_staff) {
                   console.log('스태프입니다.')
                   isStaff.value = true
-                  loginPk.value = res.data[data].id
                 }
+                loginPk.value = res.data[data].id
+                userData.value = res.data[data]
                 break
               }
             }
@@ -134,7 +140,7 @@ export const useCounterStore = defineStore('counter', () => {
       })
       .catch((err) => {
         window.alert('로그인정보가 일치하지 않습니다.')
-        console.log(err)
+        console.log(err)  
         router.replace({ name: 'home'})
       })
   }
@@ -150,6 +156,7 @@ export const useCounterStore = defineStore('counter', () => {
         loginUser.value = null
         isStaff.value = false
         loginPk.value = null
+        userData.value = null 
       })
       .catch((err) => {
         console.log(err)
@@ -170,5 +177,6 @@ export const useCounterStore = defineStore('counter', () => {
   }
   
 
-  return { movies, getArticles, API_URL, articles, signUp, logIn, token, loginUser, getCoord, cinemas, logOut, isStaff, loginPk, isLoading }
+  return { movies, getArticles, API_URL, articles, signUp, logIn, token, loginUser, 
+    getCoord, cinemas, logOut, isStaff, loginPk, isLoading, userData }
 }, { persist: true })

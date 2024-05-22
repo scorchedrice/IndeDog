@@ -29,10 +29,7 @@ import Subtitle from '@/components/slide/MarqueeSubtitle.vue'
 const store = useCounterStore()
 const route = useRouter()
 const goHomePage = function () {
-  route.push({name: 'home'}).then(() => {
-    window.location.reload();
-    // menu 에 회원가입 이후 반영이 안되는 문제 해결, home page이동시에만 새로고침 활용
-  })
+  route.push({name: 'home'})
 }
 
 const menuHide = function () {

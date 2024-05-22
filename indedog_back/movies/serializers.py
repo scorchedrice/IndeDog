@@ -15,6 +15,7 @@ class MovieListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = ('id', 'title', 'img_src', 'keywords', 'director', 'cinemas', 'genre', 'title_en', 'making_year', 'length', 'comment_set', 'like_users')
+        # fields = '__all__'
 
 
 class MovieLikeSerializer(serializers.ModelSerializer):

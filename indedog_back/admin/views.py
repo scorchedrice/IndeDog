@@ -10,9 +10,20 @@ from .serializers import UserSerializer
 
 # Create your views here.
 
+user = get_user_model()
+
 @api_view(['GET'])
 def admin(request):
     if request.method == 'GET':
-        users = get_user_model().objects.all()
+        # users = get_user_model().objects.all()
+        users = user.objects.prefetch_related('like_movies')
         serializer = UserSerializer(users, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def user_detail(request, user_id):
+    if request.method == 'GET':
+        user = get_user_model().objects.prefetch_related('like_movies').get(pk=user_id)
+        serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
