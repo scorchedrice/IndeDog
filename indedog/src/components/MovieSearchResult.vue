@@ -16,7 +16,7 @@
             <input type="submit" value="검색">
         </form>
 
-        <div class="row align-items-center container" style="background-color: bisque; border: 5px solid black">
+        <div class="row align-items-center" style="border: 5px solid black">
             <div
             v-for="movie in paginationMovies"
             :key="movie.id" class="col-6">
@@ -38,14 +38,13 @@
                         <li class="list-group-item">Running Time: {{ movie.length }}</li>
                         <Keyword :keyword-list="movie.keyword" />
                     </div>
-                    
                 </div>
                 <br>
                 <hr>
             </div>
             </div>
-        <fwb-pagination style="text-align: center;" v-model="currentPage" :total-pages="totalPages" previous-label="⬅️" next-label="➡️"></fwb-pagination>
-    </div>
+        </div>
+        <fwb-pagination style="text-align: center" v-model="currentPage" :total-pages="totalPages" previous-label="⬅️" next-label="➡️"></fwb-pagination>
 </template>
 
 <script setup>

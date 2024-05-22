@@ -1,23 +1,43 @@
 <template>
-    <div>
-        <div v-for="movie in recentMovie" class="row align-items-center">
-            <RouterLink :to="{ name: 'movie_detail', params: { 'id': movie.id } }" class="col-4">
-                    <img :src="movie.img_src" class="d-block w-100" alt="...">
-            </RouterLink>
-            <div class="col-8">
-                <h3>{{ movie.title }} - {{ movie.director }}</h3>
-                <p>장르: {{ movie.genre }}</p>
-                <p>상영시간: {{ movie.length }}</p>
-                <div 
-                v-for="cinema in cinemaList[movie.id]"
-                >
-                    <div v-if="cinema != ''">
-                        <RouterLink :to="{name:'cinema_info', params: {'address': cinema}}">
-                            {{ cinema }}
-                        </RouterLink>
+    <div class="row align-items-center">
+        <div class="col-6" v-for="movie in recentMovie">
+            <div class="row align-items-center">
+                <div class="col-6">
+                    <RouterLink :to="{ name: 'movie_detail', params: { 'id': movie.id } }" class="col-4">
+                            <img :src="movie.img_src" class="d-block w-100" alt="...">
+                    </RouterLink>
+                </div>
+            
+            <div class="col-6">
+                <h4>{{ movie.title }}</h4>
+                <h5 v-if="movie.title_en">{{ movie.title_en }}</h5>
+                <h6>{{ movie.making_year }}</h6>
+
+                <h6>Director: {{ movie.director }}</h6>
+                <h6>Genre: {{ movie.genre }}</h6>
+                <h6>Running Time: {{ movie.length }}</h6>
+                <div>
+                    <!-- ------------- -->
+                    <hr>
+                    <div class="btn-group dropend">
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            상영관
+                        </button>
+                        <ul class="dropdown-menu" style="width: 30vh">
+                            <div 
+                        v-for="cinema in cinemaList[movie.id]"
+                        >
+                            <div v-if="cinema != ''">
+                                <h6 @click="goCinemaInfo(cinema)">{{ cinema }}</h6>
+                            </div>
+                        </div>
+                        </ul>
                     </div>
+                    <!-- ------------- -->
+                        
                 </div>
             </div>
+        </div>
             <p></p>
             <hr>
         </div>
@@ -30,10 +50,16 @@ import { useCounterStore } from '@/stores/counter'
 import { RouterLink, useRouter } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import axios from 'axios'
+import router from '@/router';
+const gorouter = useRouter()
 const isFirstMount = ref(true)
 const store = useCounterStore()
 const recentMovie = store.recentMovies
 const cinemaList = ref({})
+const goCinemaInfo = function (cinema) {
+    gorouter.push({name:'cinema_info', params: {'address': cinema}})
+}
+
 onMounted(() => {
     axios({
         method: 'get',
@@ -57,5 +83,8 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
+@import '@/assets/font/font.css';
+h4 {
+    font-family: 'hanna'
+}
 </style>

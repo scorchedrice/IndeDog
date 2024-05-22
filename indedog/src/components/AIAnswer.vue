@@ -38,7 +38,7 @@
             content: props.inputData,
             role: 'user',
           },],
-          temperature: 0.8,
+          temperature: 0.3,
           max_tokens: 500,
         },
         {

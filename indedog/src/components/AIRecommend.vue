@@ -1,23 +1,21 @@
-<template>
-    <div class="container">
-      <h3>인공지능한테도 추천 받아보실래요?</h3>
-        <div class="container" style="margin: auto;">
-            <RouterLink :to="{name: 'ai_recommend'}">
-                <img src="@/assets/icon/AI_icon.webp" alt="" style="width: 50%;" @click="clickAI">
-            </RouterLink>
-        </div>
+<template>  
+      <div style="text-align: center;">
+        
+      
+        <RouterLink :to="{name: 'ai_recommend'}">
+            <img src="@/assets/icon/ai_icon.gif" alt="" style="width: 50px;">
+        </RouterLink>
       </div>
+
+      <h3 style="text-align: center;">AI가 오늘 추천하는 영화는 무엇일까요?</h3>
+      
   </template>
   
   <script setup>
   import { ref } from 'vue'
   import {RouterLink} from 'vue-router'
   import axios from 'axios'
-  
-  
-  const clickAI = function () {
-    console.log('clickAI')
-  }
+
   </script>
   
   <style>

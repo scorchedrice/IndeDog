@@ -14,12 +14,12 @@
         </form>
 
         <br>
-        <div class="row align-items-center container" style="background-color: bisque; border: 5px solid black">
+        <div class="row align-items-center" style="border: 2px solid black">
             <div
             v-for="movie in paginationMovies"
             :key="movie.id" class="col-6">
                 <br>
-                <div class="container row">
+                <div class="row align-items-center">
                     <div class="col-6">
                         <RouterLink :to="{ name: 'movie_detail', params: { 'id': movie.id } }">
                             <img :src="movie.img_src" alt="movie.poster" width="100%">
@@ -34,17 +34,30 @@
                         <h6 class="list-group-item">Director: {{ movie.director }}</h6>
                         <h6 class="list-group-item">Genre: {{ movie.genre }}</h6>
                         <h6 class="list-group-item">Running Time: {{ movie.length }}</h6>
-                        <Keyword :keyword-list="movie.keywords" />
+                        <hr>
+                        <div class="btn-group dropend">
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Keywords
+                        </button>
+                        <ul class="dropdown-menu" style="width: 20vh">
+                            <div 
+                        v-for="keyword in movie.keywords"
+                        >
+                            <div v-if="keyword != ''">
+                                <h6 @click="goMovieDetail(keyword)">#{{ keyword }}</h6>
+                            </div>
+                        </div>
+                        </ul>
                     </div>
-                    
-                </div>
+                    </div>
+                </div>  
                 <br>
                 <hr>
             </div>
             </div>
         </div>
-        <fwb-pagination style="text-align: center" v-model="currentPage" :total-pages="totalPages" previous-label="⬅️" next-label="➡️"></fwb-pagination>
         <br>
+        <fwb-pagination v-model="currentPage" :total-pages="totalPages" previous-label="⬅️" next-label="➡️"></fwb-pagination>
 </template>
 
 <script setup>
@@ -66,6 +79,9 @@ const movieResult = function (category) {
     router.push({ name: 'movie_search_result', params: { 'category': category, 'name': text.value }})
 }
 
+const goMovieDetail = function (keyword) {
+    router.push({name: 'movie_search_result', params:{'category': '키워드', 'name':keyword}})
+}
 
 // pagination
 const currentPage = ref(1)
