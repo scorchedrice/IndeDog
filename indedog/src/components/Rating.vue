@@ -1,7 +1,20 @@
 <template>
     <div class="form-floating">
+        <h1>이곳의 평점은?</h1>
+        <div style="display: flex;">
+            <vue3-star-ratings
+                v-model="curRating"
+                :starSize="50"
+                starColor="#ff9800"
+                inactiveColor="#333333"
+                :numberOfStars="5"
+                :disableClick="true"
+                />
+            <h2 class="ms-2">{{ curRating }}</h2>
+        </div>
         <div class="row">
             <div>
+                <hr>
                 <vue3-star-ratings
                     v-model="rating"
                     :starSize="20"
@@ -35,7 +48,6 @@
                     :numberOfStars="5"
                     :disableClick="true"
                     />
-                {{ comment.point }}
             </div>
             {{ comment.content }}
             {{ comment.user }}
@@ -50,6 +62,8 @@ import axios from 'axios'
 
 const store = useCounterStore()
 const comments = ref(null)
+const sumRating = ref(0)
+const curRating = ref(0.0)
 
 const cinemaName = defineProps({
     address: String
@@ -73,6 +87,11 @@ onMounted(() => {
                 comments.value = cinema.comment_set
             }
         }
+        comments.value.forEach(element => {
+            sumRating.value += element.point
+        })
+        curRating.value = (sumRating.value / comments.value.length).toFixed(2)
+        console.log(curRating.value)
     })
     .catch(err => {
         console.log(err)
@@ -92,6 +111,11 @@ const fetchData = async (address) => {
                 comments.value = cinema.comment_set
             }
         }
+        comments.value.forEach(element => {
+            sumRating.value += element.point
+        })
+        curRating.value = (sumRating.value / comments.value.length).toFixed(2)
+        console.log(curRating.value)
     })
     .catch(err => {
         console.log(err)
@@ -101,6 +125,7 @@ const fetchData = async (address) => {
 const rating = ref(0)
 const content = ref('')
 const createComment = function(address) {
+    sumRating.value = 0
     console.log(store.loginUser)
     if(!store.loginUser){
         window.alert('로그인을 하셔야 댓글등록이 가능해요!')
