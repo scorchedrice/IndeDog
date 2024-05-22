@@ -1,8 +1,5 @@
 <template>
     <div class="container">
-      <h3>인공지능한테도 추천 받아보실래요?</h3>
-      <textarea v-model="userInput" placeholder="Ask something..."></textarea>
-      <button @click="sendMessage">Send</button>
       <div v-if="loading">Loading...</div>
       <div v-if="response">
         <h2>Response:</h2>
@@ -14,11 +11,13 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue'
-  import {RouterLink} from 'vue-router'
+  import { ref, defineProps, onMounted } from 'vue'
   import axios from 'axios'
-  
-  
+
+  const props = defineProps({
+    inputData: String
+  })
+
   const clickAI = function () {
     console.log('clickAI')
   }
@@ -26,7 +25,6 @@
   const userInput = ref('')
   const response = ref('')
   const loading = ref(false)
-  
   const sendMessage = async () => {
     loading.value = true
     response.value = ''
@@ -37,7 +35,7 @@
         {
         model: 'gpt-3.5-turbo',
           messages: [{
-            content: userInput.value,
+            content: props.inputData,
             role: 'user',
           },],
           temperature: 0.8,
@@ -61,6 +59,11 @@
       loading.value = false
     }
   }
+
+  onMounted(() =>{
+    console.log(props.inputData),
+    setTimeout(sendMessage, 3000)
+  })
   </script>
   
   <style>

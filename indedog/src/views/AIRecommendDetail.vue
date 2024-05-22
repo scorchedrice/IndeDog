@@ -1,27 +1,33 @@
 <template>
-  <Carousel :itemsToShow="1.75" :wrapAround="true" :transition="500">
+  <h3>4:완전 공감(이해)한다 <=> 1:공감(이해)하기 어렵다.</h3>
+  <Carousel :itemsToShow="1.3" :wrapAround="true" :transition="500">
     <Slide v-for="slide in slides" :key="slide">
       <div class="carousel__item">
         <h1>{{ slide.title }}</h1>
         <h2>{{ slide.content }}</h2>
-        <div>
-          <div class="grid gap-6" v-for="select in slide.select_list">
-                <fwb-radio v-model="picked[slide.id]" :label="select" name="radio-bordered" :value="select"  :id="slide.id" 
-                />
-            
+          <div v-for="select in slide.select_list">
+            <button @click="pushPicked" :id="slide.id" type="button" class="btn">
+              <h3 :id="slide.id">{{ select }}</h3>
+              <p v-if="picked[slide.id]== select != ''">
+                Checked!
+              </p>
+            </button>
           </div>
-        </div>
       </div>
     </Slide>
 
-    
     <template #addons>
       <Navigation />
       <Pagination />
     </template>
   </Carousel>
-  <button @click="calScore">Submit</button>
-  <AIAnswer/>
+  <div style="text-align: center;" v-if="cntPicked == 9">
+    <button @click="calScore" type="button" class="btn" id="final">완료 하셨나요??</button>
+  </div>
+  <div v-if="showAns == true">
+    <AIAnswer :input-data="inputData"/>
+  </div>
+  
 </template>
 
 
@@ -29,13 +35,28 @@
 import 'vue3-carousel/dist/carousel.css'
 import {ref} from 'vue'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
-import { FwbRadio } from 'flowbite-vue'
 import AIAnswer from '@/components/AIAnswer.vue'
 
 const picked=ref(['','','','','','','','','',''])
-
-// const first_filter = ref(['정치', '퀴어/동성애', '자살', '선정적인 내용'])
 const four = ref([4,3,2,1])
+const cntPicked = ref(0)
+const showAns = ref(false)
+
+const pushPicked = function (event) {
+  picked.value[event.target.id] = event.target.innerText
+  cntPicked.value = 0
+  for (const pick of picked.value) {
+    
+    if (pick != '') {
+      cntPicked.value++
+      console.log(cntPicked.value)
+    }
+  }
+  if (cntPicked.value === 9) {
+    console.log('complete')
+  }
+}
+
 const slides = [
   { id: 1, title: '나는', content: '청춘이라는 단어를 보면 가슴이 뛴다', select_list: four.value, target: '청춘'},
   { id: 2, title: '나는', content: '가족들과 함께 지내는 시간이 다른 것들 보다 소중하다', select_list: four.value, target: '가족'},
@@ -55,11 +76,11 @@ const like = ref([])
 const hate = ref([])
 
 const calScore = function() {
+  console.log('calScore')
   inputData.value = ''
   favorite.value = []
   like.value = []
   hate.value = []
-
   for (const slide of slides) {
     
     if (picked.value[slide.id] == 4) {
@@ -82,7 +103,6 @@ const calScore = function() {
       }
     }
   }
-  console.log(inputData.value)
   if (favorite.value.length) {
     inputData.value += '내가 정말 정말 좋아하는 영화 키워드는 '
     for (const fav of favorite.value) {
@@ -98,6 +118,7 @@ const calScore = function() {
       inputData.value += ' '
     }
     inputData.value += '이고'
+  }
   if (like.value.length != 0) {
     inputData.value += '내가 조금은 좋아하는 키워드는 '
     for (const lik of like.value) {
@@ -107,7 +128,7 @@ const calScore = function() {
   }
   inputData.value += '아무튼 독립영화를 보려고 하는데, 위 내용 기반으로 영화 키워드 추천해줘! 내 기분에 맞는 영화 장르를 추가로 추천해주고 내가 좋아하는 장르들 외에도 비슷한 것들 추가로 추천해줘!'
   console.log(inputData.value)
-}
+  showAns.value = true
 }
 
 const breakpoints = {

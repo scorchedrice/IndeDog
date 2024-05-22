@@ -4,7 +4,6 @@
             <div class="col-8"  style="border: solid black 5px;">
                 <TodayRecommend />
             </div>
-            
             <div class="col-4" style="border: solid black 5px;">
                 <AIRecommend/>
             </div>
