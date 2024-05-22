@@ -36,7 +36,7 @@
                         <li class="list-group-item">Director: {{ movie.director }}</li>
                         <li class="list-group-item">Genre: {{ movie.genre }}</li>
                         <li class="list-group-item">Running Time: {{ movie.length }}</li>
-                        <Keyword :keyword-list="movie.keywordws" />
+                        <Keyword :keyword-list="movie.keyword" />
                     </div>
                     
                 </div>

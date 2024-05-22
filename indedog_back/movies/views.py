@@ -29,7 +29,7 @@ def cinema_list(request):
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def movie_like(request, movie_pk):
-    movie = Movie.objects.get(pk=movie_pk)
+    movie = Movie.objects.prefetch_related('like_users').get(pk=movie_pk)
     serializer = MovieLikeSerializer(movie, data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save()

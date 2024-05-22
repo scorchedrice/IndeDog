@@ -34,6 +34,11 @@ class CommentMovieSerializer(serializers.ModelSerializer):
         read_only_fields = ('user', 'article', 'cinema', 'movie', 'like_users')
 
 
+class ArticleLikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Article
+        fields = ('like_users',)
+
 # class NoticeSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Article

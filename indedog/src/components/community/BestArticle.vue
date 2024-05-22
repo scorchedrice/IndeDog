@@ -28,6 +28,10 @@ import { ref } from 'vue'
 
 const category = ref('전체')
 const store = useCounterStore()
+const articles = ref(null)
+articles.value = store.articles
+
+
 </script>
 
 <style scoped>

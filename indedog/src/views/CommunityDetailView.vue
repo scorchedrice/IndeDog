@@ -16,6 +16,14 @@
             게시글 삭제
           </button>
         </div>
+        <div v-if="store.loginUser">
+          <button v-if="!isLike" @click.prevent="upLike(article.id, 1)">
+                좋아요
+          </button>
+          <button v-else @click.prevent="upLike(article.id, 2)">
+              좋아요 취소
+          </button>
+        </div>
       <RouterLink :to="{name: 'community'}">
         뒤로가기
       </RouterLink>
@@ -46,6 +54,8 @@ const route = useRoute()
 const article = ref(null)
 const router = useRouter()
 const content = ref(null)
+const isLike = ref(false)
+const likeusersList = ref(null)
 
 onMounted(() => {
   axios({
@@ -55,11 +65,28 @@ onMounted(() => {
     .then((response) => {
       console.log(response.data)
       article.value = response.data
+      likeusersList.value = response.data.like_users
+      if (likeusersList.value.includes(store.loginPk)) {
+        isLike.value = true
+      }
     })
     .catch((error) => {
       console.log(error)
     })
 })
+
+const fetchData = async () => {
+  axios({
+    method: 'get',
+    url: `${store.API_URL}/api/v1/articles/${route.params.id}/`
+  })
+    .then((response) => {
+      likeusersList.value = response.data.like_users
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
 
 const articleDelete = function(article_pk) {
   axios({
@@ -104,6 +131,35 @@ const createComment = function(article_id) {
     })
 }
 
+
+const upLike = function(article_pk, type) {
+        if (type === 1) {
+            likeusersList.value.push(store.loginPk)
+            console.log(likeusersList.value)
+            isLike.value = !isLike.value
+        } else {
+            likeusersList.value = likeusersList.value.filter(user => user !== store.loginPk)
+            isLike.value = !isLike.value
+        }
+        axios({
+            method: 'put',
+            url: `${store.API_URL}/api/v1/articles/${article_pk}/like/`,
+            data: {
+                like_users: likeusersList.value
+            },
+            headers: {
+                Authorization : `Token ${store.token}`
+            }
+        })
+        .then(res => {
+            console.log('좋아요 수정완료')
+            console.log(res.data)
+            fetchData()
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
 
 
 </script>

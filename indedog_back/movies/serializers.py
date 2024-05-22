@@ -19,19 +19,9 @@ class MovieListSerializer(serializers.ModelSerializer):
 
 
 class MovieLikeSerializer(serializers.ModelSerializer):
-    like_users = serializers.PrimaryKeyRelatedField(
-        queryset=get_user_model().objects.all(),
-        many=True,
-        required=False
-    )
     class Meta:
         model = Movie
         fields = ('like_users',)
-
-    def update(self, instance, validated_data):
-        like_users_data = validated_data.pop('like_users', [])
-        instance.like_users.set(like_users_data)
-        return instance
 
 
 class CinemaListSerializer(serializers.ModelSerializer):
@@ -39,4 +29,3 @@ class CinemaListSerializer(serializers.ModelSerializer):
         model = Cinema
         fields = ('address', 'latitude', 'longitude', 'recent_movies')
         read_only_fields = ('recent_movies', )
-

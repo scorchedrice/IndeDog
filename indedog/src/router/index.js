@@ -106,7 +106,7 @@ const router = createRouter({
       path: '/:username/userpage',
       name: 'userpage',
       component: UserpageView
-    }
+    },
   ]
 })
 

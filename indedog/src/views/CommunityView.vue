@@ -12,12 +12,17 @@
         </div>
     </div>
     <br>
-    
+    <div>
+        <RouterLink :to="{ name: 'CommunityCreateView'}">
+            <h1>게시글 작성</h1>
+        </RouterLink>
+    </div>
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
 import { useCounterStore } from '@/stores/counter'
+import { RouterLink } from 'vue-router'
 import BestArticle from '@/components/community/BestArticle.vue'
 import MovieCommunity from '@/components/community/MovieCommunity.vue'
 import MovieComment from '@/components/community/MovieComment.vue'

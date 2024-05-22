@@ -14,7 +14,7 @@ class Movie(models.Model):
     genre = models.TextField()
     making_year = models.CharField(max_length=10)
     detail = models.TextField()
-    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_movies')
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_movies', blank=True)
     actors = models.TextField()
     cinemas = models.TextField()
 

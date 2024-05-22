@@ -180,6 +180,15 @@ keywords.value = curMovie.value?.keywords?.filter(item => item.trim() !== '')
 
 const fetchData = async () => {
     sumRate.value = 0
+    for(const movie of store.movies){
+    if (movie.id === Number(route.params.id)) {
+        movie.like_users = likeusersList.value
+        if (curMovie.value.like_users.includes(store.loginPk)){
+            isLike.value = true
+        }
+        break
+    }
+}
     for(const comment of curMovie.value.comment_set){
         sumRate.value += comment.point
         console.log(comment.point)

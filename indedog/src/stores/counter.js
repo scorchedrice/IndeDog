@@ -91,7 +91,6 @@ export const useCounterStore = defineStore('counter', () => {
   }
 
   const signUp = function (payload) {
-    console.log(payload)
     const { username, password1, password2 } = payload
     axios({
       method: 'post',
@@ -129,7 +128,7 @@ export const useCounterStore = defineStore('counter', () => {
         loginUser.value = username
         axios({
           method: 'get',
-          url: `${API_URL}/api/v1/admin/`,
+          url: `${API_URL}/api/v1/custom/`,
         })
           .then(res => {
             for(const data in res.data){

@@ -6,24 +6,32 @@ from rest_framework import status
 
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.contrib.auth import get_user_model  
-from .serializers import UserSerializer
+from .serializers import UserSerializer, AvatarSerializer
 
 # Create your views here.
 
-user = get_user_model()
 
 @api_view(['GET'])
-def admin(request):
+def user(request):
     if request.method == 'GET':
         # users = get_user_model().objects.all()
-        users = user.objects.prefetch_related('like_movies')
+        users = get_user_model().objects.prefetch_related('like_movies')
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
-def user_detail(request, user_id):
+def user_detail(request, username):
     if request.method == 'GET':
-        user = get_user_model().objects.prefetch_related('like_movies').get(pk=user_id)
+        user = get_user_model().objects.prefetch_related('like_movies').get(username=username)
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def user_avatar_create(request):
+    if request.method == 'POST':
+        serializer = AvatarSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)

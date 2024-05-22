@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .models import Article, Comment
 from movies.models import Movie, Cinema
-from .serializers import ArticleSerializer, CommentSerializer, CommentMovieSerializer
+from .serializers import ArticleSerializer, CommentSerializer, CommentMovieSerializer, ArticleLikeSerializer
 
 
 # Create your views here.
@@ -110,3 +110,13 @@ def comment_update_movie(request, comment_pk):
     elif request.method == 'DELETE':
         comment.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def article_like(request, article_pk):
+    article = Article.objects.prefetch_related('like_users').get(pk=article_pk)
+    serializer = ArticleLikeSerializer(article, data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
