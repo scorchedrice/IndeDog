@@ -103,11 +103,15 @@ export const useCounterStore = defineStore('counter', () => {
         const password = password1
         logIn({username, password})
         window.alert('회원가입 성공')
-        router.replace({ name: 'home'}).then(() => {
-          window.location.reload()
-          // menu 에 회원가입 이후 반영이 안되는 문제 해결, home page이동시에만 새로고침 활용
-        })
       })
+        .then(()=>{
+          setTimeout(() => {
+            router.replace({ name: 'home'}).then(() => {
+              window.location.reload()
+              // menu 에 회원가입 이후 반영이 안되는 문제 해결, home page이동시에만 새로고침 활용
+            })
+          }, 1000);
+        })
       .catch((err) => {
         console.log(err)
       })
@@ -131,6 +135,7 @@ export const useCounterStore = defineStore('counter', () => {
           url: `${API_URL}/api/v1/custom/`,
         })
           .then(res => {
+            console.log(res.data)
             for(const data in res.data){
               if (res.data[data].username === loginUser.value){
                 if (res.data[data].is_staff) {

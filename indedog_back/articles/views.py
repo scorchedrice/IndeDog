@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .models import Article, Comment
 from movies.models import Movie, Cinema
-from .serializers import ArticleSerializer, CommentSerializer, CommentMovieSerializer, ArticleLikeSerializer
+from .serializers import ArticleSerializer, CommentSerializer, CommentMovieSerializer, ArticleLikeSerializer, CommentCinemaSerializer
 
 
 # Create your views here.
@@ -120,3 +120,14 @@ def article_like(request, article_pk):
     if serializer.is_valid(raise_exception=True):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['POST', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def comment_create_cinema(request, cinema_name):
+    cinema = Cinema.objects.get(address=cinema_name)
+    if request.method == 'POST':
+        serializer = CommentMovieSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user, cinema=cinema)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)

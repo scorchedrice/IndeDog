@@ -84,7 +84,7 @@
                 <div>
                     <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px" v-model="content"></textarea>
                     <label for="floatingTextarea2"></label>
-                    <input type="submit" value="댓글작성" @click="createComment(curMovie.id)">
+                    <input type="submit" value="댓글작성" @click.prevent="createComment(curMovie.id)">
                 </div>
                 <hr>
                 <h1>코멘트들...</h1>

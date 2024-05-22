@@ -34,6 +34,14 @@ class CommentMovieSerializer(serializers.ModelSerializer):
         read_only_fields = ('user', 'article', 'cinema', 'movie', 'like_users')
 
 
+class CommentCinemaSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='user.username')
+    class Meta:
+        model = Comment
+        fields = ('id', 'content', 'point', 'cinema', 'user', 'like_users')
+        read_only_fields = ('user', 'article', 'cinema', 'movie', 'like_users')
+
+
 class ArticleLikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
