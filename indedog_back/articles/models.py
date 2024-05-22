@@ -4,10 +4,11 @@ from movies.models import Movie, Cinema
 
 # Create your models here.
 class Article(models.Model):
-    # movie = models.ForeignKey(Movie, on_delete=models.CASCADE, blank=True)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True)
     # cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_articles')
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -15,8 +16,10 @@ class Article(models.Model):
     category = models.CharField(max_length=20)
 
 
+
 class Comment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_comments')
     article = models.ForeignKey(Article, on_delete=models.CASCADE, null=True)
     point = models.FloatField(default=0.0)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True)

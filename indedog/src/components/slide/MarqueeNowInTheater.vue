@@ -6,7 +6,7 @@
             @on-resume="playState = 'playing'"
             aria-setsize="small"
         >
-            <div v-for="movie in recentMovies" :key="avatar">
+            <div v-for="movie in recentMovies" :key="movie.id">
                 <RouterLink :to="{ name: 'movie_detail', params: { 'id': movie.id } }">
                     <img :src="movie.img_src" class="d-block w-100" alt="...">
                 </RouterLink>

@@ -39,30 +39,31 @@
                     <hr>
                     <div>
                         <strong>아직 회원이 아니신가요?</strong>
-                        <p class="text-primary" style="text-decoration: underline;" @click="goSignUp">회원가입</p>
+                        <p class="text-primary" style="text-decoration: underline;" @click.prevent="goSignUp">회원가입</p>
                     </div>
                     </div>
                     <div v-if="store.token">
                         <h1>ID : {{ store.loginUser }}</h1>
                         <p>환영합니다!</p>
                         <div>
-                            <button @click="store.logOut" class="btn btn-outline-danger" style="margin-left:auto;">
+                            <button @click.prevent="store.logOut" class="btn btn-outline-danger" style="margin-left:auto;">
                                 Logout
                             </button>
                         </div>
+                        <RouterLink :to="{ name: 'userpage', params: { 'username': store.loginUser }}">
+                            유저페이지
+                        </RouterLink>
                     </div>
-     
-                    
                 </div>
             </div>
             </div>
             <li class="list-group-item"><strong>Inde-Dog 소개</strong></li>
-            <li class="list-group-item" @click="goNotice"><strong>공지사항 / 이벤트</strong></li>
+            <li class="list-group-item" @click.prevent="goNotice"><strong>공지사항 / 이벤트</strong></li>
             <li class="list-group-item"></li>
-            <li class="list-group-item" @click="goMovieSearch">작품 검색</li>
-            <li class="list-group-item" @click="goCinemaSearch">상영관 검색</li>
-            <li class="list-group-item" @click="goNowInTheater">현재 상영작</li>
-            <li class="list-group-item" @click="goCommunity">커뮤니티</li>
+            <li class="list-group-item" @click.prevent="goMovieSearch">작품 검색</li>
+            <li class="list-group-item" @click.prevent="goCinemaSearch">상영관 검색</li>
+            <li class="list-group-item" @click.prevent="goNowInTheater">현재 상영작</li>
+            <li class="list-group-item" @click.prevent="goCommunity">커뮤니티</li>
         </ul>
         </div>
     </div>

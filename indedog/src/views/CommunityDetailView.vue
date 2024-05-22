@@ -5,21 +5,19 @@
         <p>내용 : {{ article.content }}</p>
         <p>작성된 날짜 : {{ article.created_at }}</p>
         <p>수정된 날짜 : {{ article.updated_at }}</p>
-        <div v-if="store.loginUser === article.user">
-          <div v-if="store.loginUser == article.user">
-          <RouterLink :to="{ name: 'CommunityUpdate', params: { 'id': article.id }}">
-            <button>
-              게시글 수정
-            </button>
-          </RouterLink>
-          <hr>
-            <button @click="articleDelete(article.id)">
-              게시글 삭제
-            </button>
+        <div v-if="store.loginUser == article.user || store.isStaff">
+        <RouterLink :to="{ name: 'CommunityUpdate', params: { 'id': article.id }}">
+          <button>
+            게시글 수정
+          </button>
+        </RouterLink>
+        <hr>
+          <button @click="articleDelete(article.id)">
+            게시글 삭제
+          </button>
         </div>
-      </div>
       <RouterLink :to="{name: 'community'}">
-        [BACK]
+        뒤로가기
       </RouterLink>
         <hr>
         <footer v-if="article.category != '공지'">

@@ -36,7 +36,7 @@
                         <li class="list-group-item">Director: {{ movie.director }}</li>
                         <li class="list-group-item">Genre: {{ movie.genre }}</li>
                         <li class="list-group-item">Running Time: {{ movie.length }}</li>
-                        <Keyword :keyword-list="movie.keywords" />
+                        <Keyword :keyword-list="movie.keywordws" />
                     </div>
                     
                 </div>
@@ -44,7 +44,7 @@
                 <hr>
             </div>
             </div>
-        <fwb-pagination style="text-align: center" v-model="currentPage" :total-pages="totalPages" previous-label="⬅️" next-label="➡️"></fwb-pagination>
+        <fwb-pagination style="text-align: center;" v-model="currentPage" :total-pages="totalPages" previous-label="⬅️" next-label="➡️"></fwb-pagination>
     </div>
 </template>
 
@@ -58,6 +58,7 @@ const store = useCounterStore()
 const route = useRoute()
 const router = useRouter()
 const currentMovies = ref([])
+const ctName = ref(route.params.category)
 
 const movieResult = function (category) {
     router.push({ name: 'movie_search_result', params: { 'category': category, 'name': text.value }})
