@@ -3,13 +3,14 @@
         <BestArticle/>
     </div>
     <br>
-    <div class="row" style="border: solid black 5px;">
-        <div class="col-8">
+    <div style="border: solid black 5px;">
+        
             <MovieCommunity/>
-        </div>
-        <div class="col-4">
-            <MovieComment/>
-        </div>
+        
+    </div>
+    <br>
+    <div style="border: solid black 5px">
+            <TheaterCommunity/>
     </div>
     <br>
     <div>

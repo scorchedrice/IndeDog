@@ -1,6 +1,7 @@
 <template>
     <div>
         <h3>영화평점 최신순 정렬 (MovieComment)</h3>
+        
     </div>
 </template> 
 

@@ -1,25 +1,38 @@
 <template>
     <div>
     <h1>게시글 작성</h1>
+    <hr>
     <form @submit.prevent="createArticle">
       <div v-if="!movieId">
-        <label for="category">카테고리 : </label>
-        <select name="category" id="category" v-model="category">
-        <option value="영화">영화</option>
-        <option value="상영관">상영관</option>
-        <option value="자유">자유</option>
-        <option v-if="store.isStaff" value="공지">공지</option>
-      </select>
+
+
+
+
+        <label for="category"><h2>카테고리</h2></label>
+        <div class="form-floating">
+          <select class="form-select form-select-lg mb-3" name="category" id="category" v-model="category">
+            <option value="영화">영화</option>
+            <option value="상영관">상영관</option>
+            <option value="자유">자유</option>
+            <option v-if="store.isStaff" value="공지">공지</option>
+          </select>
+          <label for="category">카테고리를 선택해주세요.</label>
+        </div>
+        
       </div>
       <div v-if="movieName">
         영화 : {{ movieName }}
       </div>
       <div>
-        <label for="title">제목 : </label>
-        <input type="text" v-model.trim="title" id="title">
+        <label for="title"><h2>제목</h2></label>
+        <br>
+        <div class="input-group input-group-lg">
+          <input class="form-control" area-describedby="inputGroup-sizing-lg" type="text" v-model.trim="title" id="title">
+        </div>
       </div>
+      <br>
       <div>
-        <label for="content">내용 : </label>
+        <label for="content"><h4>내용 :</h4> </label>
         <textarea v-model.trim="content" id="content"></textarea>
       </div>
       <input type="submit">
