@@ -17,16 +17,16 @@
         <div class="row align-items-center" style="border: 2px solid black">
             <div
             v-for="movie in paginationMovies"
-            :key="movie.id" class="col-6">
+            :key="movie.id" class="col-12 col-md-6">
                 <br>
                 <div class="row align-items-center">
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         <RouterLink :to="{ name: 'movie_detail', params: { 'id': movie.id } }">
                             <img :src="movie.img_src" alt="movie.poster" width="100%">
                         </RouterLink>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         <h4 class="card-title">{{ movie.title }}</h4>
                         <h5 v-if="movie.title_en">{{ movie.title_en }}</h5>
                         <h6 class="card-text">{{ movie.making_year }}</h6>

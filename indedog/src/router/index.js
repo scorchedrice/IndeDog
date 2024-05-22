@@ -16,6 +16,7 @@ import NoticeView from '@/views/NoticeView.vue'
 import CommunityUpdate from '@/components/CommunityUpdate.vue'
 import AIRecommendDetail from '@/views/AIRecommendDetail.vue'
 import UserpageView from '@/views/UserpageView.vue'
+import JobView from '@/views/JobView.vue'
 
 
 
@@ -107,6 +108,11 @@ const router = createRouter({
       name: 'userpage',
       component: UserpageView
     },
+    {
+      path: '/job',
+      name: 'job',
+      component: JobView
+    }
   ]
 })
 

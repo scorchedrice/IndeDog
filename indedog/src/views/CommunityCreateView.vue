@@ -9,10 +9,13 @@
         <option value="상영관">상영관</option>
         <option value="자유">자유</option>
         <option v-if="store.isStaff" value="공지">공지</option>
-      </select>
+      </select> 
       </div>
       <div v-if="movieName">
         영화 : {{ movieName }}
+      </div>
+      <div v-if="back == '/job'">
+        구인공고를 작성해주세요.
       </div>
       <div>
         <label for="title">제목 : </label>
@@ -21,6 +24,12 @@
       <div>
         <label for="content">내용 : </label>
         <textarea v-model.trim="content" id="content"></textarea>
+      </div>
+      <div v-if="category == '구인공고'">
+        <label for="job">모집부문 : </label>
+        <input type="text" v-model.trim="job" id="job">
+        <label for="by">지원 마감기한 : </label>
+        <input type="date" v-model="by" id="by">
       </div>
       <input type="submit">
       <br>
@@ -43,49 +52,78 @@ const isNotice = ref(false)
 const category = ref(null)
 const movieId = ref(null)
 const movieName = ref(null)
+const by = ref(null)
+const job = ref(null)
+const applicant = ref([])
+const back = ref(history.state.back)
+
 
 // 영화 평론에서 넘어왔다면 실행
 if (history.state.movie_id) {
-  console.log(history.state.movie_id)
-  console.log(history.state.movie_name)
   console.log('영화 평론')
   movieId.value = history.state.movie_id
   movieName.value = history.state.movie_name
   category.value = '영화'
+} else if (back.value == '/job') {
+  category.value = '구인공고'
+  movieId.value = 1
 }
 
 const createArticle = function () {
     if(category.value === '공지') {
       isNotice.value = true
-    }
-    axios({
-      method: 'post',
-      url: `${store.API_URL}/api/v1/articles/create/`,
-      data: {
-        title: title.value,
-        content: content.value,
-        is_notice: isNotice.value,
-        category: category.value,
-        movie: movieId.value
-      },
-      headers: {
-        Authorization : `Token ${store.token}`
-      }
-    })
-      .then(response => {
-        console.log(response.data)
-        if(isNotice.value) {
-          router.replace({ name: 'notice'})
-        } else if(movieId.value){
-          router.push({ name: 'movie_detail', params: { 'id': movieId.value }})
-        } else {
-          router.replace({ name: 'community'})
+    } else if(category.value !== '구인공고'){
+      axios({
+        method: 'post',
+        url: `${store.API_URL}/api/v1/articles/create/`,
+        data: {
+          title: title.value,
+          content: content.value,
+          is_notice: isNotice.value,
+          category: category.value,
+          movie: movieId.value
+        },
+        headers: {
+          Authorization : `Token ${store.token}`
         }
-        movieId.value = null
       })
-      .catch(error => {
-        console.log(error)
+        .then(response => {
+          console.log(response.data)
+          if(isNotice.value) {
+            router.replace({ name: 'notice'})
+          } else if(movieId.value){
+            router.push({ name: 'movie_detail', params: { 'id': movieId.value }})
+          } else {
+            router.replace({ name: 'community'})
+          }
+          movieId.value = null
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    } else {
+      axios({
+        method: 'post',
+        url: `${store.API_URL}/api/v1/articles/job/create/`,
+        data: {
+          title: title.value,
+          content: content.value,
+          job: job.value,
+          by: by.value,
+          applicant: applicant.value
+        },
+        headers: {
+          Authorization : `Token ${store.token}`
+        }
       })
+        .then(response => {
+          console.log(response.data)
+          router.replace({ name: 'job'})
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
   }
 
 </script>

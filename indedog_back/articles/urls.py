@@ -11,5 +11,7 @@ urlpatterns = [
     path('movie/<int:movie_pk>/comments/', views.comment_create_movie),
     path('movie/<int:comment_pk>/comments/update/', views.comment_update_movie),
     path('cinema/<str:cinema_name>/comments/', views.comment_create_cinema),
+    path('job/', views.job),
+    path('job/create/', views.job_create),
     path('notices/', views.notice),
 ]
