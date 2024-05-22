@@ -1,7 +1,6 @@
 <template>
-    <div class="row align-items-center container">
-        <h1>CinemaView</h1>
-        <h2>우선 지도를 배치하고, 해당 위치의 마크를 누르면 Detail로 연결합시다.</h2>
+    <div class="row align-items-center">
+        <h1>현재 영화를 관람할 수 있는 상영관 및 영화 목록</h1>
         <div>
             <CinemaMap/>
         </div>

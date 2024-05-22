@@ -1,9 +1,9 @@
 <template>
     <div class = "align-items-center" style="text-align: center;">
+        <h1>오늘의 추천 영화!</h1>
         <div style="text-align: center;">
-            <h1>오늘의 추천 영화!</h1>
-            <div>
-                <div id="carousel_today_recommend" class="carousel slide" data-bs-ride="carousel" style="margin: auto;">
+            <div class="row">
+                <div id="carousel_today_recommend" class="carousel slide col-6" data-bs-ride="carousel" style="margin: auto;">
                     <div class="carousel-inner">
                         <template v-for="(tdmovie, index) in todayMovie"
                         :key="tdmovie.id">
@@ -32,7 +32,7 @@
     </div>
 </div>
 </div>
-<div>
+        <div>
             <h4>
                 오늘은 석가탄신일! 불교와 관련된 독립영화 어때요?
             </h4>

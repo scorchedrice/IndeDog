@@ -18,7 +18,11 @@
 
     <template #addons>
       <Navigation />
-      <Pagination />
+      <!-- <Pagination /> -->
+      <div class="progress" role="progressbar" aria-label="Warning example" :aria-valuenow="percentPicked" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar text-bg-warning" id="percentBar">{{percentPicked}}%</div>
+      </div>
+
     </template>
   </Carousel>
   <div style="text-align: center;" v-if="cntPicked == 9">
@@ -41,17 +45,21 @@ const picked=ref(['','','','','','','','','',''])
 const four = ref([4,3,2,1])
 const cntPicked = ref(0)
 const showAns = ref(false)
+const percentPicked = ref(0)
+const percentBar = document.querySelector('#percentBar')
 
 const pushPicked = function (event) {
   picked.value[event.target.id] = event.target.innerText
   cntPicked.value = 0
   for (const pick of picked.value) {
-    
     if (pick != '') {
       cntPicked.value++
       console.log(cntPicked.value)
     }
   }
+  percentPicked.value = Math.ceil((cntPicked.value / 9) * 100)
+  console.log(percentPicked.value + '%')
+  document.querySelector('#percentBar').style.width = percentPicked.value + "%"
   if (cntPicked.value === 9) {
     console.log('complete')
   }

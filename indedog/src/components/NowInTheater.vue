@@ -1,5 +1,5 @@
 <template>
-    <header style="border: 5px solid black;">
+    <header>
         <div>
             <h1>현재 상영중</h1>
             <MarqueeNowInTheater/>

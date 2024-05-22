@@ -14,6 +14,8 @@ import vue3StarRatings from "vue3-star-ratings"
 import 'wowerlay/style.css'
 // marquee
 import Vue3Marquee from 'vue3-marquee'
+// Avatar
+
 
 const pinia = createPinia()
 const app = createApp(App)
@@ -24,5 +26,6 @@ pinia.use(piniaPluginPersistedstate)
 app.use(pinia)
 app.use(router)
 app.component("vue3-star-ratings", vue3StarRatings)
+
 app.use(Vue3Marquee)
 app.mount('#app')

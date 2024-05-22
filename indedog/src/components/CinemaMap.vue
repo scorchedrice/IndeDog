@@ -3,8 +3,7 @@
     <div style="text-align: center;"></div>
     <div>
     <b-form-rating v-model="value"></b-form-rating>
-    <p class="mt-2">Value: {{ value }}</p>
-    <p style="text-align: right; font-family: euljiro;">test</p>
+    <br>
   </div>
 </template>
 

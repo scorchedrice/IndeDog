@@ -5,7 +5,7 @@
       <Subtitle/> 
     </div>
     <br>
-    <div class="container-sm" style="width: 80%;">
+    <div class="container-sm" style="width: 90%;">
       <div>
         <RouterView />
         <div id="menu" style="z-index: 99; position: relative;">
@@ -35,8 +35,15 @@ const menuHide = function () {
 }
 </script>
 <style scoped>
+@import '/node_modules/flowbite-vue/dist/index.css';
 @import '@/assets/font/font.css';
 #HomePage {
   font-family: 'euljiro';
+}
+h1, h2 {
+ font-family: 'hanna' 
+}
+h3, h4, h5, h6, p, button, div {
+  font-family: 'hanna_air'
 }
 </style>

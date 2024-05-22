@@ -1,11 +1,13 @@
 <template>
     <header v-if="isDeskTop">
-        <div class="row">
-            <div class="col-8"  style="border: solid black 5px;">
+        <div class="row align-items-center">
+            <div class="col-6">
                 <TodayRecommend />
             </div>
-            <div class="col-4" style="border: solid black 5px;">
-                <AIRecommend/>
+            <div class="col-6">
+                <div>
+                    <AIRecommend/>
+                </div>
             </div>
         </div>
         <br>
@@ -13,7 +15,7 @@
             <NowInTheater/>
         </div>
         <br>
-        <div style="border: solid black 5px;">
+        <div>
             <Notice/>
         </div>
         
@@ -46,6 +48,7 @@ import AIRecommend from "@/components/AIRecommend.vue"
 import {ref} from 'vue'
 import { useCounterStore } from '@/stores/counter'
 import { onMounted } from 'vue'
+import { FwbAvatar } from "flowbite-vue"
 
 const store = useCounterStore()
 
