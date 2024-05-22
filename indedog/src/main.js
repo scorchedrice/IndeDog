@@ -12,8 +12,12 @@ import router from './router'
 import vue3StarRatings from "vue3-star-ratings"
 // marquee
 import Vue3Marquee from 'vue3-marquee'
-// Avatar
+// Pagination
+    // import the package
+import VueAwesomePaginate from "vue-awesome-paginate";
 
+    // import the necessary css file
+import "vue-awesome-paginate/dist/style.css";
 
 const pinia = createPinia()
 const app = createApp(App)
@@ -24,6 +28,6 @@ pinia.use(piniaPluginPersistedstate)
 app.use(pinia)
 app.use(router)
 app.component("vue3-star-ratings", vue3StarRatings)
-
+app.use(VueAwesomePaginate)
 app.use(Vue3Marquee)
 app.mount('#app')

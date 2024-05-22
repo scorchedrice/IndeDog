@@ -2,7 +2,7 @@
       <div style="text-align: center;">
         
       
-        <RouterLink :to="{name: 'ai_recommend'}">
+        <RouterLink :to="{name: 'intro_ai'}">
             <img src="@/assets/icon/ai_icon.gif" alt="" style="width: 50px;">
         </RouterLink>
       </div>
@@ -12,9 +12,7 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue'
   import {RouterLink} from 'vue-router'
-  import axios from 'axios'
 
   </script>
   

@@ -36,7 +36,21 @@
                         <li class="list-group-item">Director: {{ movie.director }}</li>
                         <li class="list-group-item">Genre: {{ movie.genre }}</li>
                         <li class="list-group-item">Running Time: {{ movie.length }}</li>
-                        <Keyword :keyword-list="movie.keyword" />
+                        <hr>
+                        <div class="btn-group dropend">
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Keywords
+                        </button>
+                        <ul class="dropdown-menu" style="width: 20vh">
+                            <div 
+                        v-for="keyword in movie.keywords"
+                        >
+                            <div v-if="keyword != ''">
+                                <h6 @click="goMovieDetail(keyword)">#{{ keyword }}</h6>
+                            </div>
+                        </div>
+                        </ul>
+                        </div>
                     </div>
                 </div>
                 <br>
@@ -44,15 +58,21 @@
             </div>
             </div>
         </div>
-        <fwb-pagination style="text-align: center" v-model="currentPage" :total-pages="totalPages" previous-label="⬅️" next-label="➡️"></fwb-pagination>
+        <br>
+        <div style="text-align: center;">
+        <div class="movie-page">
+            <vue-awesome-paginate
+            :total-items="paginationMovies.length"
+            v-model="currentPage"
+            />
+        </div>
+    </div>
 </template>
 
 <script setup>
 import { useRoute, useRouter, RouterLink } from 'vue-router'
 import { useCounterStore } from '@/stores/counter.js'
-import { FwbPagination } from 'flowbite-vue'
 import { ref, computed } from 'vue'
-import Keyword from '@/components/KeywordDetail.vue'
 const store = useCounterStore()
 const route = useRoute()
 const router = useRouter()
@@ -64,7 +84,11 @@ const movieResult = function (category) {
     .then(() => {
     window.location.reload()});
 }
-
+const goMovieDetail = function (keyword) {
+    router.push({name: 'movie_search_result', params:{'category': '키워드', 'name':keyword}})
+    .then(() => {
+    window.location.reload()});
+}
 console.log(route.params)
 if (route.params.category === '제목'){
     for (const movie of store.movies){   
@@ -116,6 +140,35 @@ const paginationMovies = computed(()=>{
 });
 </script>
 
-<style scoped>
+<style>
+
+.movie-page .pagination-container {
+  column-gap: 10px;
+}
+.paginate-buttons {
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  
+  cursor: pointer;
+  background-color: rgb(242, 242, 242);
+  border: 1px solid rgb(217, 217, 217);
+  color: black;
+}
+.movie-page .paginate-buttons:hover {
+  background-color: #d8d8d8;
+}
+.movie-page .active-page {
+  background-color: #3498db;
+  border: 1px solid #3498db;
+  color: white;
+}
+.movie-page .active-page:hover {
+  background-color: #2988c8;
+}
+.movie-page .back-button:active,
+.movie-page .next-button:active {
+  background-color: #c4c4c4;
+}
 
 </style>

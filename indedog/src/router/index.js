@@ -14,6 +14,7 @@ import { useCounterStore } from '@/stores/counter'
 import CinemaInfoView from '@/views/CinemaInfoView.vue'
 import NoticeView from '@/views/NoticeView.vue'
 import CommunityUpdate from '@/components/CommunityUpdate.vue'
+import IntroAI from '@/views/IntroAI.vue'
 import AIRecommendDetail from '@/views/AIRecommendDetail.vue'
 import UserpageView from '@/views/UserpageView.vue'
 
@@ -96,6 +97,11 @@ const router = createRouter({
       path: '/notice',
       name: 'notice',
       component: NoticeView
+    },
+    {
+      path: '/intro_ai',
+      name: 'intro_ai',
+      component: IntroAI
     },
     {
       path: '/ai_recommend',

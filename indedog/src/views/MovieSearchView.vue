@@ -57,15 +57,19 @@
         </div>
     </div>
     <br>
-    <div id="pagination">
-        <fwb-pagination v-model="currentPage" :total-pages="totalPages" previous-label="⬅️" next-label="➡️"></fwb-pagination>
+    <div style="text-align: center;">
+        <div class="movie-page">
+            <vue-awesome-paginate
+            :total-items="movies.length"
+            v-model="currentPage"
+            />
+        </div>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useCounterStore } from '@/stores/counter'
 import { RouterLink, RouterView, useRouter } from 'vue-router'
-import { FwbPagination } from 'flowbite-vue'
 import { ref, computed } from 'vue'
 
 const text = ref('')
@@ -94,10 +98,9 @@ const paginationMovies = computed(()=>{
     console.log('pageChange')
     return movies.slice(start,end);
 });
-
 </script>
 
-<style scoped>
+<style>
 @import '@/assets/font/font.css';
 h4,h3 {
     font-family: "hanna";
@@ -105,4 +108,34 @@ h4,h3 {
 * {
     font-family: "hanna_air"
 }
+
+.movie-page .pagination-container {
+  column-gap: 10px;
+}
+.paginate-buttons {
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  
+  cursor: pointer;
+  background-color: rgb(242, 242, 242);
+  border: 1px solid rgb(217, 217, 217);
+  color: black;
+}
+.movie-page .paginate-buttons:hover {
+  background-color: #d8d8d8;
+}
+.movie-page .active-page {
+  background-color: #3498db;
+  border: 1px solid #3498db;
+  color: white;
+}
+.movie-page .active-page:hover {
+  background-color: #2988c8;
+}
+.movie-page .back-button:active,
+.movie-page .next-button:active {
+  background-color: #c4c4c4;
+}
+
 </style>
