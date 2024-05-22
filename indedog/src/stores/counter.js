@@ -19,6 +19,7 @@ export const useCounterStore = defineStore('counter', () => {
   const cinemaRecentMovie = ref([])
   const isLoading = ref(true)
   const userData = ref(null)
+  const userList = ref([])
   // const token = ref(null)
   // const isLogin = computed(() => {
   //   if (token.value === null) {
@@ -131,6 +132,8 @@ export const useCounterStore = defineStore('counter', () => {
           url: `${API_URL}/api/v1/custom/`,
         })
           .then(res => {
+            userList.value = []
+            userList.value = res.data
             for(const data in res.data){
               if (res.data[data].username === loginUser.value){
                 if (res.data[data].is_staff) {
@@ -184,5 +187,5 @@ export const useCounterStore = defineStore('counter', () => {
   }
   
 
-  return { movies, getArticles, API_URL, articles, signUp, logIn, token, loginUser, getCoord, cinemas, logOut, isStaff, recentMovies, loginPk, isLoading, userData }
+  return { movies, getArticles, API_URL, articles, signUp, logIn, token, loginUser, getCoord, cinemas, logOut, isStaff, recentMovies, loginPk, isLoading, userData, userList }
 }, { persist: true })

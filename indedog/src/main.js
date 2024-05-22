@@ -10,8 +10,6 @@ import router from './router'
 
 // star rating
 import vue3StarRatings from "vue3-star-ratings"
-// popover
-import 'wowerlay/style.css'
 // marquee
 import Vue3Marquee from 'vue3-marquee'
 // Avatar

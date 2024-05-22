@@ -54,10 +54,12 @@
                 <br>
                 <hr>
             </div>
-            </div>
         </div>
-        <br>
+    </div>
+    <br>
+    <div id="pagination">
         <fwb-pagination v-model="currentPage" :total-pages="totalPages" previous-label="⬅️" next-label="➡️"></fwb-pagination>
+    </div>
 </template>
 
 <script setup>
@@ -65,7 +67,6 @@ import { useCounterStore } from '@/stores/counter'
 import { RouterLink, RouterView, useRouter } from 'vue-router'
 import { FwbPagination } from 'flowbite-vue'
 import { ref, computed } from 'vue'
-import Keyword from '@/components/KeywordDetail.vue'
 
 const text = ref('')
 const ctName = ref('')

@@ -16,7 +16,7 @@
             </div>
         </Vue3Marquee>
     </div>
-    <p>
+    <p style="text-align: right;">
         마우스를 올리시면 애니메이션이 멈춥니다.
     </p>
 </template>

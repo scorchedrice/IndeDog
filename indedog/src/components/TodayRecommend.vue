@@ -1,6 +1,6 @@
 <template>
     <div class = "align-items-center" style="text-align: center;">
-        <h1>오늘의 추천 영화!</h1>
+        <h2>운영자의 선택 !</h2>
         <div style="text-align: center;">
             <div class="row">
                 <div id="carousel_today_recommend" class="carousel slide col-6" data-bs-ride="carousel" style="margin: auto;">
@@ -34,9 +34,9 @@
 </div>
         <div>
             <h4>
-                오늘은 석가탄신일! 불교와 관련된 독립영화 어때요?
+                5월 22일은 국제 생물 다양성의 날! 자연을 다루는 영화는 어때요?
             </h4>
-            <p class="keyword">#불교</p>
+            <p class="keyword">#자연, #생명</p>
         </div>   
     </div>
 </template>
@@ -52,7 +52,7 @@ const movieList = store.movies
 const todayMovie = ref([])
 
 for (const movie of movieList) {
-    if (movie.keywords.includes('불교')){
+    if (movie.keywords.includes('자연') || movie.keywords.includes('생명')){
         todayMovie.value.push(movie)
     }
 }

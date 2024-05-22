@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h1>추천을 많이 받은 게시판</h1>
         <br>
         <article v-for="article in articleList"
         :key="article.id">

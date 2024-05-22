@@ -1,5 +1,6 @@
 <template>
     <header v-if="isDeskTop">
+        <h1>오늘은 무슨 재미있는 것들이 있을까?</h1>
         <div class="row align-items-center">
             <div class="col-6">
                 <TodayRecommend />
@@ -7,6 +8,10 @@
             <div class="col-6">
                 <div>
                     <AIRecommend/>
+                </div>
+                <div>
+                    <!-- <h1>여기에 베스트 게시물을 전시해볼까용</h1> -->
+                    <BestArticle/>
                 </div>
             </div>
         </div>
@@ -49,6 +54,7 @@ import {ref} from 'vue'
 import { useCounterStore } from '@/stores/counter'
 import { onMounted } from 'vue'
 import { FwbAvatar } from "flowbite-vue"
+import BestArticle from '@/components/community/BestArticle.vue'
 
 const store = useCounterStore()
 
