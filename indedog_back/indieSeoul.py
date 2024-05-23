@@ -4,30 +4,7 @@ import pprint
 import json
 import re
 
-
-def get_geocode_info(address, api_key):
-    url = "https://maps.googleapis.com/maps/api/geocode/json"
-    params = {
-        "address": address,
-        "key": api_key
-    }
-    response = requests.get(url, params=params)
-
-    if response.status_code == 200:
-        data = response.json()
-        if data.get("results"):
-            result = data["results"][0]
-            formatted_address = result.get("formatted_address")
-            location = result.get("geometry", {}).get("location", {})
-            latitude = location.get("lat")
-            longitude = location.get("lng")
-            return {
-                "formatted_address": formatted_address,
-                "latitude": latitude,
-                "longitude": longitude
-            }
-    return None
-
+# 인디서울 현재상영영화 / 상영관 크롤링
 
 address = ''
 api_key = 'AIzaSyB4iMRT75dIyGna5K1Rq9MSr6X7eUm-__E'

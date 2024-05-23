@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-auto">
                     <span id="IdHelpInline">
-                        <button @click="checkId">
+                        <button @click.prevent="checkId">
                             중복확인
                         </button>
                     </span>
@@ -76,7 +76,6 @@ const passwordWarning = ref(false)
 const passwordSame = ref(null)
 
 const signUp = function () {
-    console.log(username.value)
     const payload = {
       username: username.value,
       password1: password1.value,
@@ -107,8 +106,8 @@ const checkPasswordLength = function () {
 }
 
 const checkPasswordSame = function () {
-    console.log(password1.value)
-    console.log(password2.value)
+    // console.log(password1.value)
+    // console.log(password2.value)
     if (password1.value == password2.value) {
         passwordSame.value = true
     } else {
@@ -119,4 +118,8 @@ const checkPasswordSame = function () {
 </script>
 
 
-<style scoped></style>
+<style scoped>
+input[type=password]{
+        font-family:"굴림";
+}
+</style>

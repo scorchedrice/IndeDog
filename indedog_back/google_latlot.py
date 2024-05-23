@@ -4,6 +4,8 @@ import pprint
 import json
 import re
 
+# 구글 지도 API를 이용한 상영관 좌표 불러오기
+
 address = '서울특별시교육청 강서도서관'
 api_key = 'AIzaSyB4iMRT75dIyGna5K1Rq9MSr6X7eUm-__E'
 

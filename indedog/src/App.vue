@@ -4,7 +4,7 @@
       <img src="@/assets/icon/dog_loading1.gif" alt="">
     </div>
   </div>
-  <div v-else id="app">
+  <div class="mb-5" v-else id="app">
     <div style="text-align: center; margin-top: 20px;">
       <h1 id="HomePage" @click.prevent="goHomePage">인디독</h1>
       <Subtitle/> 
@@ -19,10 +19,12 @@
     </div>
   </div>
   </div>
-  <footer class="pt-3 mt-4 text-body-secondary border-top"
-  style="text-align: center;">
-      SSAFY 11기 1학기 최종 프로젝트, 배원빈 / 한지웅
-    </footer>
+  <div class="container pt-5">
+    <footer class="text-body-secondary border-top"
+    style="text-align: center;">
+        SSAFY 11기 1학기 최종 프로젝트, 배원빈 / 한지웅
+      </footer>
+  </div>
 </template>
 
 <script setup>
@@ -70,4 +72,5 @@ template {
 #loading-img {
   text-align: center;
 }
+
 </style>

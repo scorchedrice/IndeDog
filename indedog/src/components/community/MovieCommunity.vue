@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>영화평론 (MovieCommunity)</h2>
+        <h2>영화 (MovieCommunity)</h2>
         <!-- <select name="category" id="category" v-model="category">
             <option value="전체">전체</option>
             <option value="영화">영화</option>

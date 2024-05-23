@@ -15,7 +15,7 @@
                     <button v-if="check(job.applicant)" class="btn btn-success" id="applicant">
                         등록완료/ 변경
                     </button>
-                    <button v-if="store.loginUser == job.user" class="btn btn-info" id="applicant">
+                    <button v-if="store.loginUser == job.user" class="btn" id="applicant" style="border: solid powderblue;">
                         공고 수정
                     </button>
                 </div>

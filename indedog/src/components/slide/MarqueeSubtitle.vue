@@ -12,5 +12,5 @@
 <script setup>
 import { Vue3Marquee } from 'vue3-marquee'
 
-const helloArray = ['안녕하세요','hello','こんにちは ','bonjour ',]
+const helloArray = ['좌상단 강아지바 클릭!']
 </script>

@@ -6,19 +6,18 @@
         <h2>[{{ jobData.job }}] {{ jobData.title }}</h2>
         <h4>~ {{ jobData.by }}</h4>
         <hr>
-        <hr>
         <h5>{{ jobData.content }}</h5>
         <h6>작성일 : {{ jobData.created_at.slice(0,10) }}</h6>
         <button v-if="store.loginUser && store.loginUser != jobData.user && !isSubmit" class="btn btn-primary" @click.prevent="submitApp(1)">
             지원넣기
         </button>
-        <button v-if="isSubmit" class="btn btn-warning" @click.prevent="submitApp(2)">
+        <button v-if="store.loginUser && store.loginUser != jobData.user && isSubmit" class="btn btn-warning" @click.prevent="submitApp(2)">
             지원취소
         </button>
-        <button v-if="store.loginUser == jobData.user" class="btn btn-danger" @click.prevent="deleteApp">
+        <button v-if="store.loginUser == jobData.user" style="border: solid gray;" class="btn" @click.prevent="deleteApp">
             공고 내리기
         </button>
-        <button v-if="store.loginUser == jobData.user" class="btn btn-primary" @click.prevent="updateApp">
+        <button v-if="store.loginUser == jobData.user" style="border: solid ;" class="ms-4 btn" @click.prevent="updateApp">
             공고 수정
         </button>
         <h2>
@@ -70,8 +69,9 @@ onMounted (() => {
                     applicantName.value.push(user.username)
                     break
                 }
-                if (person == store.loginPk)
-                { isSubmit.value = true}
+            }
+            if (person == store.loginPk) { 
+                isSubmit.value = true
             }
         }
         console.log(applicantName.value)

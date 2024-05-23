@@ -35,7 +35,7 @@
             
             <div class="form-floating">
               <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
-              v-model="content" @input="console.log(content)"></textarea>
+              v-model="content"></textarea>
               <label for="floatingTextarea">Comments</label>
             </div>
             <input type="submit" value="댓글달기">
@@ -89,7 +89,6 @@ onMounted(() => {
     url: `${store.API_URL}/api/v1/articles/${route.params.id}/`
   })
     .then((response) => {
-      console.log(response.data)
       article.value = response.data
       likeusersList.value = response.data.like_users
       if (likeusersList.value.includes(store.loginPk)) {
@@ -138,7 +137,6 @@ const createComment = function(article_id) {
         window.alert('로그인을 하셔야 댓글등록이 가능해요!')
         return
     }
-    console.log(content)
   axios({
     method: 'post',
     url: `${store.API_URL}/api/v1/articles/${article_id}/comments/`,
@@ -163,6 +161,10 @@ const createComment = function(article_id) {
 
 
 const upLike = function(article_pk, type) {
+        if(!store.loginUser){
+              window.alert('로그인을 하셔야해요!')
+              return
+          }
         if (type === 1) {
             likeusersList.value.push(store.loginPk)
             console.log(likeusersList.value)

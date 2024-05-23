@@ -7,6 +7,8 @@ import re
 movie_data = []
 i = 1
 
+# 인디그라운드 독립영화 DB 크롤링
+
 while i <5501:
   url = f'https://indieground.kr/indie/movieLibraryView.do?seq={i}&type=D'
   response = requests.get(url, verify=True)

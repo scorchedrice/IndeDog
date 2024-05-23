@@ -96,6 +96,7 @@ const goMovieDetail = function (keyword) {
     window.location.reload()});
 }
 console.log(route.params)
+console.log(store.movies)
 if (route.params.category === '제목'){
     for (const movie of store.movies){   
         if (movie.title.includes(route.params.name) || movie.title_en.includes(route.params.name)){
@@ -111,7 +112,7 @@ else if (route.params.category === '감독'){
     }
 }
 else if (route.params.category === '키워드'){
-    for (const movie of store.movies){  
+    for (const movie of store.movies){
         if (movie.keywords.includes(route.params.name)){
             currentMovies.value.push(movie)
         }

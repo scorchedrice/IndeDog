@@ -10,8 +10,9 @@
         <br>
         <div style="height: 54%;">
             <hr>
-            <div v-for="article in articles" style="position: flex; ">
-                <div v-if="articleLatest != article">
+            <div v-for="article in articles" style="position: flex;"
+            :key="article.id">
+                <div v-if="articlesLatest != article">
                     <RouterLink :to="{ name: 'CommunityDetailView', params: { 'id': article.id }}">
                         {{ article.title }} 
                     </RouterLink>
@@ -54,7 +55,6 @@ if(store.articles){
 if(articles.value.length){
     articlesLatest.value = articles.value[articles.value.length-1]
 }
-console.log(articlesLatest.value)
 
 </script>
 

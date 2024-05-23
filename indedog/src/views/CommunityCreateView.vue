@@ -8,7 +8,6 @@
         <div class="form-floating">
           <select class="form-select form-select-lg mb-3" name="category" id="category" v-model="category">
             <option value="영화">영화</option>
-            <option value="상영관">상영관</option>
             <option value="자유">자유</option>
             <option v-if="store.isStaff" value="공지">공지</option>
           </select>

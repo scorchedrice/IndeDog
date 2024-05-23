@@ -39,8 +39,10 @@
             코멘트들...
         </h1>
         <div v-for="comment in comments">
-            <div>
+            <div class="d-flex">
+                <h2 class="me-4">{{ comment.user }}</h2>
                 <vue3-star-ratings
+                    class="me-3"
                     v-model="comment.point"
                     :starSize="20"
                     starColor="#ff9800"
@@ -48,9 +50,9 @@
                     :numberOfStars="5"
                     :disableClick="true"
                     />
+                {{ comment.point }} / 5.0
             </div>
-            {{ comment.content }}
-            {{ comment.user }}
+            <p class="ms-2">{{ comment.content }}</p>
         </div>
 </template>
   

@@ -128,5 +128,7 @@ const goSignUp = function () {
 </script>
 
 <style scoped>
-
+input[type=password]{
+        font-family:"굴림";
+}
 </style>

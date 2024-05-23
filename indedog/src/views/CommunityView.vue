@@ -1,5 +1,7 @@
 <template>
-    <div>
+    <template v-if="isLoading">
+    </template>
+    <div v-if="!isLoading">
         <div class="row align-items-md-stretch">
       <div class="col-md-6">
         <div class="h-100" style="border: solid black 2px;" >
@@ -35,9 +37,6 @@
         <MovieCommunity/>
     </div>
     <br>
-    <div style="border: solid black 2px">
-        <TheaterCommunity/>
-    </div>
     <br>
     <div style="border: solid black 2px;">
         <FreeCommunity/>
@@ -45,7 +44,7 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useCounterStore } from '@/stores/counter'
 import { RouterLink } from 'vue-router'
 import BestArticle from '@/components/community/BestArticle.vue'
@@ -53,9 +52,13 @@ import MovieCommunity from '@/components/community/MovieCommunity.vue'
 import TheaterCommunity from '@/components/community/TheaterCommunity.vue'
 import FreeCommunity from '@/components/community/FreeCommunity.vue'
 const store = useCounterStore()
+const isLoading = ref(true)
 
 onMounted(() => {
   store.getArticles()
+  setTimeout(() => {
+    isLoading.value = false
+  }, 500);
 })
 </script>
 

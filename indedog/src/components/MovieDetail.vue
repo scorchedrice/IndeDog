@@ -1,9 +1,6 @@
 <template>
     <div v-if="isLoading"><h1>불러오는중...</h1></div>
     <div v-if="!isLoading">
-    <a :href="goBack">
-        뒤로가기
-    </a>
     <h1>영화 정보</h1>
     <div class="row align-items-center">
         <img :src="curMovie.img_src" alt="movie.poster" class="col-4">
@@ -152,9 +149,7 @@ const content = ref(null)
 const contentUpdate = ref(null)
 const scoreUpdate = ref(null)
 const updateNow = ref(false)
-const goBack = function () {
-    window.history.back()
-}
+
 
 const updateComment = ref(false)
 const route = useRoute()
@@ -202,7 +197,6 @@ const fetchData = async () => {
 }
     for(const comment of curMovie.value.comment_set){
         sumRate.value += comment.point
-        console.log(comment.point)
     }
     score.value = (sumRate.value / curMovie.value.comment_set.length).toFixed(2)
 
@@ -211,7 +205,6 @@ const fetchData = async () => {
         url: `${store.API_URL}/api/v1/articles/`
     })
     .then(res => {
-        console.log(res)
         articles.value = []
         for(const article of res.data){
             if(curMovie.value.id === article.movie){
@@ -269,7 +262,6 @@ const commentDelete = function (comment_id, idx) {
         }
     })
       .then(res => {
-        console.log(curMovie.value.comment_set.length)
         length.value = curMovie.value.comment_set.length
         curMovie.value.comment_set.splice(length.value-1-idx, 1)
         console.log('삭제완료')
@@ -299,8 +291,8 @@ const commentUpdatePush = function (comment_id, idx) {
         }
     })
       .then(res => {
-        console.log(curMovie.value.comment_set[idx])
-        curMovie.value.comment_set[idx].content = contentUpdate.value
+        const length = curMovie.value.comment_set.length
+        curMovie.value.comment_set[length-1-idx].content = contentUpdate.value
         console.log('수정완료')
         fetchData()
         contentUpdate.value = null
@@ -314,13 +306,16 @@ const commentUpdatePush = function (comment_id, idx) {
 
 // movies/<int:movie_pk>/like/
     const upLike = function(movie_pk, type) {
+        console.log(likeusersList.value)
+        if (!store.loginPk) {
+            window.alert('로그인을 해주세요!')
+            return
+        }
         if (type === 1) {
             likeusersList.value.push(store.loginPk)
             console.log(likeusersList.value)
-            isLike.value = !isLike.value
         } else {
             likeusersList.value = likeusersList.value.filter(user => user !== store.loginPk)
-            isLike.value = !isLike.value
         }
         axios({
             method: 'put',
@@ -333,11 +328,21 @@ const commentUpdatePush = function (comment_id, idx) {
             }
         })
         .then(res => {
+            if (type === 1) {
+                isLike.value = true
+            } else {
+                isLike.value = false
+            }
             console.log('좋아요 수정완료')
-            console.log(res.data)
             fetchData()
         })
         .catch(err => {
+            if (type === 1) {
+            likeusersList.value = likeusersList.value.filter(user => user !== store.loginPk)
+        } else {
+            likeusersList.value.push(store.loginPk)
+        }
+            window.alert('오류입니다.')
             console.log(err)
         })
     }
