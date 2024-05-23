@@ -1,15 +1,15 @@
 <template>
     <header v-if="isDeskTop">
         <h1>오늘은 무슨 재미있는 것들이 있을까?</h1>
-        <div class="row align-items-center">
-            <div class="col-6">
+        <div class="row align-items-center" style="border-bottom: solid black 2px; border-top: solid black 2px;">
+            <div class="col-6" style="border-right: solid black 2px;">
                 <TodayRecommend />
             </div>
             <div class="col-6">
-                <div>
+                <div style="height: 100px; border-bottom: solid black 2px">
                     <AIRecommend/>
                 </div>
-                <div>
+                <div style="height: 400px;">
                     <!-- <h1>여기에 베스트 게시물을 전시해볼까용</h1> -->
                     <BestArticle/>
                 </div>

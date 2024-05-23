@@ -17,7 +17,24 @@
                 <h6>Genre: {{ movie.genre }}</h6>
                 <h6>Running Time: {{ movie.length }}</h6>
                 <div>
-                    <!-- ------------- -->
+                    <hr>
+                    <!-- 키워드 -->
+                    <div class="btn-group dropend">
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            키워드
+                        </button>
+                        <ul class="dropdown-menu" style="width: 20vh">
+                            <div 
+                        v-for="keyword in movie.keywords"
+                        >
+                            <div v-if="keyword != ''">
+                                <h6 @click="goSearchInfo(keyword)">{{ keyword }}</h6>
+                            </div>
+                        </div>
+                        </ul>
+                    </div>
+                    <!-- ------ -->
+                    <!-- 상영관 -->
                     <hr>
                     <div class="btn-group dropend">
                         <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -34,7 +51,7 @@
                         </ul>
                     </div>
                     <!-- ------------- -->
-                        
+                    
                 </div>
             </div>
         </div>
@@ -58,6 +75,9 @@ const recentMovie = store.recentMovies
 const cinemaList = ref({})
 const goCinemaInfo = function (cinema) {
     gorouter.push({name:'cinema_info', params: {'address': cinema}})
+}
+const goSearchInfo = function (keyword) {
+    gorouter.push({name: 'movie_search_result', params:{'category': '키워드', 'name':keyword}})
 }
 
 onMounted(() => {

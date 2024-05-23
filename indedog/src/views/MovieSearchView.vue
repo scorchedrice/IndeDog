@@ -1,20 +1,22 @@
 <template>
     <div>
-        <form @submit.prevent="movieResult(ctName)" style="text-align: right">
-            <select v-model="ctName">
-                <option value="" selected>카테고리선택</option>
-                <option value="감독">감독</option>
-                <option value="제목">제목</option>
-                <option value="키워드">키워드</option>
-                <option value="제작년도">제작년도</option>
-                <option value="장르">장르</option>
-            </select>
-            <input type="text" v-model="text">
-            <input type="submit" value="검색">
-        </form>
-
-        <br>
-        <div class="row align-items-center" style="border: 2px solid black">
+        <div display="flex">
+            <form @submit.prevent="movieResult(ctName)" style="display: flex; width: 500px; margin-left: auto">
+                <div class="input-group input-group-sm mb-3">
+                    <select class="form-select" v-model="ctName" style="width: 140px;">
+                        <option value="" selected>카테고리 선택</option>
+                        <option value="감독">감독</option>
+                        <option value="제목">제목</option>
+                        <option value="키워드">키워드</option>
+                        <option value="제작년도">제작년도</option>
+                        <option value="장르">장르</option>
+                    </select>
+                    <input type="text"  class="form-control" v-model="text" style="width: 300px">
+                </div>
+                <input type="submit" value="검색" style="width: 60px; height: 100%;">
+            </form>
+        </div>
+        <div class="row align-items-center">
             <div
             v-for="movie in paginationMovies"
             :key="movie.id" class="col-6">
@@ -62,6 +64,8 @@
             <vue-awesome-paginate
             :total-items="movies.length"
             v-model="currentPage"
+            :items-per-page="6"
+            :max-pages-shown="5"
             />
         </div>
     </div>
@@ -78,7 +82,6 @@ const router = useRouter()
 
 const store = useCounterStore()
 const movies = store.movies
-const searchedMovies = ref([])
 
 const movieResult = function (category) {
     router.push({ name: 'movie_search_result', params: { 'category': category, 'name': text.value }})

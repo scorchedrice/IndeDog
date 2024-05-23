@@ -62,7 +62,7 @@ for (const movie of movieList) {
 
 <style scoped>
 @import '@/assets/font/font.css';
-h1 {
+h1,h2 {
     font-family: "hanna";
 }
 * {

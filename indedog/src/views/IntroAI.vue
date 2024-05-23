@@ -12,18 +12,18 @@
     <div class="row align-items-md-stretch">
       <div class="col-md-6">
         <div class="h-100 p-5 text-bg-dark rounded-3">
-          <h2>편하게 선택하세요</h2>
+          <h3>편하게 선택하세요</h3>
           <br>
           <p>제가 여러가지 질문을 드리면, 이에 대한 생각을 선택지를 통해 제게 알려주세요.</p>
           <br>
-          <p>질문마다 1부터 4가 적힌 선택지를 드려요.</p>
+          <h3>질문마다 1부터 4가 적힌 선택지를 드려요.</h3>
           <p>제가 드린 질문이 마음에 들거나 공감(혹은 이해)한다면 높은 숫자를 선택해주시고,</p>
           <p>질문이 마음에 들지 않거나 공감(혹은 이해)하기 어렵다면 낮은 숫자를 선택해주세요.</p>
         </div>
       </div>
       <div class="col-md-6">
         <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-          <h2>Example</h2>
+          <h3>Example</h3>
           <br>
           <h5>예시. 친구가 평양냉면을 먹으러 가자고 권유한다면 나는</h5>
           <hr>
