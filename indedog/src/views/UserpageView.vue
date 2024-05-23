@@ -29,15 +29,25 @@
             </div>
             <div class="col-6">
                 <h2>작성한 게시글</h2>
-                <div v-for="article in articleList">
+                <br>
+                <div v-for="article in paginationArticles">
                     <RouterLink :to="{ name: 'CommunityDetailView', params: { 'id': article.id }}">
-                        <h2>{{ article.title }}</h2>
+                        <h4>{{ article.title }}</h4>
                     </RouterLink>
+                    <hr>
+                </div>
+                <div class="article-page" style="text-align: center;">
+                    <vue-awesome-paginate
+                    :total-items="articleList.length"
+                    v-model="currentPage"
+                    :items-per-page="10"
+                    :max-pages-shown="5"
+                    />
                 </div>
             </div>
         </div>
         <br>
-        <hr>
+        
     </div>
 
 
@@ -70,8 +80,8 @@
     </div>
 </template>
 
-<script setup>
-import { ref, onMounted } from 'vue'
+<script setup lang="ts">
+import { ref, onMounted, computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { useCounterStore } from '@/stores/counter.js'
 import axios from 'axios'
@@ -80,7 +90,7 @@ import { Vue3Marquee } from 'vue3-marquee'
 const route = useRoute()
 const store = useCounterStore()
 const moviesLiked = ref(null)
-const articleList = ref(null)
+const articleList = ref([])
 const userName = ref(route.params.username)
 
 console.log(route.params.username)
@@ -90,19 +100,59 @@ onMounted(() => {
         method: 'get',
         url: `${store.API_URL}/api/v1/custom/user/${userName.value}/`,
     })
-        .then(res => {
-        console.log(res)
-        moviesLiked.value = res.data.like_movies
-        articleList.value = res.data.article_set
+    .then(res => {
+    console.log(res)
+    moviesLiked.value = res.data.like_movies
+    articleList.value = res.data.article_set
     })
-        .catch(err => {
-            console.log(err)
-        })
+    .catch(err => {
+        console.log(err)
+    })
 })
 
 
+//pagination - 게시글
+const currentPage = ref(1)
+const articlesPerPage = 10
+const totalPages = computed(() => Math.ceil(articleList.length / articlesPerPage))
+const paginationArticles = computed(()=>{
+    const start = (currentPage.value - 1)*articlesPerPage;
+    const end = start + articlesPerPage;
+    console.log('pageChange')
+    return articleList.value.slice(start,end);
+});
 </script>
 
-<style scoped>
-
+<style>
+.article-page .pagination-container {
+  column-gap: 10px;
+}
+.paginate-buttons {
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  
+  cursor: pointer;
+  background-color: rgb(242, 242, 242);
+  border: 1px solid rgb(217, 217, 217);
+  color: black;
+}
+.article-page .paginate-buttons:hover {
+  background-color: #d8d8d8;
+}
+.article-page .active-page {
+  background-color: #3498db;
+  border: 1px solid #3498db;
+  color: white;
+}
+.article-page .active-page:hover {
+  background-color: #2988c8;
+}
+.article-page .back-button:active,
+.article-page .next-button:active {
+  background-color: #c4c4c4;
+}
+a {
+    color: black
+}
 </style>

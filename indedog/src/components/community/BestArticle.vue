@@ -6,7 +6,9 @@
         <article v-for="article in articleList"
         :key="article.id">
                 <div v-if="article.category!='공지'">
-                    <h4>[{{ article.category }}] {{ article.title }}</h4>
+                    <RouterLink :to="{ name: 'CommunityDetailView', params: { 'id': article.id}}">
+                        <h4>[{{ article.category }}] {{ article.title }}</h4>
+                    </RouterLink>
                     <div v-if="article.content.length > 25">
                         <p>{{ article.content.slice(0,25) }}...  - 좋아요: {{ article.like_users.length }}개</p>
                     </div>
@@ -35,7 +37,7 @@ let articleList = store.articles.sort((a,b) => {
 console.log(articleList)
 const cuttingIndex = ref(0)
 for (const article of articleList) {
-    console.log(article)
+    console.log(articleList)
     console.log('####')
     if (article.category != '공지') {
         cuttingIndex.value++

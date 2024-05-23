@@ -7,29 +7,40 @@
         </div>
       </div>
       <div class="col-md-6">
-        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-          <h2>커뮤니티 게시판 이용 규칙</h2>
-          <p>더 유익하고, 즐거운 커뮤니티를 위해 다음의 규칙을 준수해주세요.</p>
+        <div class="h-100 p-5" style="border: solid black 2px;">
+          <h2>커뮤니티 게시판입니다.</h2>
+          <p>더 유익하고, 즐거운 커뮤니티를 위해 규칙을 준수해주세요.</p>
+          <hr>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <RouterLink :to="{ name: 'CommunityCreateView'}">
+                <h3>게시글 작성하기</h3>
+              </RouterLink>
+            </div>
+            <div class="col-md-6">
+              <RouterLink :to="{ name: 'community_notice'}">
+                <h3>커뮤니티 규칙 확인하기</h3>
+              </RouterLink>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="col-md-3">
       </div>
     </div>
     </div>
     <br>
-    <div style="border: solid black 5px;">
+    <div style="border: solid black 2px;">
         <MovieCommunity/>
     </div>
     <br>
-    <div style="border: solid black 5px">
+    <div style="border: solid black 2px">
         <TheaterCommunity/>
     </div>
     <br>
-    <div style="border: solid black 4px;">
+    <div style="border: solid black 2px;">
         <FreeCommunity/>
-    </div>
-    <div>
-        <RouterLink :to="{ name: 'CommunityCreateView'}">
-            <h1>게시글 작성</h1>
-        </RouterLink>
     </div>
 </template>
 

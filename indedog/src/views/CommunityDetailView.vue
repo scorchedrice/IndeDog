@@ -2,25 +2,26 @@
     <div v-if="article">
         <h1>제목 : {{ article.title }}</h1>
         <h3>작성자 : {{ article.user }}</h3>
-        <p>내용 : {{ article.content }}</p>
-        <p>작성된 날짜 : {{ article.created_at }}</p>
-        <div v-if="store.loginUser == article.user || store.isStaff">
-        <RouterLink :to="{ name: 'CommunityUpdate', params: { 'id': article.id }}">
-          <button>
-            게시글 수정
-          </button>
-        </RouterLink>
         <hr>
-          <button @click.prevent="articleDelete(article.id)">
-            게시글 삭제
-          </button>
+        <p>{{ article.content }}</p>
+        <hr>
+        <p>작성된 날짜 : {{ article.created_at.slice(0,10) }}</p>
+        <div v-if="store.loginUser == article.user || store.isStaff">
+        <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+          <button type="button" class="btn btn-outline-warning"
+          @click.prevent="changeArticle(article.id)">게시글 수정</button>
+          <button type="button" class="btn btn-outline-warning"
+            @click.prevent="articleDelete(article.id)">게시글 삭제</button>
+        </div>
         </div>
         <div v-if="store.loginUser">
-          <button v-if="!isLike" @click.prevent="upLike(article.id, 1)">
+          <button v-if="!isLike" @click.prevent="upLike(article.id, 1)"
+          type="button" class="btn btn-light">
                 좋아요
           </button>
-          <button v-else @click.prevent="upLike(article.id, 2)">
-              좋아요 취소
+          <button v-else @click.prevent="upLike(article.id, 2)"
+          type="button" class="btn btn-primary">
+              이 게시물을 좋아합니다
           </button>
         </div>
       <RouterLink :to="{name: 'community'}">
@@ -31,20 +32,35 @@
           <h1>코멘트</h1>
           <hr>
           <form @submit.prevent="createComment(article.id)">
-            <input type="text" v-model="content">
+            
+            <div class="form-floating">
+              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
+              v-model="content" @input="console.log(content)"></textarea>
+              <label for="floatingTextarea">Comments</label>
+            </div>
             <input type="submit" value="댓글달기">
           </form>
-          <div v-for="(comment, index) in article.comment_set">
-            <p>{{ comment.user }} |
-              <input type="button" v-if="store.loginUser == comment.user && !updateNow" @click.prevent="commentUpdate(comment.id, comment.content)" value="수정">
-              <input type="button" v-if="store.loginUser == comment.user && updateNow" @click.prevent="commentUpdatePush(comment.id, index)" value="수정완료">
-              <span> | </span>
-              <a v-if="store.loginUser == comment.user || store.isStaff" @click.prevent="commentDelete(comment.id, index)">
-                  [삭제]
-              </a>
+          <hr>
+          <hr>
+          <div v-for="(comment, index) in article.comment_set.slice().reverse()">
+            <p>{{ comment.user }}
+              <div style="display: flex; flex-direction: row;">
+                <div>
+                  <h4 v-if="!(updateNow && comment.id == currentIdx)">{{ comment.content }}</h4>
+                  <input v-if="updateNow && comment.id == currentIdx" type="text" v-model="contentUpdate">
+                </div>
+                <div>
+                  <p type="button" v-if="store.loginUser == comment.user && updateNow" @click.prevent="commentUpdatePush(comment.id, index)" value="수정완료">[수정완료]</p>
+                  <p type="button" v-if="store.loginUser == comment.user && !updateNow" @click.prevent="commentUpdate(comment.id, comment.content)" value="수정">[수정]</p>
+                </div>
+                <div>
+                  <a v-if="store.loginUser == comment.user || store.isStaff" @click.prevent="commentDelete(comment.id, index)">
+                    [삭제]
+                  </a>
+                </div>
+              </div>
             </p>
-            <h4 v-if="!(updateNow && comment.id == currentIdx)">{{ comment.content }}</h4>
-            <input v-if="updateNow && comment.id == currentIdx" type="text" v-model="contentUpdate">
+            
           </div>
         </footer>
     </div>
@@ -63,6 +79,9 @@ const router = useRouter()
 const content = ref(null)
 const isLike = ref(false)
 const likeusersList = ref(null)
+const changeArticle = function (articleId) {
+  router.push({ name: 'CommunityUpdate', params: { 'id': articleId }})
+}
 
 onMounted(() => {
   axios({
@@ -119,6 +138,7 @@ const createComment = function(article_id) {
         window.alert('로그인을 하셔야 댓글등록이 가능해요!')
         return
     }
+    console.log(content)
   axios({
     method: 'post',
     url: `${store.API_URL}/api/v1/articles/${article_id}/comments/`,
@@ -131,6 +151,7 @@ const createComment = function(article_id) {
   })
     .then(res => {
       console.log('댓글 생성')
+
       content.value = null
       fetchData()
     })
@@ -233,6 +254,6 @@ const commentUpdatePush = function (comment_id, idx) {
 <style scoped>
 a {
     cursor: pointer;
-    color: blue;
+    color: black;
 }
 </style>

@@ -105,7 +105,7 @@ const paginationMovies = computed(()=>{
 
 <style>
 @import '@/assets/font/font.css';
-h4,h3 {
+h4,h3, h1,h2 {
     font-family: "hanna";
 }
 * {

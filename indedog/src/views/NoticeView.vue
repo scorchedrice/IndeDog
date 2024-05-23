@@ -1,20 +1,16 @@
 <template>
+    <h1>공지사항</h1>
     <div v-if="store.isStaff">
-        당신은 스태프입니다.
         <RouterLink :to="{ name: 'CommunityCreateView'}">
-            <button>
-                공지사항 작성
-            </button>
+            <h5>공지사항 작성</h5>
         </RouterLink>
     </div>
-    <h3>제목 |</h3>
     <hr>
     <article v-for="article in articles" :key="article.id">
         <RouterLink :to="{ name: 'CommunityDetailView', params: { 'id': article.id}}">
-            <h3>공지 | {{ article.title }}</h3>
+            <h3>{{ article.title }}</h3>
         </RouterLink>
         <br>
-
     </article>
 </template>
 
@@ -31,7 +27,9 @@ onMounted(() => {
 })
 
 for (const article of store.articles){
-    if(article.is_notice){
+    console.log(article)
+    console.log('##')
+    if (article.is_notice) {
         articles.value.push(article)
     }
 }

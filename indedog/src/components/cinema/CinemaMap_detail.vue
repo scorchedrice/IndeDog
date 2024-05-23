@@ -77,10 +77,10 @@ const loadKakaoMap = (container) => {
                         '        </div>' + 
                         '        <div class="body">' + 
                         '            <div class="img">' +
-                        '                <img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/thumnail.png" width="73" height="70">' +
+                        '                ' +
                         '           </div>' + 
                         '            <div class="desc">' + 
-                        '                <div><a href="' + 'https://map.kakao.com/link/to/'+props.cinemaName+','+cinema_lat.value+','+cinema_lng.value +'" target="_blank" class="link">길찾기</a></div>' + 
+                        '                <div><a href="' + 'https://map.kakao.com/link/to/'+props.cinemaName+','+cinema_lat.value+','+cinema_lng.value +'" target="_blank" class="link">'+props.cinemaName+'로 가는 길 카카오 맵으로 알아보기</a></div>' + 
                         '            </div>' + 
                         '        </div>' + 
                         '    </div>' +    

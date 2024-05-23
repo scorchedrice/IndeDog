@@ -49,7 +49,7 @@
         }
       )
       response.value = result.data.choices[0].message.content
-      
+      console.log(props.inputData)
     } catch (error) {
       console.error('Error:', error)
       console.log(response)

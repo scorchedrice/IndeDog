@@ -39,12 +39,20 @@
                     </span>
                 </template>
             </p>
-            <button v-if="!isLike" @click.prevent="upLike(curMovie.id, 1)">
+            <button v-if="!isLike" @click.prevent="upLike(curMovie.id, 1)"
+          type="button" class="btn btn-light">
+                좋아요
+          </button>
+          <button v-else @click.prevent="upLike(curMovie.id, 2)"
+          type="button" class="btn btn-primary">
+              이 게시물을 좋아합니다
+          </button>
+            <!-- <button v-if="!isLike" @click.prevent="upLike(curMovie.id, 1)">
                 좋아요
             </button>
             <button v-else @click.prevent="upLike(curMovie.id, 2)">
                 좋아요 취소
-            </button>
+            </button> -->
         </div>    
     </div>
     <br>
@@ -61,7 +69,6 @@
             <RouterLink v-if="article" :to="{ name: 'CommunityDetailView', params: {'id': article.id} }">
                 <h2>{{ article.title }}</h2>
             </RouterLink>
-            <p>더보기 및 작성하기</p>
         </div>
         <div class="col-6">
             <h1>평점</h1>
@@ -87,34 +94,38 @@
                     <input type="submit" value="댓글작성" @click.prevent="createComment(curMovie.id)">
                 </div>
                 <hr>
-                <h1>코멘트들...</h1>
+                <h1>코멘트</h1>
+                <br>
                 <div v-if="isLoading">불러오는중...</div>
                 <template v-else>
                     <div v-for="(comment, index) in curMovie.comment_set.slice().reverse()" style="display: flex;" :key="index">
                         <footer>
-                            <span>{{ comment.user }} |</span>
-                            <span>
-                                <span v-if="!(updateNow && comment.id == currentIdx)">{{ comment.content }}</span>
-                                <input v-if="updateNow && comment.id == currentIdx" type="text" v-model="contentUpdate">
-                            </span>
-                            <span>
-                            <vue3-star-ratings
-                            v-model="comment.point"
-                            :starSize="20"
-                            starColor="#ff9800"
-                            inactiveColor="#333333"
-                            :numberOfStars="5"
-                            :disableClick="true"
-                            />
-                            {{ comment.point }}
-                            </span>
-                            <input type="button" v-if="store.loginUser == comment.user && !updateNow" @click.prevent="commentUpdate(comment.id, comment.content)" value="수정">
-                            <input type="button" v-if="store.loginUser == comment.user && updateNow" @click.prevent="commentUpdatePush(comment.id, index)" value="수정완료">
-                            <span> | </span>
-                            <a v-if="store.loginUser == comment.user || store.isStaff" @click.prevent="commentDelete(comment.id, index)">
-                                [삭제]
-                            </a>
-                            <hr>
+                            <div style="display: flex; flex-direction: row; justify-content: space-around;">
+                                <span><h3>{{ comment.user }}</h3></span>
+                                <p style="width: 15px;"></p>
+                                <vue3-star-ratings
+                                v-model="comment.point"
+                                :starSize="20"
+                                starColor="#ff9800"
+                                inactiveColor="#333333"
+                                :numberOfStars="5"
+                                :disableClick="true"
+                                />
+                                <p style="width: 10px;"></p>
+                                <h5>{{ comment.point }}/5.0</h5>
+                                <p style="width: 20px;"></p>
+                                <p type="button" v-if="store.loginUser == comment.user && !updateNow" @click.prevent="commentUpdate(comment.id, comment.content)" value="수정">[수정]</p>
+                                <p type="button" v-if="store.loginUser == comment.user && updateNow" @click.prevent="commentUpdatePush(comment.id, index)" value="수정완료">[수정완료]</p>
+                                <span> | </span>
+                                <p v-if="store.loginUser == comment.user || store.isStaff" @click.prevent="commentDelete(comment.id, index)">
+                                    [삭제]
+                                </p>
+                                </div>
+                                <span>
+                                    <span v-if="!(updateNow && comment.id == currentIdx)"><h5>{{ comment.content }}</h5></span>
+                                    <input v-if="updateNow && comment.id == currentIdx" type="text" v-model="contentUpdate">
+                                </span>
+                                <hr>
                         </footer>
                     </div>
                 </template>
@@ -336,6 +347,6 @@ const commentUpdatePush = function (comment_id, idx) {
 <style scoped>
 a {
     cursor: pointer;
-    color: blue;
+    color: black;
 }
 </style>

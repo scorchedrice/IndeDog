@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import NowInTheaterDetail from '@/components/CinemaDetail-NowInTheater.vue'
+import NowInTheaterDetail from '@/components/cinema/CinemaDetail-NowInTheater.vue'
 // import MobileNowInTheater from '@/components/mobile/now_in_theater/MobileNowInTheater.vue'
 
 // import { onMounted } from 'vue'

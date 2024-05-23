@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import CinemaView from '@/views/CinemaView.vue'
-import CinemaDetail from '@/components/CinemaDetail.vue'
+import CinemaDetail from '@/components/cinema/CinemaDetail.vue'
 import MovieSearchView from '@/views/MovieSearchView.vue'
 import NowInTheaterView from '@/views/NowInTheaterView.vue'
 import CommunityView from '@/views/CommunityView.vue'
@@ -13,14 +13,14 @@ import CommunityDetailView from '@/views/CommunityDetailView.vue'
 import { useCounterStore } from '@/stores/counter'
 import CinemaInfoView from '@/views/CinemaInfoView.vue'
 import NoticeView from '@/views/NoticeView.vue'
-import CommunityUpdate from '@/components/CommunityUpdate.vue'
+import CommunityUpdate from '@/components/community/CommunityUpdate.vue'
 import IntroAI from '@/views/IntroAI.vue'
 import AIRecommendDetail from '@/views/AIRecommendDetail.vue'
 import UserpageView from '@/views/UserpageView.vue'
 import JobView from '@/views/JobView.vue'
 import JobDetailView from '@/views/JobDetailView.vue'
 import JobUpdate from '@/components/JobUpdate.vue'
-
+import CommunityNotice from '@/components/community/CommunityNotice.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -129,6 +129,11 @@ const router = createRouter({
       path: '/job/update/:id',
       name: 'job_update',
       component: JobUpdate
+    },
+    {
+      path:  '/community/notice',
+      name: 'community_notice',
+      component: CommunityNotice
     }
   ]
 })

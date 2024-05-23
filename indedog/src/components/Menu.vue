@@ -10,8 +10,11 @@
         <ul class="list-group list-group-flush">
             <div class = "accordion" id="login">
             <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                로그인 / 회원가입
+                <button v-if="!store.token"  class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    로그인 / 회원가입
+                </button>
+                <button v-if="store.token" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    유저 정보
                 </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
@@ -42,9 +45,9 @@
                     </div>
                     </div>
                     <div v-if="store.token">
-                        <div>
+                        <!-- <div>
                             <img style="width: 50px; border-radius: 50px; border: solid black 1px;" src="../assets/avatar/basic3.png" alt="">
-                        </div>
+                        </div> -->
                         <h1>{{ store.loginUser }} 님</h1>
                         <h4>환영합니다!</h4>
                         <div>

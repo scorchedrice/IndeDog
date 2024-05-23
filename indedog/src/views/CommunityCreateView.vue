@@ -81,6 +81,7 @@ if (history.state.movie_id) {
 const createArticle = function () {
   console.log(category.value)
     if(category.value === '공지') {
+      isNotice.value = true
       axios({
       method: 'post',
       url: `${store.API_URL}/api/v1/articles/create/`,
@@ -97,12 +98,13 @@ const createArticle = function () {
     })
       .then(response => {
         console.log(response.data)
+        
         router.replace({ name: 'community'})
       })
       .catch(error => {
         console.log(error)
       })
-      isNotice.value = true
+      
     return
     } else if(category.value != '구인공고'){
       console.log('###')

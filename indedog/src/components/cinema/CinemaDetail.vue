@@ -6,8 +6,8 @@
 
 <script setup>
 import {ref} from 'vue'
-import CinemaDetail_NowInTheater from '@/components/CinemaDetail-NowInTheater.vue'
-import CinemaDetail_Region from '@/components/CinemaDetail-Region.vue'
+import CinemaDetail_NowInTheater from '@/components/cinema/CinemaDetail-NowInTheater.vue'
+
 // Event
 
 const searchNowInTheater = function () {

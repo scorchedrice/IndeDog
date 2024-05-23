@@ -19,6 +19,10 @@
     </div>
   </div>
   </div>
+  <footer class="pt-3 mt-4 text-body-secondary border-top"
+  style="text-align: center;">
+      SSAFY 11기 1학기 최종 프로젝트, 배원빈 / 한지웅
+    </footer>
 </template>
 
 <script setup>

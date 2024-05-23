@@ -9,7 +9,7 @@
 import {useRoute} from 'vue-router'
 import {ref} from 'vue'
 
-import CinemaMapDetail from '@/components/CinemaMap_detail.vue'
+import CinemaMapDetail from '@/components/cinema/CinemaMap_detail.vue'
 defineProps({
     cinemaName: String
 })

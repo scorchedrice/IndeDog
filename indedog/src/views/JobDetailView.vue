@@ -1,27 +1,29 @@
 <template>
-    <div>
-        <h1>제목 : {{ title2 }}</h1>
+    <template v-if="isloading">
+        
+    </template>
+    <div v-if="!isloading">
+        <h2>[{{ jobData.job }}] {{ jobData.title }}</h2>
+        <h4>~ {{ jobData.by }}</h4>
         <hr>
-        <p>
-            모집분야 : {{ job2 }}
-        </p>
-        <h2>내용 : {{ content2 }}</h2>
-        <h4>작성일 : {{ date }}</h4>
-        <button v-if="store.loginUser && store.loginUser != writer && !isSubmit" class="btn btn-primary" @click.prevent="submitApp(1)">
+        <hr>
+        <h5>{{ jobData.content }}</h5>
+        <h6>작성일 : {{ jobData.created_at.slice(0,10) }}</h6>
+        <button v-if="store.loginUser && store.loginUser != jobData.user && !isSubmit" class="btn btn-primary" @click.prevent="submitApp(1)">
             지원넣기
         </button>
         <button v-if="isSubmit" class="btn btn-warning" @click.prevent="submitApp(2)">
             지원취소
         </button>
-        <button v-if="store.loginUser == writer" class="btn btn-danger" @click.prevent="deleteApp">
+        <button v-if="store.loginUser == jobData.user" class="btn btn-danger" @click.prevent="deleteApp">
             공고 내리기
         </button>
-        <button v-if="store.loginUser == writer" class="btn btn-primary" @click.prevent="updateApp">
+        <button v-if="store.loginUser == jobData.user" class="btn btn-primary" @click.prevent="updateApp">
             공고 수정
         </button>
-        <h2 v-if="applicant.length">
-            지원현황 : {{ applicant.length }}
-            <template v-if="store.loginUser == writer">
+        <h2>
+            <template v-if="store.loginUser == jobData.user">
+                지원현황 : {{ applicant.length }}
                 <div v-for="person in applicantName">
                     <RouterLink :to="{ name: 'userpage', params: {'username' : person}}">
                         <h1>{{ person }}</h1>
@@ -37,21 +39,17 @@ import { useCounterStore } from '@/stores/counter'
 import axios from 'axios'
 import { useRoute, useRouter } from 'vue-router'
 import { ref, onMounted } from 'vue'
-import moment from 'moment'
 
+const isloading = ref(true)
 const router = useRouter()
 const store = useCounterStore()
 const route = useRoute()
 const jobId = ref(route.params.id)
-const jobData = ref()
+const jobData = ref([])
 const applicant = ref([])
 const applicantName = ref([])
 const isSubmit = ref(false)
-const title2 = ref('')
-const content2 = ref('')
-const job2 = ref('')
-const writer = ref('')
-const date = ref('')
+
 
 onMounted (() => {
     axios({
@@ -59,32 +57,25 @@ onMounted (() => {
         url: `${store.API_URL}/api/v1/articles/job/detail/${jobId.value}/`,
     })
       .then((res) => {
+        console.log(res.data)
         jobData.value = res.data
-        const { title, content, job, created_at } = jobData.value
-        title2.value = title
-        content2.value = content
-        job2.value = job
-        writer.value = jobData.value.user
         if (jobData.value.applicant) {
             applicant.value = jobData.value.applicant
         }
-        moment.locale('ko')
-        date.value = moment(created_at).format('YYYY년 MM월 DD일 HH:mm')
-        if (jobData.value.applicant && jobData.value.applicant.includes(store.loginPk)) {
-            isSubmit.value = true
-        } else {
-            isSubmit.value = false
-        }
+        
         applicantName.value = []
         for (const person of applicant.value){
-            for (const user of store.usersData) {
+            for (const user of store.userList) {
                 if (person == user.id){
                     applicantName.value.push(user.username)
                     break
                 }
+                if (person == store.loginPk)
+                { isSubmit.value = true}
             }
         }
         console.log(applicantName.value)
+        isloading.value = false
       })
       .catch((err) => {
         console.log(err)

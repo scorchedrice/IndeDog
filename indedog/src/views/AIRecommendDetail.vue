@@ -39,7 +39,7 @@
 import 'vue3-carousel/dist/carousel.css'
 import {ref} from 'vue'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
-import AIAnswer from '@/components/AIAnswer.vue'
+import AIAnswer from '@/components/ai/AIAnswer.vue'
 
 const picked=ref(['','','','','','','','','',''])
 const four = ref([4,3,2,1])
@@ -69,7 +69,7 @@ const slides = [
   { id: 1, title: '나는', content: '청춘이라는 단어를 보면 가슴이 뛴다', select_list: four.value, target: '청춘'},
   { id: 2, title: '나는', content: '가족들과 함께 지내는 시간이 다른 것들 보다 소중하다', select_list: four.value, target: '가족'},
   { id: 3, title: '만약', content: '무서운 영화를 공짜로 볼 기회가 생긴다면', select_list: four.value, target: '공포'},
-  { id: 4, title: '나는', content: '애니메이션을', select_list: four.value, target: 'animation'},
+  { id: 4, title: '나는', content: '애니메이션을', select_list: four.value, target: '애니메이션'},
   { id: 5, title: '나는', content: '사랑의 힘을 굳게 믿는 사람이다.', select_list: four.value, target: '사랑'},
   { id: 6, title: '나는', content: '방황하는 청소년들을', select_list: four.value, target: '방황'},
   { id: 7, title: '만약', content: '나의 월급으로 노숙자 2명 평생의 끼니 및 거주 문제를 완벽하게 해결할 수 있다면 나는 기꺼이 월급을 지출할 것이다.', select_list: four.value, target: '취약층'},
@@ -134,7 +134,7 @@ const calScore = function() {
       inputData.value += ' '
     }
   }
-  inputData.value += '아무튼 독립영화를 보려고 하는데, 위 내용 기반으로 영화 키워드 추천해줘! 내 기분에 맞는 영화 장르를 추가로 추천해주고 내가 좋아하는 장르들 외에도 비슷한 것들 추가로 추천해줘!'
+  inputData.value += '아무튼 독립영화를 보려고 하는데, 위 내용 기반으로 영화 키워드 추천해줘! 내 기분에 맞는 영화 장르를 추가로 추천해주고 내가 좋아하는 장르들 외에도 비슷한 것들 추가로 추천해줘! 그리고 대답할때는 #(키워드) 꼴로 대답해줄래?'
   console.log(inputData.value)
   showAns.value = true
 }

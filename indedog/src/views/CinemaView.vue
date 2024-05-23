@@ -12,8 +12,8 @@
 
 <script setup>
 import {RouterLink, RouterView} from 'vue-router'
-import CinemaMap from '@/components/CinemaMap.vue'
-import CinemaDetail from '@/components/CinemaDetail.vue'
+import CinemaMap from '@/components/cinema/CinemaMap.vue'
+import CinemaDetail from '@/components/cinema/CinemaDetail.vue'
 </script>
 
 <style scoped>

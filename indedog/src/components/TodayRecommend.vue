@@ -45,7 +45,7 @@
 import { useCounterStore } from '@/stores/counter'
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
-import AIRecommend from '@/components/AIRecommend.vue'
+import AIRecommend from '@/components/ai/AIRecommend.vue'
 
 const store = useCounterStore()
 const movieList = store.movies
