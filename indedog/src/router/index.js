@@ -17,7 +17,8 @@ import CommunityUpdate from '@/components/CommunityUpdate.vue'
 import AIRecommendDetail from '@/views/AIRecommendDetail.vue'
 import UserpageView from '@/views/UserpageView.vue'
 import JobView from '@/views/JobView.vue'
-
+import JobDetailView from '@/views/JobDetailView.vue'
+import JobUpdate from '@/components/JobUpdate.vue'
 
 
 const router = createRouter({
@@ -112,6 +113,16 @@ const router = createRouter({
       path: '/job',
       name: 'job',
       component: JobView
+    },
+    {
+      path: '/job/:id',
+      name: 'job_detail',
+      component: JobDetailView
+    },
+    {
+      path: '/job/update/:id',
+      name: 'job_update',
+      component: JobUpdate
     }
   ]
 })

@@ -53,7 +53,22 @@ class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mozip
         fields = '__all__'
-        read_only_fields = ['user', 'applicant', ]
+        read_only_fields = ['user', ]
+
+
+class JobSubmitSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Mozip
+        fields = ['applicant', ]
+
+
+class JobUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Mozip
+        fields = '__all__'
+        read_only_fields = ['user', ]
+
+
 
 # class NoticeSerializer(serializers.ModelSerializer):
 #     class Meta:

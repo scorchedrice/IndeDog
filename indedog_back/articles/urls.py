@@ -13,5 +13,8 @@ urlpatterns = [
     path('cinema/<str:cinema_name>/comments/', views.comment_create_cinema),
     path('job/', views.job),
     path('job/create/', views.job_create),
+    path('job/detail/<int:job_pk>/', views.job_detail),
+    path('job/update/<int:job_pk>/', views.job_submit),
+    path('job/article/update/<int:job_pk>/', views.job_article_update),
     path('notices/', views.notice),
 ]
