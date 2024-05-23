@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Article, Comment
+from .models import Article, Comment, Mozip
 from movies.models import Movie, Cinema
 
 
@@ -34,10 +34,41 @@ class CommentMovieSerializer(serializers.ModelSerializer):
         read_only_fields = ('user', 'article', 'cinema', 'movie', 'like_users')
 
 
+class CommentCinemaSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='user.username')
+    class Meta:
+        model = Comment
+        fields = ('id', 'content', 'point', 'cinema', 'user', 'like_users')
+        read_only_fields = ('user', 'article', 'cinema', 'movie', 'like_users')
+
+
 class ArticleLikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = ('like_users',)
+
+
+class JobSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='user.username')
+    class Meta:
+        model = Mozip
+        fields = '__all__'
+        read_only_fields = ['user', ]
+
+
+class JobSubmitSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Mozip
+        fields = ['applicant', ]
+
+
+class JobUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Mozip
+        fields = '__all__'
+        read_only_fields = ['user', ]
+
+
 
 # class NoticeSerializer(serializers.ModelSerializer):
 #     class Meta:

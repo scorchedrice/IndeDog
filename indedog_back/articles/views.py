@@ -5,9 +5,9 @@ from rest_framework.authentication import TokenAuthentication, BasicAuthenticati
 from rest_framework import status
 
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from .models import Article, Comment
+from .models import Article, Comment, Mozip
 from movies.models import Movie, Cinema
-from .serializers import ArticleSerializer, CommentSerializer, CommentMovieSerializer, ArticleLikeSerializer
+from .serializers import ArticleSerializer, CommentSerializer, CommentMovieSerializer, ArticleLikeSerializer, CommentCinemaSerializer, JobSerializer, JobSubmitSerializer, JobUpdateSerializer
 
 
 # Create your views here.
@@ -120,3 +120,65 @@ def article_like(request, article_pk):
     if serializer.is_valid(raise_exception=True):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['POST', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def comment_create_cinema(request, cinema_name):
+    cinema = Cinema.objects.get(address=cinema_name)
+    if request.method == 'POST':
+        serializer = CommentMovieSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user, cinema=cinema)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def job_create(request):
+    serializer = JobSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(user=request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET'])
+def job(request):
+    if request.method == 'GET':
+        jobs = Mozip.objects.all()
+        serializer = JobSerializer(jobs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+
+@api_view(['GET'])
+def job_detail(request, job_pk):
+    if request.method == 'GET':
+        job = Mozip.objects.prefetch_related('applicant').get(pk=job_pk)
+        serializer = JobSerializer(job)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def job_submit(request, job_pk):
+    job = Mozip.objects.prefetch_related('applicant').get(pk=job_pk)
+    
+    if request.method == 'PUT':
+        serializer = JobSubmitSerializer(job, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+    elif request.method == 'DELETE':
+        job.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def job_article_update(request, job_pk):
+    job = Mozip.objects.get(pk=job_pk)
+    if request.method == 'PUT':
+        serializer = JobUpdateSerializer(job, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)

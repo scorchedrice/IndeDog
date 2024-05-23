@@ -84,7 +84,7 @@
                 <div>
                     <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px" v-model="content"></textarea>
                     <label for="floatingTextarea2"></label>
-                    <input type="submit" value="댓글작성" @click="createComment(curMovie.id)">
+                    <input type="submit" value="댓글작성" @click.prevent="createComment(curMovie.id)">
                 </div>
                 <hr>
                 <h1>코멘트들...</h1>
@@ -252,7 +252,7 @@ const createComment = function(movie_id) {
 const commentDelete = function (comment_id, idx) {
     axios({
         method: 'delete',
-        url: `${store.API_URL}/api/v1/articles/movie/${comment_id}/comments/update/`,
+        url: `${store.API_URL}/api/v1/articles/${comment_id}/comments/update/`,
         headers: {
             Authorization : `Token ${store.token}`
         }
@@ -279,7 +279,7 @@ const commentUpdate = function (comment_id, content_) {
 const commentUpdatePush = function (comment_id, idx) {
     axios({
         method: 'put',
-        url: `${store.API_URL}/api/v1/articles/movie/${comment_id}/comments/update/`,
+        url: `${store.API_URL}/api/v1/articles/${comment_id}/comments/update/`,
         data: {
             content: contentUpdate.value,
         },

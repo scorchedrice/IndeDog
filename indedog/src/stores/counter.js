@@ -104,11 +104,15 @@ export const useCounterStore = defineStore('counter', () => {
         const password = password1
         logIn({username, password})
         window.alert('회원가입 성공')
-        router.replace({ name: 'home'}).then(() => {
-          window.location.reload()
-          // menu 에 회원가입 이후 반영이 안되는 문제 해결, home page이동시에만 새로고침 활용
-        })
       })
+        .then(()=>{
+          setTimeout(() => {
+            router.replace({ name: 'home'}).then(() => {
+              window.location.reload()
+              // menu 에 회원가입 이후 반영이 안되는 문제 해결, home page이동시에만 새로고침 활용
+            })
+          }, 1000);
+        })
       .catch((err) => {
         console.log(err)
       })
@@ -142,7 +146,6 @@ export const useCounterStore = defineStore('counter', () => {
                 }
                 loginPk.value = res.data[data].id
                 userData.value = res.data[data]
-                break
               }
             }
           })

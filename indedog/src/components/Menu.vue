@@ -65,6 +65,7 @@
             <li class="list-group-item" @click.prevent="goMovieSearch">작품 검색</li>
             <li class="list-group-item" @click.prevent="goCinemaSearch">현재 상영작 / 상영관 검색</li>
             <li class="list-group-item" @click.prevent="goCommunity">커뮤니티</li>
+            <li class="list-group-item" @click.prevent="goJob">구인공고</li>
         </ul>
         </div>
     </div>
@@ -93,6 +94,10 @@ const logIn = function() {
 
 const router = useRouter()
 
+const goJob = function() {
+    console.log('구인공고')
+    router.push({name: 'job'})
+}
 const goNotice = function() {
     console.log('공지사항')
     router.push({name: 'notice'})

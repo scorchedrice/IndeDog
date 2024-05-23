@@ -25,7 +25,15 @@ class MovieLikeSerializer(serializers.ModelSerializer):
 
 
 class CinemaListSerializer(serializers.ModelSerializer):
+    class CinemaCommentSerializer(serializers.ModelSerializer):
+        user = serializers.ReadOnlyField(source='user.username')
+        class Meta:
+            model = Comment
+            fields = ('id', 'content', 'user', 'point', 'like_users',)
+    
+    comment_set = CinemaCommentSerializer(read_only=True, many=True)
+
     class Meta:
         model = Cinema
-        fields = ('address', 'latitude', 'longitude', 'recent_movies')
+        fields = ('address', 'latitude', 'longitude', 'recent_movies', 'comment_set',)
         read_only_fields = ('recent_movies', )

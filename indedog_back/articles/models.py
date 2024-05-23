@@ -14,7 +14,7 @@ class Article(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_notice = models.BooleanField(default=False)
     category = models.CharField(max_length=20)
-
+    
 
 
 class Comment(models.Model):
@@ -27,3 +27,14 @@ class Comment(models.Model):
     content = models.CharField(max_length=250)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class Mozip(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    job = models.CharField(max_length=20)
+    content = models.TextField()
+    title = models.CharField(max_length=50)
+    applicant = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='applicated')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    by = models.DateField()

@@ -2,11 +2,16 @@
     <h1>KakaoMap Render</h1>
     <div ref="mapContainer" style="width: 100%; height: 400px;"></div>
     <div style="text-align: center;"></div>
-    <Rating/>
+    <Rating :address="address"/>
+    <hr>
+    <!-- <div v-for="comment in comments">
+
+    </div> -->
 </template>
 
 <script setup>
 import {ref, onMounted} from 'vue'
+import { useRoute } from 'vue-router'
 import {useCounterStore} from '@/stores/counter.js'
 import Rating from '@/components/Rating.vue'
 // 1. Data
@@ -16,6 +21,10 @@ store.getCoord()
 const cinemas = store.cinemas
 const cinema_lat = ref('')
 const cinema_lng = ref('')
+const route = useRoute()
+const address = ref(null)
+
+address.value = route.params.address
 
 for(let i = 0; i < cinemas.length; i++) {
     if (cinemas[i].address == props.cinemaName) {

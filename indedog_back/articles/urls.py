@@ -9,6 +9,12 @@ urlpatterns = [
     path('<int:article_pk>/update/', views.article_update),
     path('<int:article_pk>/comments/', views.comment_create_article),
     path('movie/<int:movie_pk>/comments/', views.comment_create_movie),
-    path('movie/<int:comment_pk>/comments/update/', views.comment_update_movie),
+    path('<int:comment_pk>/comments/update/', views.comment_update_movie),
+    path('cinema/<str:cinema_name>/comments/', views.comment_create_cinema),
+    path('job/', views.job),
+    path('job/create/', views.job_create),
+    path('job/detail/<int:job_pk>/', views.job_detail),
+    path('job/update/<int:job_pk>/', views.job_submit),
+    path('job/article/update/<int:job_pk>/', views.job_article_update),
     path('notices/', views.notice),
 ]

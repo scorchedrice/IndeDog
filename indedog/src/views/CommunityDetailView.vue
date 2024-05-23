@@ -4,7 +4,6 @@
         <h3>작성자 : {{ article.user }}</h3>
         <p>내용 : {{ article.content }}</p>
         <p>작성된 날짜 : {{ article.created_at }}</p>
-        <p>수정된 날짜 : {{ article.updated_at }}</p>
         <div v-if="store.loginUser == article.user || store.isStaff">
         <RouterLink :to="{ name: 'CommunityUpdate', params: { 'id': article.id }}">
           <button>
@@ -12,7 +11,7 @@
           </button>
         </RouterLink>
         <hr>
-          <button @click="articleDelete(article.id)">
+          <button @click.prevent="articleDelete(article.id)">
             게시글 삭제
           </button>
         </div>
@@ -35,9 +34,17 @@
             <input type="text" v-model="content">
             <input type="submit" value="댓글달기">
           </form>
-          <div v-for="comment in article.comment_set" style="display: flex;">
-            <h4>{{ comment.user }}</h4>
-            <p>{{ comment.content }}</p>
+          <div v-for="(comment, index) in article.comment_set">
+            <p>{{ comment.user }} |
+              <input type="button" v-if="store.loginUser == comment.user && !updateNow" @click.prevent="commentUpdate(comment.id, comment.content)" value="수정">
+              <input type="button" v-if="store.loginUser == comment.user && updateNow" @click.prevent="commentUpdatePush(comment.id, index)" value="수정완료">
+              <span> | </span>
+              <a v-if="store.loginUser == comment.user || store.isStaff" @click.prevent="commentDelete(comment.id, index)">
+                  [삭제]
+              </a>
+            </p>
+            <h4 v-if="!(updateNow && comment.id == currentIdx)">{{ comment.content }}</h4>
+            <input v-if="updateNow && comment.id == currentIdx" type="text" v-model="contentUpdate">
           </div>
         </footer>
     </div>
@@ -82,6 +89,7 @@ const fetchData = async () => {
   })
     .then((response) => {
       likeusersList.value = response.data.like_users
+      article.value = response.data
     })
     .catch((error) => {
       console.log(error)
@@ -123,7 +131,8 @@ const createComment = function(article_id) {
   })
     .then(res => {
       console.log('댓글 생성')
-      window.location.reload()
+      content.value = null
+      fetchData()
     })
     .catch(err => {
       console.log(err)
@@ -160,10 +169,70 @@ const upLike = function(article_pk, type) {
             console.log(err)
         })
     }
+    
+  const length = ref(null)
 
+  const commentDelete = function (comment_id, idx) {
+  axios({
+      method: 'delete',
+      url: `${store.API_URL}/api/v1/articles/${comment_id}/comments/update/`,
+      headers: {
+          Authorization : `Token ${store.token}`
+      }
+  })
+    .then(res => {
+      console.log(article.value.comment_set.length)
+      length.value = article.value.comment_set.length
+      article.value.comment_set.splice(length.value-1-idx, 1)
+      console.log('삭제완료')
+      fetchData()
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+const updateNow = ref(false)
+const currentIdx = ref(null)
+const contentUpdate = ref(null)
+
+const commentUpdate = function (comment_id, content_) {
+    updateNow.value = !updateNow.value
+    currentIdx.value = comment_id
+    contentUpdate.value = content_
+}
+
+
+const commentUpdatePush = function (comment_id, idx) {
+    axios({
+        method: 'put',
+        url: `${store.API_URL}/api/v1/articles/${comment_id}/comments/update/`,
+        data: {
+            content: contentUpdate.value,
+        },
+        headers: {
+            Authorization : `Token ${store.token}`
+        }
+    })
+      .then(res => {
+        console.log(article.value.comment_set[idx])
+        article.value.comment_set[idx].content = contentUpdate.value
+        console.log('수정완료')
+        fetchData()
+        contentUpdate.value = null
+        currentIdx.value = null
+        updateNow.value = !updateNow.value
+      })
+      .catch(err => {
+        console.log(err)
+      })
+}
 
 </script>
 
 <style scoped>
-
+a {
+    cursor: pointer;
+    color: blue;
+}
 </style>
