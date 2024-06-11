@@ -42,7 +42,7 @@ onMounted(() => {
 })
 const loadKakaoMap = (container) => {
     const script = document.createElement('script')
-    script.src = 'https://dapi.kakao.com/v2/maps/sdk.js?appkey=2a1d54c8291415ac437b2532d4f11171'
+    script.src = 'https://dapi.kakao.com/v2/maps/sdk.js?appkey='
     document.head.appendChild(script)
     script.onload= () => {
         window.kakao.maps.load(() => {
