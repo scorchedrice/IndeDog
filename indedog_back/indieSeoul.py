@@ -7,7 +7,7 @@ import re
 # 인디서울 현재상영영화 / 상영관 크롤링
 
 address = ''
-api_key = 'AIzaSyB4iMRT75dIyGna5K1Rq9MSr6X7eUm-__E'
+api_key = ''
 movie_data = []
 
 url = 'http://www.indieseoul.org/movie_info/movie_index.php?cate=0'
