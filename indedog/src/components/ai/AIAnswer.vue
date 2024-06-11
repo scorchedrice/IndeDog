@@ -52,7 +52,7 @@
         {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer sk-proj-Ng9Di9VUSWALCjTnftQUT3BlbkFJ66h9fBomsApfjKOQJw6V'
+            'Authorization': 'Bearer'
           }
         }
       )
