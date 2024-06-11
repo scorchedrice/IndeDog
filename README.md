@@ -1,3 +1,33 @@
+# 실행방법
+
+git clone 후,
+
+1. Indedog 폴더에서 cd indedog로 경로 이동 후,
+
+```
+npm install
+npm run dev
+```
+
+venv 가상 환경 설정 후, Indedog 메인 폴더에서
+
+```
+pip install -r requirements.txt
+```
+
+2. Indedog 폴더에서 cd indedog_back로 경로 이동 후,
+```
+python manage.py migrate
+python manage.py loaddata example.json
+python manage.py runserver
+```
+
+3. npm run dev로 커맨드 입력 후, local 에 나오는 localhost 링크에 접속
+
+# 6월 11일 업데이트
+
+기존 api 키 삭제 및 브랜치병합 (개발자 입장에서 정상적으로 사용하기 위해서는 카카오맵 api, chat gpt api 필요)
+
 # 인디독 (INDEDOG)
 
 독립영화 데이터베이스 / 커뮤니티
@@ -31,6 +61,7 @@
 + 5월 23일 - 코멘트 업데이트 및 상영관 평점 시스템 작업 완료. 구인 구직 페이지 생성
 + 5월 24일 - AI 결과값 추출 완료, 버튼, 로딩 등 버그 수정 및 유지보수
 
++ 6월 11일 - API KEY 삭제 및 업로드
 
 ## 목표 서비스
 1. 독립영화 데이터베이스 구축 및 최신화
